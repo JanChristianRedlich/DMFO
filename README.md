@@ -211,13 +211,13 @@ Output of `python validation/scripts/run_all_acqs.py --all` with
 
 | Profile | DMFO | B1 | Δ |
 |---|---|---|---|
-| Maritime (Inst. I)  | 18 / 20 | 7 / 20 | 11 ACQs lost without (A1)–(A6) |
+| Maritime (Inst. I)  | 20 / 20 | 8 / 20 | 12 ACQs lost without (A1)–(A6) |
 | Food (Inst. II)     | 20 / 20 | 8 / 20 | 12 ACQs lost without (A1)–(A6) |
 
-Maritime returns 18/20 because two Class III ACQs target identity-derivation
-patterns (split/merge) that do not occur in the maritime instantiation —
-the corresponding queries are answerable on the food instantiation.
-Combined coverage across both instantiations is 20/20.
+Both instantiations score 20/20 because the maritime ABox includes
+the LCL deconsolidation pattern (UN/CEFACT MMT, IMO FAL.5/Circ.42 §3.5)
+that exercises the same identity-derivation chain (ACQ-III-05 +
+ACQ-III-08) as food's split/merge scenario.
 
 Locality: per `python validation/scripts/locality_check.py`, two axioms
 in `O_St + b(Id,St)` are definitional (A1, A2 — Paper Theorem 2(b)); all

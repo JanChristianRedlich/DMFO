@@ -48,8 +48,8 @@ vacuously empty · `✗` = structurally underdetermined.
 |---|---|---|---|---|---|---|
 | DMFO       | maritime | 2/2 | 6/6 | 8/8 | 4/4 | 20/20 |
 | DMFO       | food     | 2/2 | 6/6 | 8/8 | 4/4 | 20/20 |
-| B1         | maritime | 2/2 | 4/6 | 2/8 | 0/4 | 8/20 |
-| B1         | food     | 2/2 | 4/6 | 2/8 | 0/4 | 8/20 |
+| B1         | maritime | 2/2 | 1/6 | 1/8 | 4/4 | 8/20 |
+| B1         | food     | 2/2 | 1/6 | 1/8 | 4/4 | 8/20 |
 | B2-CCO/sosa | maritime | 2/2 | 6/6 | 6/8 | 3/4 | 17/20 |
 | B2-CCO/sosa | food     | 2/2 | 6/6 | 6/8 | 3/4 | 17/20 |
 | B2-CCO/native | maritime | 2/2 | 5/6 | 5/8 | 3/4 | 15/20 |
@@ -149,6 +149,6 @@ The honest reading is: when DMFO co-imports four upstream vocabularies
 typed alignment axioms, it answers all 20 standard-derived ACQs.
 A faithful CCO-native alternative — one that respects CCO 2.0's
 documented commitments and refuses to back-port the upstream
-vocabularies — answers 16/20. The 4-ACQ gap is exactly the cost of
+vocabularies — answers 15/20. The 5-ACQ gap is exactly the cost of
 *not* importing PROV-O / SOSA / DnS-style situations into a BFO-only
 foundation.

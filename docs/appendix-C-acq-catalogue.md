@@ -30,31 +30,31 @@ Legend:
 |---|---|---|---|---|---|---|
 | ACQ-I-01   | I   | ✓ | ✓ | ✓ | ✓ | ADR-001 |
 | ACQ-I-02   | I   | ✓ | ✓ | ✓ | ✓ | ADR-001+003a |
-| ACQ-II-01  | II  | ✓ | ✗ | ✓ | ✓ | ADR-001 |
+| ACQ-II-01  | II  | ✓ | ✓ | ✓ | ✓ | ADR-001 |
 | ACQ-II-02  | II  | ✓ | ✗ | ✓ | ✓ | ADR-002 |
 | ACQ-II-03  | II  | ✓ | ✗ | ✓ | ✓ | ADR-003a / 003b |
 | ACQ-II-04  | II  | ✓ | ✗ | ✓ | ✓ | ADR-005 |
 | ACQ-II-05  | II  | ✓ | ✗ | ✓ | ✓ | ADR-004 |
-| ACQ-II-06  | II  | ✓ | ✓ | ✓ | ✗ `(d)` | ADR-003b (no SOSA → no observed-property quality) |
+| ACQ-II-06  | II  | ✓ | ✗ | ✓ | ✗ `(d)` | ADR-003b (no SOSA → no observed-property quality) |
 | ACQ-III-01 | III | ✓ | ✗ | ✓ | ✓ | ADR-001+002 |
 | ACQ-III-02 | III | ✓ | ✗ | ◑ `(b/c)` | ◑ `(b/c)` | ADR-004 |
 | ACQ-III-03 | III | ✓ | ✗ | ✓ | ✗ `(d)` | ADR-003b (no sensor concept in CCO) |
 | ACQ-III-04 | III | ✓ | ✗ | ✗ `(d)` | ✗ `(d)` | ADR-002 (no PROV-O qualified usage / hadRole) |
-| ACQ-III-05 | III | ✓ | ✗ | ✓ | ✓ | ADR-006 (act-mediated derivation) |
+| ACQ-III-05 | III | ✓ | ✓ | ✓ | ✓ | ADR-006 (act-mediated derivation) |
 | ACQ-III-06 | III | ✓ | ✗ | ✓ | ✓ | ADR-004+005 |
 | ACQ-III-07 | III | ✓ | ✗ | ✓ | ✓ | ADR-002+005 |
 | ACQ-III-08 | III | ✓ | ✗ | ✓ | ✓ | ADR-006 (transitive Act chain) |
 | ACQ-IV-01  | IV  | ✓ | ✓ | ✓ | ✗ `(d)` | ADR-003b |
 | ACQ-IV-02  | IV  | ✓ | ✓ | ✓ | ✓ | ADR-002 |
 | ACQ-IV-03  | IV  | ✓ | ✓ | ◑ `(c)`   | ◑ `(c)`   | ADR-007 (F3-prohibited typed scheme) |
-| ACQ-IV-04  | IV  | ✓ | ✗ | ✓ | ✓ | ADR-004 |
+| ACQ-IV-04  | IV  | ✓ | ✓ | ✓ | ✓ | ADR-004 |
 
 Score (any-profile-answers, strict rubric):
 
 | Framework | Total | by class (I / II / III / IV) |
 |---|---|---|
 | DMFO              | **20 / 20** | 2 / 6 / 8 / 4 |
-| B1 (DMFO − A1–A6) | **6 / 20**  | 2 / 1 / 0 / 3 |
+| B1 (DMFO − A1–A6) | **8 / 20**  | 2 / 1 / 1 / 4 |
 | B2-CCO/sosa       | **17 / 20** | 2 / 6 / 6 / 3 |
 | B2-CCO/native     | **15 / 20** | 2 / 5 / 5 / 3 |
 

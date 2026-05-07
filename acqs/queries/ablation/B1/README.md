@@ -7,23 +7,22 @@ alignment axioms (A1)–(A6)**.
 
 ## How to construct B1
 
-The B1 KB is built by stripping (A1)–(A6) from the DMFO TBox closure.
-This is automated by `validation/scripts/build_b1.py`, which:
+The B1 KB is built at evaluation time by stripping the (A1)–(A6)
+axiom triples from the DMFO TBox closure. This is implemented inside
+`validation/scripts/run_all_acqs.py --b1`, which:
 
 1. Loads `ontology/dmfo-full.ttl` + the chosen profile (maritime / food).
 2. Removes triples matching each of the (A1)–(A6) axiom shapes
    (the same patterns as `../../conformance/A?.ask.rq`).
-3. Writes the resulting graph to `validation/results/b1_<profile>.ttl`.
+3. Re-runs the same 20 ACQ files against the stripped graph.
 
 ## Re-using the ACQ catalog
 
 B1 uses **the same 20 ACQ files** as the conformant case
-(`../../ACQ-*.sparql`). The runner `run_all_acqs.py --b1` evaluates them
-against the stripped KB and records which ACQs produce non-empty
-bindings. Per Paper Table 3, the expected B1 score is 4/20: only the
-identity–state subset (Class I + the single Class-II ACQ that traverses
-A2 alone) survives the ablation; the other 16 ACQs are structurally
-underdetermined without (A1)–(A6).
+(`../../dmfo/ACQ-*.sparql`). The score on the current package is **8/20**
+on each profile (per-class: I=2/2, II=1/6, III=1/8, IV=4/4) — the
+identity-only and absence-detection ACQs survive the ablation, while
+the multi-bridge and single-bridge-with-typed-anchor ACQs collapse.
 
 ## Failure-pattern attribution
 
