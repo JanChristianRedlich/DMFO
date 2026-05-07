@@ -1,0 +1,10 @@
+# A4 — Normative framing
+# dmfo:governedBy domain dul:Situation, range dul:Description.
+PREFIX dmfo: <https://w3id.org/dmfo#>
+PREFIX dul:  <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+ASK {
+  dmfo:governedBy rdfs:domain dul:Situation ;
+                  rdfs:range  dul:Description .
+}

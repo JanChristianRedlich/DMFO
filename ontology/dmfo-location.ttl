@@ -1,0 +1,50 @@
+# =============================================================
+# DMFO Module: dmfo-location (O_Lo) + bridge O_bridge(Co, Lo)
+#
+# Anchor: geo:Feature (imported from GeoSPARQL)
+# Bridge: dmfo:inZone (Context ↔ Location)
+#
+# Alignment axiom contributed by this module:
+#   (A6) dmfo:inZone ⊑ geo:sfWithin , typed dul:Situation × geo:Feature
+#
+# Institutional zone membership is constituted by decision, not
+# containment. A6 fixes the typed bridge from contextual situations
+# to spatial features without committing to geometric containment
+# semantics; concrete spatial relationships are imported from
+# GeoSPARQL.
+#
+# Reference: Paper §3.1 (Location), Table 1, Car et al. [18].
+# =============================================================
+
+@prefix dmfo:    <https://w3id.org/dmfo#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dul:     <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix geo:     <http://www.opengis.net/ont/geosparql#> .
+
+<https://w3id.org/dmfo/location>
+    a owl:Ontology ;
+    owl:versionIRI <https://w3id.org/dmfo/location/1.0.0> ;
+    rdfs:label "DMFO Location Module"@en ;
+    rdfs:comment "Bridge dmfo:inZone, alignment axiom (A6)."@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    owl:imports <https://w3id.org/dmfo/context> ,
+                <http://www.opengis.net/ont/geosparql> .
+
+# ── Bridge: Context–Location (A6) ─────────────────────────────
+
+dmfo:inZone
+    a owl:ObjectProperty ;
+    rdfs:label "in zone"@en ;
+    rdfs:isDefinedBy <https://w3id.org/dmfo> ;
+    rdfs:domain dul:Situation ;
+    rdfs:range  geo:Feature ;
+    rdfs:subPropertyOf geo:sfWithin ;
+    rdfs:comment """(A6) Links a contextual Situation to the institutional zone
+(geo:Feature) within which it holds. As a sub-property of
+geo:sfWithin, location-scoped reasoning leverages GeoSPARQL spatial
+relations while preserving the Situation/Feature typing required
+for compliance and recall queries."""@en .

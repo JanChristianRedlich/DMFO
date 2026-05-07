@@ -1,0 +1,14 @@
+# ACQ-III-02 (B2-CCO) — TVE → state → situation → regime
+# Classification: (b/c) — works via act-as-situation pattern, but
+# loses DMFO's "one Situation, multiple Descriptions" abstraction.
+
+PREFIX cco: <https://www.commoncoreontologies.org/>
+PREFIX bfo: <http://purl.obolibrary.org/obo/>
+
+SELECT ?tve ?quality ?act ?regime
+WHERE {
+  ?quality bfo:BFO_0000197 ?tve .             # inheres in
+  ?act     cco:ont00001986 ?quality .         # has output
+  ?regime  cco:ont00001942 ?act .             # prescribes
+}
+ORDER BY ?tve

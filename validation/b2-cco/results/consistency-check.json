@@ -1,0 +1,7 @@
+{
+  "reasoner": "rdflib + OWL-RL (sound, incomplete vs HermiT)",
+  "triples": 638,
+  "disjointness_axioms": 0,
+  "consistent": true,
+  "unsat_classes": []
+}

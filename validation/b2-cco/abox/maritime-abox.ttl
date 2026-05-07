@@ -1,0 +1,279 @@
+# =============================================================
+# B2-CCO Maritime ABox
+#
+# One-to-one re-implementation of profiles/maritime/mar-abox.ttl
+# against B2-CCO patterns:
+#   - Identity-objects:       same individuals
+#   - State (Manifestation):  → Quality + bfo:inheres in
+#   - Activity:               → cco:Act with cco:has agent
+#   - Evidence (variant a):   → sosa:Observation pointing at the Quality
+#   - Context:                → cco:Process Regulation prescribing the Act
+#   - Location:               → bfo:Site / bfo:located in
+#
+# Same scenario, same individuals, different modelling.
+# Triple count vs. DMFO maritime ABox is reported in
+# docs/abox-translation-maritime.md.
+# =============================================================
+
+@prefix b2cco: <https://w3id.org/dmfo/baseline/cco#> .
+@prefix b2mar: <https://w3id.org/dmfo/baseline/cco/maritime#> .
+@prefix bfo:   <http://purl.obolibrary.org/obo/> .
+@prefix cco:   <https://www.commoncoreontologies.org/> .
+@prefix ex:    <https://w3id.org/dmfo/baseline/cco/example#> .
+@prefix sosa:  <http://www.w3.org/ns/sosa/> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://w3id.org/dmfo/baseline/cco/maritime/abox>
+    a owl:Ontology ;
+    rdfs:label "B2-CCO Maritime ABox (synthetic port-call)"@en ;
+    owl:imports <https://w3id.org/dmfo/baseline/cco/maritime> .
+
+# ─────────────────────────────────────────────────────────────
+# Identity layer (objects)
+# ─────────────────────────────────────────────────────────────
+
+ex:CONT_HLXU3456789  a b2mar:Container ;
+    rdfs:label "Container HLXU3456789"@en .
+
+ex:CONT_MSKU7654321  a b2mar:Container ;
+    rdfs:label "Container MSKU7654321"@en .
+
+ex:CONT_UNKN1234567  a b2mar:Container ;
+    rdfs:label "Container UNKN1234567 (under-determined)"@en .
+
+ex:VSL_ALINA  a b2mar:Vessel ;
+    rdfs:label "Vessel MSC ALINA"@en .
+
+# ── Identifier ICEs (designate the objects) ───────────────────
+# CCO pattern: ICE designates the Object (cco:designates,
+# ont00001916). The Quality of "having BIC code X" is the value
+# of the ICE.
+
+ex:BIC_HLXU3456789  a b2mar:BICCode ;
+    cco:ont00001916 ex:CONT_HLXU3456789 ;        # designates
+    rdfs:label "HLXU3456789"@en .
+
+ex:BIC_MSKU7654321  a b2mar:BICCode ;
+    cco:ont00001916 ex:CONT_MSKU7654321 ;
+    rdfs:label "MSKU7654321"@en .
+
+ex:BIC_UNKN1234567  a b2mar:BICCode ;
+    cco:ont00001916 ex:CONT_UNKN1234567 ;
+    rdfs:label "UNKN1234567"@en .
+
+ex:IMO_ALINA  a b2mar:IMONumber ;
+    cco:ont00001916 ex:VSL_ALINA ;
+    rdfs:label "9876543"@en .
+
+# ─────────────────────────────────────────────────────────────
+# State layer (Quality instances inhering in objects) — ADR-001
+# ─────────────────────────────────────────────────────────────
+
+ex:Q_HLXU_OnVessel       a b2mar:OnVesselLocationQuality ;
+    bfo:BFO_0000197 ex:CONT_HLXU3456789 .         # inheres in
+
+ex:Q_HLXU_Discharged     a b2mar:DischargedLocationQuality ;
+    bfo:BFO_0000197 ex:CONT_HLXU3456789 .
+
+ex:Q_HLXU_InYard         a b2mar:InYardLocationQuality ;
+    bfo:BFO_0000197 ex:CONT_HLXU3456789 .
+
+ex:Q_HLXU_GateOut        a b2mar:GateOutLocationQuality ;
+    bfo:BFO_0000197 ex:CONT_HLXU3456789 .
+
+ex:Q_MSKU_InYard         a b2mar:InYardLocationQuality ;
+    bfo:BFO_0000197 ex:CONT_MSKU7654321 .
+
+ex:Q_ALINA_OnBerth       a b2mar:OnVesselLocationQuality ;
+    bfo:BFO_0000197 ex:VSL_ALINA .
+
+# ─────────────────────────────────────────────────────────────
+# Activity layer (cco:Act instances) — ADR-002
+# Each act has an agent (cco:has agent), produces an output
+# Quality (cco:has output), and occurs at a site (cco:occurs at).
+# ─────────────────────────────────────────────────────────────
+
+ex:Agent_HHLA_K12  a cco:ont00001017 ;            # cco:Agent
+    rdfs:label "HHLA Crane Operator K12"@en .
+
+ex:Agent_HHLA_GateController  a cco:ont00001017 ;
+    rdfs:label "HHLA Gate Controller"@en .
+
+ex:Disch_77  a b2mar:VesselDischarge ;
+    cco:ont00001833 ex:Agent_HHLA_K12 ;            # has agent
+    cco:ont00001986 ex:Q_HLXU_Discharged ;         # has output
+    cco:ont00001918 ex:Berth_HHLA_CTA_03 ;         # occurs at
+    rdfs:label "Vessel discharge of HLXU 2026-04-12 08:15Z"@en .
+
+ex:CraneTrf_77  a b2mar:CraneTransfer ;
+    cco:ont00001833 ex:Agent_HHLA_K12 ;
+    cco:ont00001986 ex:Q_HLXU_InYard ;
+    cco:ont00001918 ex:Yard_CTA ;
+    bfo:BFO_0000062 ex:Disch_77 ;                   # preceded by
+    rdfs:label "Crane transfer of HLXU 2026-04-12 08:21Z"@en .
+
+ex:GateOut_99  a b2mar:GateMovement ;
+    cco:ont00001833 ex:Agent_HHLA_GateController ;
+    cco:ont00001986 ex:Q_HLXU_GateOut ;
+    cco:ont00001918 ex:Gate_CTA_South ;
+    bfo:BFO_0000062 ex:CraneTrf_77 ;
+    rdfs:label "Gate-out of HLXU 2026-04-12 14:42Z"@en .
+
+# ─────────────────────────────────────────────────────────────
+# Context layer (Process Regulations) — ADR-004
+# Reified situation = the act token; the regulation prescribes it.
+# ─────────────────────────────────────────────────────────────
+
+ex:CustodyTransfer_HLXU  a b2mar:CustodyTransfer_Act ;
+    bfo:BFO_0000171 ex:ISPSZone_CTA ;               # located in
+    rdfs:comment "Custody transfer of HLXU3456789 at CTA, governed by ISPS."@en .
+
+ex:CustomsControl_HLXU   a b2mar:CustomsControl_Act ;
+    bfo:BFO_0000171 ex:Gate_CTA_South ;
+    rdfs:comment "Customs control of HLXU3456789 under EU UCC."@en .
+
+ex:PendingHandover_MSKU  a cco:ont00000005 ;        # bare cco:Act, no governing regulation
+    bfo:BFO_0000171 ex:Yard_CTA ;
+    rdfs:comment "Pending-handover act for MSKU; no regulatory regime declared (ACQ-IV-04 governance gap)."@en .
+
+ex:Regime_EU_UCC  a b2mar:RegulatoryRegime ;
+    cco:ont00001942 ex:CustomsControl_HLXU ;        # prescribes
+    rdfs:label "EU Union Customs Code"@en .
+
+ex:Regime_ISPS  a b2mar:RegulatoryRegime ;
+    cco:ont00001942 ex:CustodyTransfer_HLXU ;
+    rdfs:label "IMO ISPS Code"@en .
+
+ex:Regime_IMO_FAL  a b2mar:RegulatoryRegime ;
+    rdfs:label "IMO FAL Convention"@en .
+
+# ─────────────────────────────────────────────────────────────
+# Evidence layer — ADR-003a (SOSA co-import variant)
+# Observation hasFeatureOfInterest a Quality (the bearer's state).
+# ─────────────────────────────────────────────────────────────
+
+ex:Sensor_AIS_HamburgVTS  a sosa:Sensor ;
+    rdfs:label "Hamburg VTS AIS receiver"@en .
+
+ex:Sensor_OCR_GateSouth   a sosa:Sensor ;
+    rdfs:label "Gate-South OCR camera"@en .
+
+ex:Obs_AIS_Alina_Berth    a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_ALINA_OnBerth ;
+    sosa:resultTime "2026-04-12T07:58:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T07:58:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_AIS_HamburgVTS .
+
+ex:Obs_Disch_HLXU         a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_HLXU_Discharged ;
+    sosa:resultTime "2026-04-12T08:21:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:21:00Z"^^xsd:dateTime .
+
+ex:Obs_GateRead_HLXU      a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_HLXU_GateOut ;
+    sosa:resultTime "2026-04-12T14:42:30Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T14:42:30Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_OCR_GateSouth .
+
+# Also emit the variant-b CCO-native Measurement ICEs side by side
+# so the same KB can answer ACQs under either variant. The two
+# variants share the same measured-Quality target, so empirically
+# the per-ACQ row counts differ only on those queries that filter
+# by SOSA-specific properties (ACQ-II-06: phenomenon vs result time).
+
+ex:Measurement_AIS_Alina   a b2mar:AIS_Measurement ;
+    cco:ont00001808 ex:Q_ALINA_OnBerth ;            # is about
+    rdfs:label "AIS measurement of MSC ALINA at 2026-04-12 07:58Z"@en .
+
+ex:Measurement_GateRead_HLXU  a b2mar:GateRead_Measurement ;
+    cco:ont00001808 ex:Q_HLXU_GateOut ;
+    rdfs:label "Gate-read measurement of HLXU 2026-04-12 14:42Z"@en .
+
+ex:Measurement_Disch_HLXU  a b2mar:GateRead_Measurement ;
+    cco:ont00001808 ex:Q_HLXU_Discharged .
+
+# ─────────────────────────────────────────────────────────────
+# Location layer (Sites) — ADR-005
+# ─────────────────────────────────────────────────────────────
+
+ex:Berth_HHLA_CTA_03  a b2mar:Berth ;
+    rdfs:label "Berth CTA-03 (Hamburg HHLA)"@en .
+
+ex:Yard_CTA           a b2mar:TerminalYard ;
+    rdfs:label "Container Terminal Altenwerder Yard"@en .
+
+ex:ISPSZone_CTA       a b2mar:ISPSZone ;
+    bfo:BFO_0000171 ex:Yard_CTA ;                    # located in
+    rdfs:label "ISPS-restricted zone CTA"@en .
+
+ex:Gate_CTA_South     a b2mar:TerminalYard ;
+    rdfs:label "CTA Gate South"@en .
+
+# ─────────────────────────────────────────────────────────────
+#  LCL deconsolidation scenario (ADR-006: act-mediated split)
+#
+#  A consolidated cargo lot (Master Bill of Lading 2026-4711)
+#  arrives on container HLXU3456789. At the CFS the deconsolidation
+#  act splits the consolidated cargo into three successor cargo
+#  lots (one per House BL). Per ADR-006 the act has multiple
+#  cco:has_output values; the act is typed b2cco:SplittingActivity
+#  via the b2mar:DeconsolidationActivity subclass.
+# ─────────────────────────────────────────────────────────────
+
+ex:CFS_CTA  a b2mar:CFS ;
+    bfo:BFO_0000171 ex:Yard_CTA ;                    # located in
+    rdfs:label "Container Freight Station — CTA"@en .
+
+ex:Agent_HHLA_CFS_Operator  a cco:ont00001017 ;     # cco:Agent
+    rdfs:label "HHLA CFS Operator"@en .
+
+# Source consolidated cargo lot
+ex:CargoLot_BL_2026_4711  a b2mar:CargoLot ;
+    rdfs:label "Consolidated cargo on HLXU3456789 (Master BL 2026-4711)"@en .
+
+ex:Identifier_BL_4711  a cco:ont00000292 ;          # cco:Artifact Identifier
+    cco:ont00001916 ex:CargoLot_BL_2026_4711 ;       # designates
+    rdfs:label "Master BL 2026-4711"@en .
+
+# Three successor cargo lots — one per House BL
+ex:CargoSubLot_BL_4711_a  a b2mar:CargoLot ;
+    rdfs:label "House BL 2026-4711-A"@en .
+ex:CargoSubLot_BL_4711_b  a b2mar:CargoLot ;
+    rdfs:label "House BL 2026-4711-B"@en .
+ex:CargoSubLot_BL_4711_c  a b2mar:CargoLot ;
+    rdfs:label "House BL 2026-4711-C"@en .
+
+ex:Identifier_HBL_4711_a  a cco:ont00000292 ;
+    cco:ont00001916 ex:CargoSubLot_BL_4711_a ;
+    rdfs:label "HBL 2026-4711-A"@en .
+ex:Identifier_HBL_4711_b  a cco:ont00000292 ;
+    cco:ont00001916 ex:CargoSubLot_BL_4711_b ;
+    rdfs:label "HBL 2026-4711-B"@en .
+ex:Identifier_HBL_4711_c  a cco:ont00000292 ;
+    cco:ont00001916 ex:CargoSubLot_BL_4711_c ;
+    rdfs:label "HBL 2026-4711-C"@en .
+
+# Distributed-state qualities for the successors (inhering)
+ex:Q_SubLot_a_Distributed  a b2mar:DistributedLocationQuality ;
+    bfo:BFO_0000197 ex:CargoSubLot_BL_4711_a .       # inheres in
+ex:Q_SubLot_b_Distributed  a b2mar:DistributedLocationQuality ;
+    bfo:BFO_0000197 ex:CargoSubLot_BL_4711_b .
+ex:Q_SubLot_c_Distributed  a b2mar:DistributedLocationQuality ;
+    bfo:BFO_0000197 ex:CargoSubLot_BL_4711_c .
+
+# Deconsolidation act — multi-output (Splitting Activity per ADR-006)
+ex:Decon_τ_HLXU  a b2mar:DeconsolidationActivity ;
+    cco:ont00001833 ex:Agent_HHLA_CFS_Operator ;     # has agent
+    cco:ont00001921 ex:CargoLot_BL_2026_4711 ;        # has input
+    cco:ont00001986 ex:CargoSubLot_BL_4711_a ,        # has output (lot 1)
+                    ex:CargoSubLot_BL_4711_b ,        # has output (lot 2)
+                    ex:CargoSubLot_BL_4711_c ,        # has output (lot 3)
+                    ex:Q_SubLot_a_Distributed ,       # has output (state of lot 1)
+                    ex:Q_SubLot_b_Distributed ,
+                    ex:Q_SubLot_c_Distributed ;
+    cco:ont00001918 ex:CFS_CTA ;                      # occurs at
+    bfo:BFO_0000062 ex:GateOut_99 ;                   # preceded by
+    rdfs:label "CFS Deconsolidation of HLXU 2026-04-12 15:30Z"@en .

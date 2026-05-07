@@ -1,0 +1,16 @@
+# ACQ-II-04  Situation → institutional zone (Class II)
+# Source: GeoSPARQL 1.1, IMO ISPS Code
+# Bridges required: A6 (inZone)
+# Question: Which institutional zones do active situations occupy?
+
+PREFIX dmfo: <https://w3id.org/dmfo#>
+PREFIX dul:  <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#>
+PREFIX geo:  <http://www.opengis.net/ont/geosparql#>
+
+SELECT ?situation ?zone ?zoneClass
+WHERE {
+  ?situation a       dul:Situation ;
+             dmfo:inZone ?zone .
+  OPTIONAL { ?zone a ?zoneClass . }
+}
+ORDER BY ?situation

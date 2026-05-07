@@ -1,0 +1,942 @@
+@prefix dmfo:    <https://w3id.org/dmfo#> .
+@prefix mar:     <https://w3id.org/dmfo/profiles/maritime#> .
+@prefix ex:      <https://w3id.org/dmfo/profiles/maritime/scale#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix sosa:    <http://www.w3.org/ns/sosa/> .
+@prefix dul:     <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix geo:     <http://www.opengis.net/ont/geosparql#> .
+
+<https://w3id.org/dmfo/profiles/maritime/scale-abox>
+    a owl:Ontology ;
+    owl:imports <https://w3id.org/dmfo/profiles/maritime> .
+
+# Shared infrastructure (sites, regimes, agents, sensors)
+ex:Berth_HHLA_CTA_03   a mar:Berth .
+ex:Yard_CTA            a mar:TerminalYard .
+ex:ISPSZone_CTA        a mar:ISPSZone ; geo:sfWithin ex:Yard_CTA .
+ex:Gate_CTA_South      a mar:TerminalYard .
+ex:CFS_CTA             a mar:CFS ; geo:sfWithin ex:Yard_CTA .
+ex:Regime_EU_UCC       a mar:RegulatoryRegime .
+ex:Regime_ISPS         a mar:RegulatoryRegime .
+ex:Agent_CraneOp       a prov:Agent .
+ex:Agent_GateController a prov:Agent .
+ex:Agent_CFSOperator   a prov:Agent .
+ex:Sensor_AIS          a sosa:Sensor .
+ex:Sensor_OCR          a sosa:Sensor .
+ex:Sensor_Thermo       a sosa:Sensor .
+
+ex:Role_PredecessorState a prov:Role .
+ex:Role_GroupageInput    a prov:Role .
+
+# ── Container 1 (full port-call + LCL deconsolidation) ──
+ex:CONT_1  a mar:Container ;
+    mar:bicCode          "HLXU0000001" ;
+    dmfo:identifierScheme "urn:iso:std:iso:6346"^^xsd:anyURI .
+
+ex:Disch_1  a mar:VesselDischarge ;
+    prov:startedAtTime  "2026-04-12T08:07:00Z"^^xsd:dateTime ;
+    prov:endedAtTime    "2026-04-12T08:13:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith ex:Agent_CraneOp .
+
+ex:CraneTrf_1  a mar:CraneTransfer ;
+    prov:startedAtTime  "2026-04-12T08:13:00Z"^^xsd:dateTime ;
+    prov:endedAtTime    "2026-04-12T08:17:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy  ex:Disch_1 ;
+    prov:wasAssociatedWith ex:Agent_CraneOp ;
+    prov:qualifiedUsage [
+        a prov:Usage ;
+        prov:entity  ex:M_Discharged_1 ;
+        prov:hadRole ex:Role_PredecessorState
+    ] .
+
+ex:GateOut_1  a mar:GateMovement ;
+    prov:startedAtTime  "2026-04-12T12:07:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy  ex:CraneTrf_1 ;
+    prov:wasAssociatedWith ex:Agent_GateController ;
+    prov:qualifiedUsage [
+        a prov:Usage ;
+        prov:entity  ex:M_InYard_1 ;
+        prov:hadRole ex:Role_PredecessorState
+    ] .
+
+ex:Obs_AIS_1  a mar:Observation_AIS ;
+    sosa:hasFeatureOfInterest ex:M_OnVessel_1 ;
+    sosa:resultTime "2026-04-12T08:07:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:07:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_AIS .
+
+ex:Obs_Disch_1  a mar:Observation_GateRead ;
+    sosa:hasFeatureOfInterest ex:M_Discharged_1 ;
+    sosa:resultTime "2026-04-12T08:13:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:13:00Z"^^xsd:dateTime .
+
+ex:Obs_GateRead_1  a mar:Observation_GateRead ;
+    sosa:hasFeatureOfInterest ex:M_GateOut_1 ;
+    sosa:resultTime "2026-04-12T12:07:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T12:07:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_OCR .
+
+ex:M_OnVessel_1  a mar:OnVessel ;
+    dmfo:manifestationOf      ex:CONT_1 ;
+    dmfo:manifestationTimestamp "2026-04-12T07:37:00Z"^^xsd:dateTimeStamp .
+
+ex:M_Discharged_1  a mar:Discharged ;
+    dmfo:manifestationOf      ex:CONT_1 ;
+    dmfo:stateWasGeneratedBy  ex:Disch_1 ;
+    dmfo:evidencedBy          ex:Obs_Disch_1 ;
+    dmfo:manifestationTimestamp "2026-04-12T08:13:00Z"^^xsd:dateTimeStamp .
+
+ex:M_InYard_1  a mar:InYard ;
+    dmfo:manifestationOf      ex:CONT_1 ;
+    dmfo:stateWasGeneratedBy  ex:CraneTrf_1 ;
+    dmfo:manifestationTimestamp "2026-04-12T08:17:00Z"^^xsd:dateTimeStamp .
+
+ex:M_GateOut_1  a mar:GateOut ;
+    dmfo:manifestationOf      ex:CONT_1 ;
+    dmfo:stateWasGeneratedBy  ex:GateOut_1 ;
+    dmfo:evidencedBy          ex:Obs_GateRead_1 ;
+    dmfo:manifestationTimestamp "2026-04-12T12:07:00Z"^^xsd:dateTimeStamp .
+
+# Custody + customs situations
+ex:Sit_Custody_1  a mar:CustodyTransferSituation ;
+    dul:includesObject ex:M_InYard_1 , ex:M_Discharged_1 ;
+    dmfo:governedBy    ex:Regime_ISPS ;
+    dmfo:inZone        ex:ISPSZone_CTA .
+
+ex:Sit_Customs_1  a mar:CustomsControlSituation ;
+    dul:includesObject ex:M_GateOut_1 ;
+    dmfo:governedBy    ex:Regime_EU_UCC ;
+    dmfo:inZone        ex:Gate_CTA_South .
+
+# LCL deconsolidation chain (every 5th container)
+# ── Container 2 (full port-call + LCL deconsolidation) ──
+ex:CONT_2  a mar:Container ;
+    mar:bicCode          "HLXU0000002" ;
+    dmfo:identifierScheme "urn:iso:std:iso:6346"^^xsd:anyURI .
+
+ex:Disch_2  a mar:VesselDischarge ;
+    prov:startedAtTime  "2026-04-12T08:14:00Z"^^xsd:dateTime ;
+    prov:endedAtTime    "2026-04-12T08:20:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith ex:Agent_CraneOp .
+
+ex:CraneTrf_2  a mar:CraneTransfer ;
+    prov:startedAtTime  "2026-04-12T08:20:00Z"^^xsd:dateTime ;
+    prov:endedAtTime    "2026-04-12T08:24:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy  ex:Disch_2 ;
+    prov:wasAssociatedWith ex:Agent_CraneOp ;
+    prov:qualifiedUsage [
+        a prov:Usage ;
+        prov:entity  ex:M_Discharged_2 ;
+        prov:hadRole ex:Role_PredecessorState
+    ] .
+
+ex:GateOut_2  a mar:GateMovement ;
+    prov:startedAtTime  "2026-04-12T12:14:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy  ex:CraneTrf_2 ;
+    prov:wasAssociatedWith ex:Agent_GateController ;
+    prov:qualifiedUsage [
+        a prov:Usage ;
+        prov:entity  ex:M_InYard_2 ;
+        prov:hadRole ex:Role_PredecessorState
+    ] .
+
+ex:Obs_AIS_2  a mar:Observation_AIS ;
+    sosa:hasFeatureOfInterest ex:M_OnVessel_2 ;
+    sosa:resultTime "2026-04-12T08:14:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:14:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_AIS .
+
+ex:Obs_Disch_2  a mar:Observation_GateRead ;
+    sosa:hasFeatureOfInterest ex:M_Discharged_2 ;
+    sosa:resultTime "2026-04-12T08:20:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:20:00Z"^^xsd:dateTime .
+
+ex:Obs_GateRead_2  a mar:Observation_GateRead ;
+    sosa:hasFeatureOfInterest ex:M_GateOut_2 ;
+    sosa:resultTime "2026-04-12T12:14:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T12:14:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_OCR .
+
+ex:M_OnVessel_2  a mar:OnVessel ;
+    dmfo:manifestationOf      ex:CONT_2 ;
+    dmfo:manifestationTimestamp "2026-04-12T07:44:00Z"^^xsd:dateTimeStamp .
+
+ex:M_Discharged_2  a mar:Discharged ;
+    dmfo:manifestationOf      ex:CONT_2 ;
+    dmfo:stateWasGeneratedBy  ex:Disch_2 ;
+    dmfo:evidencedBy          ex:Obs_Disch_2 ;
+    dmfo:manifestationTimestamp "2026-04-12T08:20:00Z"^^xsd:dateTimeStamp .
+
+ex:M_InYard_2  a mar:InYard ;
+    dmfo:manifestationOf      ex:CONT_2 ;
+    dmfo:stateWasGeneratedBy  ex:CraneTrf_2 ;
+    dmfo:manifestationTimestamp "2026-04-12T08:24:00Z"^^xsd:dateTimeStamp .
+
+ex:M_GateOut_2  a mar:GateOut ;
+    dmfo:manifestationOf      ex:CONT_2 ;
+    dmfo:stateWasGeneratedBy  ex:GateOut_2 ;
+    dmfo:evidencedBy          ex:Obs_GateRead_2 ;
+    dmfo:manifestationTimestamp "2026-04-12T12:14:00Z"^^xsd:dateTimeStamp .
+
+# Custody + customs situations
+ex:Sit_Custody_2  a mar:CustodyTransferSituation ;
+    dul:includesObject ex:M_InYard_2 , ex:M_Discharged_2 ;
+    dmfo:governedBy    ex:Regime_ISPS ;
+    dmfo:inZone        ex:ISPSZone_CTA .
+
+ex:Sit_Customs_2  a mar:CustomsControlSituation ;
+    dul:includesObject ex:M_GateOut_2 ;
+    dmfo:governedBy    ex:Regime_EU_UCC ;
+    dmfo:inZone        ex:Gate_CTA_South .
+
+# LCL deconsolidation chain (every 5th container)
+# ── Container 3 (full port-call + LCL deconsolidation) ──
+ex:CONT_3  a mar:Container ;
+    mar:bicCode          "HLXU0000003" ;
+    dmfo:identifierScheme "urn:iso:std:iso:6346"^^xsd:anyURI .
+
+ex:Disch_3  a mar:VesselDischarge ;
+    prov:startedAtTime  "2026-04-12T08:21:00Z"^^xsd:dateTime ;
+    prov:endedAtTime    "2026-04-12T08:27:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith ex:Agent_CraneOp .
+
+ex:CraneTrf_3  a mar:CraneTransfer ;
+    prov:startedAtTime  "2026-04-12T08:27:00Z"^^xsd:dateTime ;
+    prov:endedAtTime    "2026-04-12T08:31:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy  ex:Disch_3 ;
+    prov:wasAssociatedWith ex:Agent_CraneOp ;
+    prov:qualifiedUsage [
+        a prov:Usage ;
+        prov:entity  ex:M_Discharged_3 ;
+        prov:hadRole ex:Role_PredecessorState
+    ] .
+
+ex:GateOut_3  a mar:GateMovement ;
+    prov:startedAtTime  "2026-04-12T12:21:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy  ex:CraneTrf_3 ;
+    prov:wasAssociatedWith ex:Agent_GateController ;
+    prov:qualifiedUsage [
+        a prov:Usage ;
+        prov:entity  ex:M_InYard_3 ;
+        prov:hadRole ex:Role_PredecessorState
+    ] .
+
+ex:Obs_AIS_3  a mar:Observation_AIS ;
+    sosa:hasFeatureOfInterest ex:M_OnVessel_3 ;
+    sosa:resultTime "2026-04-12T08:21:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:21:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_AIS .
+
+ex:Obs_Disch_3  a mar:Observation_GateRead ;
+    sosa:hasFeatureOfInterest ex:M_Discharged_3 ;
+    sosa:resultTime "2026-04-12T08:27:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:27:00Z"^^xsd:dateTime .
+
+ex:Obs_GateRead_3  a mar:Observation_GateRead ;
+    sosa:hasFeatureOfInterest ex:M_GateOut_3 ;
+    sosa:resultTime "2026-04-12T12:21:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T12:21:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_OCR .
+
+ex:M_OnVessel_3  a mar:OnVessel ;
+    dmfo:manifestationOf      ex:CONT_3 ;
+    dmfo:manifestationTimestamp "2026-04-12T07:51:00Z"^^xsd:dateTimeStamp .
+
+ex:M_Discharged_3  a mar:Discharged ;
+    dmfo:manifestationOf      ex:CONT_3 ;
+    dmfo:stateWasGeneratedBy  ex:Disch_3 ;
+    dmfo:evidencedBy          ex:Obs_Disch_3 ;
+    dmfo:manifestationTimestamp "2026-04-12T08:27:00Z"^^xsd:dateTimeStamp .
+
+ex:M_InYard_3  a mar:InYard ;
+    dmfo:manifestationOf      ex:CONT_3 ;
+    dmfo:stateWasGeneratedBy  ex:CraneTrf_3 ;
+    dmfo:manifestationTimestamp "2026-04-12T08:31:00Z"^^xsd:dateTimeStamp .
+
+ex:M_GateOut_3  a mar:GateOut ;
+    dmfo:manifestationOf      ex:CONT_3 ;
+    dmfo:stateWasGeneratedBy  ex:GateOut_3 ;
+    dmfo:evidencedBy          ex:Obs_GateRead_3 ;
+    dmfo:manifestationTimestamp "2026-04-12T12:21:00Z"^^xsd:dateTimeStamp .
+
+# Custody + customs situations
+ex:Sit_Custody_3  a mar:CustodyTransferSituation ;
+    dul:includesObject ex:M_InYard_3 , ex:M_Discharged_3 ;
+    dmfo:governedBy    ex:Regime_ISPS ;
+    dmfo:inZone        ex:ISPSZone_CTA .
+
+ex:Sit_Customs_3  a mar:CustomsControlSituation ;
+    dul:includesObject ex:M_GateOut_3 ;
+    dmfo:governedBy    ex:Regime_EU_UCC ;
+    dmfo:inZone        ex:Gate_CTA_South .
+
+# LCL deconsolidation chain (every 5th container)
+# ── Container 4 (full port-call + LCL deconsolidation) ──
+ex:CONT_4  a mar:Container ;
+    mar:bicCode          "HLXU0000004" ;
+    dmfo:identifierScheme "urn:iso:std:iso:6346"^^xsd:anyURI .
+
+ex:Disch_4  a mar:VesselDischarge ;
+    prov:startedAtTime  "2026-04-12T08:28:00Z"^^xsd:dateTime ;
+    prov:endedAtTime    "2026-04-12T08:34:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith ex:Agent_CraneOp .
+
+ex:CraneTrf_4  a mar:CraneTransfer ;
+    prov:startedAtTime  "2026-04-12T08:34:00Z"^^xsd:dateTime ;
+    prov:endedAtTime    "2026-04-12T08:38:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy  ex:Disch_4 ;
+    prov:wasAssociatedWith ex:Agent_CraneOp ;
+    prov:qualifiedUsage [
+        a prov:Usage ;
+        prov:entity  ex:M_Discharged_4 ;
+        prov:hadRole ex:Role_PredecessorState
+    ] .
+
+ex:GateOut_4  a mar:GateMovement ;
+    prov:startedAtTime  "2026-04-12T12:28:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy  ex:CraneTrf_4 ;
+    prov:wasAssociatedWith ex:Agent_GateController ;
+    prov:qualifiedUsage [
+        a prov:Usage ;
+        prov:entity  ex:M_InYard_4 ;
+        prov:hadRole ex:Role_PredecessorState
+    ] .
+
+ex:Obs_AIS_4  a mar:Observation_AIS ;
+    sosa:hasFeatureOfInterest ex:M_OnVessel_4 ;
+    sosa:resultTime "2026-04-12T08:28:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:28:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_AIS .
+
+ex:Obs_Disch_4  a mar:Observation_GateRead ;
+    sosa:hasFeatureOfInterest ex:M_Discharged_4 ;
+    sosa:resultTime "2026-04-12T08:34:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:34:00Z"^^xsd:dateTime .
+
+ex:Obs_GateRead_4  a mar:Observation_GateRead ;
+    sosa:hasFeatureOfInterest ex:M_GateOut_4 ;
+    sosa:resultTime "2026-04-12T12:28:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T12:28:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_OCR .
+
+ex:M_OnVessel_4  a mar:OnVessel ;
+    dmfo:manifestationOf      ex:CONT_4 ;
+    dmfo:manifestationTimestamp "2026-04-12T07:58:00Z"^^xsd:dateTimeStamp .
+
+ex:M_Discharged_4  a mar:Discharged ;
+    dmfo:manifestationOf      ex:CONT_4 ;
+    dmfo:stateWasGeneratedBy  ex:Disch_4 ;
+    dmfo:evidencedBy          ex:Obs_Disch_4 ;
+    dmfo:manifestationTimestamp "2026-04-12T08:34:00Z"^^xsd:dateTimeStamp .
+
+ex:M_InYard_4  a mar:InYard ;
+    dmfo:manifestationOf      ex:CONT_4 ;
+    dmfo:stateWasGeneratedBy  ex:CraneTrf_4 ;
+    dmfo:manifestationTimestamp "2026-04-12T08:38:00Z"^^xsd:dateTimeStamp .
+
+ex:M_GateOut_4  a mar:GateOut ;
+    dmfo:manifestationOf      ex:CONT_4 ;
+    dmfo:stateWasGeneratedBy  ex:GateOut_4 ;
+    dmfo:evidencedBy          ex:Obs_GateRead_4 ;
+    dmfo:manifestationTimestamp "2026-04-12T12:28:00Z"^^xsd:dateTimeStamp .
+
+# Custody + customs situations
+ex:Sit_Custody_4  a mar:CustodyTransferSituation ;
+    dul:includesObject ex:M_InYard_4 , ex:M_Discharged_4 ;
+    dmfo:governedBy    ex:Regime_ISPS ;
+    dmfo:inZone        ex:ISPSZone_CTA .
+
+ex:Sit_Customs_4  a mar:CustomsControlSituation ;
+    dul:includesObject ex:M_GateOut_4 ;
+    dmfo:governedBy    ex:Regime_EU_UCC ;
+    dmfo:inZone        ex:Gate_CTA_South .
+
+# LCL deconsolidation chain (every 5th container)
+# ── Container 5 (full port-call + LCL deconsolidation) ──
+ex:CONT_5  a mar:Container ;
+    mar:bicCode          "HLXU0000005" ;
+    dmfo:identifierScheme "urn:iso:std:iso:6346"^^xsd:anyURI .
+
+ex:Disch_5  a mar:VesselDischarge ;
+    prov:startedAtTime  "2026-04-12T08:35:00Z"^^xsd:dateTime ;
+    prov:endedAtTime    "2026-04-12T08:41:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith ex:Agent_CraneOp .
+
+ex:CraneTrf_5  a mar:CraneTransfer ;
+    prov:startedAtTime  "2026-04-12T08:41:00Z"^^xsd:dateTime ;
+    prov:endedAtTime    "2026-04-12T08:45:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy  ex:Disch_5 ;
+    prov:wasAssociatedWith ex:Agent_CraneOp ;
+    prov:qualifiedUsage [
+        a prov:Usage ;
+        prov:entity  ex:M_Discharged_5 ;
+        prov:hadRole ex:Role_PredecessorState
+    ] .
+
+ex:GateOut_5  a mar:GateMovement ;
+    prov:startedAtTime  "2026-04-12T12:35:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy  ex:CraneTrf_5 ;
+    prov:wasAssociatedWith ex:Agent_GateController ;
+    prov:qualifiedUsage [
+        a prov:Usage ;
+        prov:entity  ex:M_InYard_5 ;
+        prov:hadRole ex:Role_PredecessorState
+    ] .
+
+ex:Obs_AIS_5  a mar:Observation_AIS ;
+    sosa:hasFeatureOfInterest ex:M_OnVessel_5 ;
+    sosa:resultTime "2026-04-12T08:35:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:35:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_AIS .
+
+ex:Obs_Disch_5  a mar:Observation_GateRead ;
+    sosa:hasFeatureOfInterest ex:M_Discharged_5 ;
+    sosa:resultTime "2026-04-12T08:41:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:41:00Z"^^xsd:dateTime .
+
+ex:Obs_GateRead_5  a mar:Observation_GateRead ;
+    sosa:hasFeatureOfInterest ex:M_GateOut_5 ;
+    sosa:resultTime "2026-04-12T12:35:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T12:35:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_OCR .
+
+ex:M_OnVessel_5  a mar:OnVessel ;
+    dmfo:manifestationOf      ex:CONT_5 ;
+    dmfo:manifestationTimestamp "2026-04-12T08:05:00Z"^^xsd:dateTimeStamp .
+
+ex:M_Discharged_5  a mar:Discharged ;
+    dmfo:manifestationOf      ex:CONT_5 ;
+    dmfo:stateWasGeneratedBy  ex:Disch_5 ;
+    dmfo:evidencedBy          ex:Obs_Disch_5 ;
+    dmfo:manifestationTimestamp "2026-04-12T08:41:00Z"^^xsd:dateTimeStamp .
+
+ex:M_InYard_5  a mar:InYard ;
+    dmfo:manifestationOf      ex:CONT_5 ;
+    dmfo:stateWasGeneratedBy  ex:CraneTrf_5 ;
+    dmfo:manifestationTimestamp "2026-04-12T08:45:00Z"^^xsd:dateTimeStamp .
+
+ex:M_GateOut_5  a mar:GateOut ;
+    dmfo:manifestationOf      ex:CONT_5 ;
+    dmfo:stateWasGeneratedBy  ex:GateOut_5 ;
+    dmfo:evidencedBy          ex:Obs_GateRead_5 ;
+    dmfo:manifestationTimestamp "2026-04-12T12:35:00Z"^^xsd:dateTimeStamp .
+
+# Custody + customs situations
+ex:Sit_Custody_5  a mar:CustodyTransferSituation ;
+    dul:includesObject ex:M_InYard_5 , ex:M_Discharged_5 ;
+    dmfo:governedBy    ex:Regime_ISPS ;
+    dmfo:inZone        ex:ISPSZone_CTA .
+
+ex:Sit_Customs_5  a mar:CustomsControlSituation ;
+    dul:includesObject ex:M_GateOut_5 ;
+    dmfo:governedBy    ex:Regime_EU_UCC ;
+    dmfo:inZone        ex:Gate_CTA_South .
+
+# LCL deconsolidation chain (every 5th container)
+ex:CargoLot_BL_5  a mar:CargoLot , dmfo:SplitSourceIdentity ;
+    dmfo:hasIdentifier "BL-5" ;
+    dmfo:identifierScheme "urn:un:cefact:bl"^^xsd:anyURI .
+
+ex:Decon_τ_5  a mar:DeconsolidationActivity ;
+    prov:wasInformedBy ex:GateOut_5 ;
+    prov:wasAssociatedWith ex:Agent_CFSOperator ;
+    prov:qualifiedUsage [
+        a prov:Usage ;
+        prov:entity  ex:M_GateOut_5 ;
+        prov:hadRole ex:Role_GroupageInput
+    ] .
+
+ex:CargoSubLot_5_a  a mar:CargoLot ;
+    dmfo:hasIdentifier "HBL-5-A" ;
+    prov:wasDerivedFrom ex:CargoLot_BL_5 ;
+    prov:wasGeneratedBy ex:Decon_τ_5 .
+ex:CargoSubLot_5_b  a mar:CargoLot ;
+    dmfo:hasIdentifier "HBL-5-B" ;
+    prov:wasDerivedFrom ex:CargoLot_BL_5 ;
+    prov:wasGeneratedBy ex:Decon_τ_5 .
+ex:CargoSubLot_5_c  a mar:CargoLot ;
+    dmfo:hasIdentifier "HBL-5-C" ;
+    prov:wasDerivedFrom ex:CargoLot_BL_5 ;
+    prov:wasGeneratedBy ex:Decon_τ_5 .
+
+ex:M_Distributed_5_a  a mar:Distributed ;
+    dmfo:manifestationOf ex:CargoSubLot_5_a ;
+    dmfo:stateWasGeneratedBy ex:Decon_τ_5 ;
+    dmfo:manifestationTimestamp "2026-04-12T16:35:00Z"^^xsd:dateTimeStamp .
+ex:M_Distributed_5_b  a mar:Distributed ;
+    dmfo:manifestationOf ex:CargoSubLot_5_b ;
+    dmfo:stateWasGeneratedBy ex:Decon_τ_5 ;
+    dmfo:manifestationTimestamp "2026-04-12T16:35:00Z"^^xsd:dateTimeStamp .
+ex:M_Distributed_5_c  a mar:Distributed ;
+    dmfo:manifestationOf ex:CargoSubLot_5_c ;
+    dmfo:stateWasGeneratedBy ex:Decon_τ_5 ;
+    dmfo:manifestationTimestamp "2026-04-12T16:35:00Z"^^xsd:dateTimeStamp .
+
+# ── Container 6 (full port-call + LCL deconsolidation) ──
+ex:CONT_6  a mar:Container ;
+    mar:bicCode          "HLXU0000006" ;
+    dmfo:identifierScheme "urn:iso:std:iso:6346"^^xsd:anyURI .
+
+ex:Disch_6  a mar:VesselDischarge ;
+    prov:startedAtTime  "2026-04-12T08:42:00Z"^^xsd:dateTime ;
+    prov:endedAtTime    "2026-04-12T08:48:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith ex:Agent_CraneOp .
+
+ex:CraneTrf_6  a mar:CraneTransfer ;
+    prov:startedAtTime  "2026-04-12T08:48:00Z"^^xsd:dateTime ;
+    prov:endedAtTime    "2026-04-12T08:52:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy  ex:Disch_6 ;
+    prov:wasAssociatedWith ex:Agent_CraneOp ;
+    prov:qualifiedUsage [
+        a prov:Usage ;
+        prov:entity  ex:M_Discharged_6 ;
+        prov:hadRole ex:Role_PredecessorState
+    ] .
+
+ex:GateOut_6  a mar:GateMovement ;
+    prov:startedAtTime  "2026-04-12T12:42:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy  ex:CraneTrf_6 ;
+    prov:wasAssociatedWith ex:Agent_GateController ;
+    prov:qualifiedUsage [
+        a prov:Usage ;
+        prov:entity  ex:M_InYard_6 ;
+        prov:hadRole ex:Role_PredecessorState
+    ] .
+
+ex:Obs_AIS_6  a mar:Observation_AIS ;
+    sosa:hasFeatureOfInterest ex:M_OnVessel_6 ;
+    sosa:resultTime "2026-04-12T08:42:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:42:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_AIS .
+
+ex:Obs_Disch_6  a mar:Observation_GateRead ;
+    sosa:hasFeatureOfInterest ex:M_Discharged_6 ;
+    sosa:resultTime "2026-04-12T08:48:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:48:00Z"^^xsd:dateTime .
+
+ex:Obs_GateRead_6  a mar:Observation_GateRead ;
+    sosa:hasFeatureOfInterest ex:M_GateOut_6 ;
+    sosa:resultTime "2026-04-12T12:42:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T12:42:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_OCR .
+
+ex:M_OnVessel_6  a mar:OnVessel ;
+    dmfo:manifestationOf      ex:CONT_6 ;
+    dmfo:manifestationTimestamp "2026-04-12T08:12:00Z"^^xsd:dateTimeStamp .
+
+ex:M_Discharged_6  a mar:Discharged ;
+    dmfo:manifestationOf      ex:CONT_6 ;
+    dmfo:stateWasGeneratedBy  ex:Disch_6 ;
+    dmfo:evidencedBy          ex:Obs_Disch_6 ;
+    dmfo:manifestationTimestamp "2026-04-12T08:48:00Z"^^xsd:dateTimeStamp .
+
+ex:M_InYard_6  a mar:InYard ;
+    dmfo:manifestationOf      ex:CONT_6 ;
+    dmfo:stateWasGeneratedBy  ex:CraneTrf_6 ;
+    dmfo:manifestationTimestamp "2026-04-12T08:52:00Z"^^xsd:dateTimeStamp .
+
+ex:M_GateOut_6  a mar:GateOut ;
+    dmfo:manifestationOf      ex:CONT_6 ;
+    dmfo:stateWasGeneratedBy  ex:GateOut_6 ;
+    dmfo:evidencedBy          ex:Obs_GateRead_6 ;
+    dmfo:manifestationTimestamp "2026-04-12T12:42:00Z"^^xsd:dateTimeStamp .
+
+# Custody + customs situations
+ex:Sit_Custody_6  a mar:CustodyTransferSituation ;
+    dul:includesObject ex:M_InYard_6 , ex:M_Discharged_6 ;
+    dmfo:governedBy    ex:Regime_ISPS ;
+    dmfo:inZone        ex:ISPSZone_CTA .
+
+ex:Sit_Customs_6  a mar:CustomsControlSituation ;
+    dul:includesObject ex:M_GateOut_6 ;
+    dmfo:governedBy    ex:Regime_EU_UCC ;
+    dmfo:inZone        ex:Gate_CTA_South .
+
+# LCL deconsolidation chain (every 5th container)
+# ── Container 7 (full port-call + LCL deconsolidation) ──
+ex:CONT_7  a mar:Container ;
+    mar:bicCode          "HLXU0000007" ;
+    dmfo:identifierScheme "urn:iso:std:iso:6346"^^xsd:anyURI .
+
+ex:Disch_7  a mar:VesselDischarge ;
+    prov:startedAtTime  "2026-04-12T08:49:00Z"^^xsd:dateTime ;
+    prov:endedAtTime    "2026-04-12T08:55:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith ex:Agent_CraneOp .
+
+ex:CraneTrf_7  a mar:CraneTransfer ;
+    prov:startedAtTime  "2026-04-12T08:55:00Z"^^xsd:dateTime ;
+    prov:endedAtTime    "2026-04-12T08:59:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy  ex:Disch_7 ;
+    prov:wasAssociatedWith ex:Agent_CraneOp ;
+    prov:qualifiedUsage [
+        a prov:Usage ;
+        prov:entity  ex:M_Discharged_7 ;
+        prov:hadRole ex:Role_PredecessorState
+    ] .
+
+ex:GateOut_7  a mar:GateMovement ;
+    prov:startedAtTime  "2026-04-12T12:49:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy  ex:CraneTrf_7 ;
+    prov:wasAssociatedWith ex:Agent_GateController ;
+    prov:qualifiedUsage [
+        a prov:Usage ;
+        prov:entity  ex:M_InYard_7 ;
+        prov:hadRole ex:Role_PredecessorState
+    ] .
+
+ex:Obs_AIS_7  a mar:Observation_AIS ;
+    sosa:hasFeatureOfInterest ex:M_OnVessel_7 ;
+    sosa:resultTime "2026-04-12T08:49:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:49:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_AIS .
+
+ex:Obs_Disch_7  a mar:Observation_GateRead ;
+    sosa:hasFeatureOfInterest ex:M_Discharged_7 ;
+    sosa:resultTime "2026-04-12T08:55:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:55:00Z"^^xsd:dateTime .
+
+ex:Obs_GateRead_7  a mar:Observation_GateRead ;
+    sosa:hasFeatureOfInterest ex:M_GateOut_7 ;
+    sosa:resultTime "2026-04-12T12:49:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T12:49:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_OCR .
+
+ex:M_OnVessel_7  a mar:OnVessel ;
+    dmfo:manifestationOf      ex:CONT_7 ;
+    dmfo:manifestationTimestamp "2026-04-12T08:19:00Z"^^xsd:dateTimeStamp .
+
+ex:M_Discharged_7  a mar:Discharged ;
+    dmfo:manifestationOf      ex:CONT_7 ;
+    dmfo:stateWasGeneratedBy  ex:Disch_7 ;
+    dmfo:evidencedBy          ex:Obs_Disch_7 ;
+    dmfo:manifestationTimestamp "2026-04-12T08:55:00Z"^^xsd:dateTimeStamp .
+
+ex:M_InYard_7  a mar:InYard ;
+    dmfo:manifestationOf      ex:CONT_7 ;
+    dmfo:stateWasGeneratedBy  ex:CraneTrf_7 ;
+    dmfo:manifestationTimestamp "2026-04-12T08:59:00Z"^^xsd:dateTimeStamp .
+
+ex:M_GateOut_7  a mar:GateOut ;
+    dmfo:manifestationOf      ex:CONT_7 ;
+    dmfo:stateWasGeneratedBy  ex:GateOut_7 ;
+    dmfo:evidencedBy          ex:Obs_GateRead_7 ;
+    dmfo:manifestationTimestamp "2026-04-12T12:49:00Z"^^xsd:dateTimeStamp .
+
+# Custody + customs situations
+ex:Sit_Custody_7  a mar:CustodyTransferSituation ;
+    dul:includesObject ex:M_InYard_7 , ex:M_Discharged_7 ;
+    dmfo:governedBy    ex:Regime_ISPS ;
+    dmfo:inZone        ex:ISPSZone_CTA .
+
+ex:Sit_Customs_7  a mar:CustomsControlSituation ;
+    dul:includesObject ex:M_GateOut_7 ;
+    dmfo:governedBy    ex:Regime_EU_UCC ;
+    dmfo:inZone        ex:Gate_CTA_South .
+
+# LCL deconsolidation chain (every 5th container)
+# ── Container 8 (full port-call + LCL deconsolidation) ──
+ex:CONT_8  a mar:Container ;
+    mar:bicCode          "HLXU0000008" ;
+    dmfo:identifierScheme "urn:iso:std:iso:6346"^^xsd:anyURI .
+
+ex:Disch_8  a mar:VesselDischarge ;
+    prov:startedAtTime  "2026-04-12T08:56:00Z"^^xsd:dateTime ;
+    prov:endedAtTime    "2026-04-12T09:02:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith ex:Agent_CraneOp .
+
+ex:CraneTrf_8  a mar:CraneTransfer ;
+    prov:startedAtTime  "2026-04-12T09:02:00Z"^^xsd:dateTime ;
+    prov:endedAtTime    "2026-04-12T09:06:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy  ex:Disch_8 ;
+    prov:wasAssociatedWith ex:Agent_CraneOp ;
+    prov:qualifiedUsage [
+        a prov:Usage ;
+        prov:entity  ex:M_Discharged_8 ;
+        prov:hadRole ex:Role_PredecessorState
+    ] .
+
+ex:GateOut_8  a mar:GateMovement ;
+    prov:startedAtTime  "2026-04-12T12:56:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy  ex:CraneTrf_8 ;
+    prov:wasAssociatedWith ex:Agent_GateController ;
+    prov:qualifiedUsage [
+        a prov:Usage ;
+        prov:entity  ex:M_InYard_8 ;
+        prov:hadRole ex:Role_PredecessorState
+    ] .
+
+ex:Obs_AIS_8  a mar:Observation_AIS ;
+    sosa:hasFeatureOfInterest ex:M_OnVessel_8 ;
+    sosa:resultTime "2026-04-12T08:56:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:56:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_AIS .
+
+ex:Obs_Disch_8  a mar:Observation_GateRead ;
+    sosa:hasFeatureOfInterest ex:M_Discharged_8 ;
+    sosa:resultTime "2026-04-12T09:02:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T09:02:00Z"^^xsd:dateTime .
+
+ex:Obs_GateRead_8  a mar:Observation_GateRead ;
+    sosa:hasFeatureOfInterest ex:M_GateOut_8 ;
+    sosa:resultTime "2026-04-12T12:56:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T12:56:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_OCR .
+
+ex:M_OnVessel_8  a mar:OnVessel ;
+    dmfo:manifestationOf      ex:CONT_8 ;
+    dmfo:manifestationTimestamp "2026-04-12T08:26:00Z"^^xsd:dateTimeStamp .
+
+ex:M_Discharged_8  a mar:Discharged ;
+    dmfo:manifestationOf      ex:CONT_8 ;
+    dmfo:stateWasGeneratedBy  ex:Disch_8 ;
+    dmfo:evidencedBy          ex:Obs_Disch_8 ;
+    dmfo:manifestationTimestamp "2026-04-12T09:02:00Z"^^xsd:dateTimeStamp .
+
+ex:M_InYard_8  a mar:InYard ;
+    dmfo:manifestationOf      ex:CONT_8 ;
+    dmfo:stateWasGeneratedBy  ex:CraneTrf_8 ;
+    dmfo:manifestationTimestamp "2026-04-12T09:06:00Z"^^xsd:dateTimeStamp .
+
+ex:M_GateOut_8  a mar:GateOut ;
+    dmfo:manifestationOf      ex:CONT_8 ;
+    dmfo:stateWasGeneratedBy  ex:GateOut_8 ;
+    dmfo:evidencedBy          ex:Obs_GateRead_8 ;
+    dmfo:manifestationTimestamp "2026-04-12T12:56:00Z"^^xsd:dateTimeStamp .
+
+# Custody + customs situations
+ex:Sit_Custody_8  a mar:CustodyTransferSituation ;
+    dul:includesObject ex:M_InYard_8 , ex:M_Discharged_8 ;
+    dmfo:governedBy    ex:Regime_ISPS ;
+    dmfo:inZone        ex:ISPSZone_CTA .
+
+ex:Sit_Customs_8  a mar:CustomsControlSituation ;
+    dul:includesObject ex:M_GateOut_8 ;
+    dmfo:governedBy    ex:Regime_EU_UCC ;
+    dmfo:inZone        ex:Gate_CTA_South .
+
+# LCL deconsolidation chain (every 5th container)
+# ── Container 9 (full port-call + LCL deconsolidation) ──
+ex:CONT_9  a mar:Container ;
+    mar:bicCode          "HLXU0000009" ;
+    dmfo:identifierScheme "urn:iso:std:iso:6346"^^xsd:anyURI .
+
+ex:Disch_9  a mar:VesselDischarge ;
+    prov:startedAtTime  "2026-04-12T09:03:00Z"^^xsd:dateTime ;
+    prov:endedAtTime    "2026-04-12T09:09:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith ex:Agent_CraneOp .
+
+ex:CraneTrf_9  a mar:CraneTransfer ;
+    prov:startedAtTime  "2026-04-12T09:09:00Z"^^xsd:dateTime ;
+    prov:endedAtTime    "2026-04-12T09:13:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy  ex:Disch_9 ;
+    prov:wasAssociatedWith ex:Agent_CraneOp ;
+    prov:qualifiedUsage [
+        a prov:Usage ;
+        prov:entity  ex:M_Discharged_9 ;
+        prov:hadRole ex:Role_PredecessorState
+    ] .
+
+ex:GateOut_9  a mar:GateMovement ;
+    prov:startedAtTime  "2026-04-12T13:03:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy  ex:CraneTrf_9 ;
+    prov:wasAssociatedWith ex:Agent_GateController ;
+    prov:qualifiedUsage [
+        a prov:Usage ;
+        prov:entity  ex:M_InYard_9 ;
+        prov:hadRole ex:Role_PredecessorState
+    ] .
+
+ex:Obs_AIS_9  a mar:Observation_AIS ;
+    sosa:hasFeatureOfInterest ex:M_OnVessel_9 ;
+    sosa:resultTime "2026-04-12T09:03:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T09:03:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_AIS .
+
+ex:Obs_Disch_9  a mar:Observation_GateRead ;
+    sosa:hasFeatureOfInterest ex:M_Discharged_9 ;
+    sosa:resultTime "2026-04-12T09:09:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T09:09:00Z"^^xsd:dateTime .
+
+ex:Obs_GateRead_9  a mar:Observation_GateRead ;
+    sosa:hasFeatureOfInterest ex:M_GateOut_9 ;
+    sosa:resultTime "2026-04-12T13:03:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T13:03:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_OCR .
+
+ex:M_OnVessel_9  a mar:OnVessel ;
+    dmfo:manifestationOf      ex:CONT_9 ;
+    dmfo:manifestationTimestamp "2026-04-12T08:33:00Z"^^xsd:dateTimeStamp .
+
+ex:M_Discharged_9  a mar:Discharged ;
+    dmfo:manifestationOf      ex:CONT_9 ;
+    dmfo:stateWasGeneratedBy  ex:Disch_9 ;
+    dmfo:evidencedBy          ex:Obs_Disch_9 ;
+    dmfo:manifestationTimestamp "2026-04-12T09:09:00Z"^^xsd:dateTimeStamp .
+
+ex:M_InYard_9  a mar:InYard ;
+    dmfo:manifestationOf      ex:CONT_9 ;
+    dmfo:stateWasGeneratedBy  ex:CraneTrf_9 ;
+    dmfo:manifestationTimestamp "2026-04-12T09:13:00Z"^^xsd:dateTimeStamp .
+
+ex:M_GateOut_9  a mar:GateOut ;
+    dmfo:manifestationOf      ex:CONT_9 ;
+    dmfo:stateWasGeneratedBy  ex:GateOut_9 ;
+    dmfo:evidencedBy          ex:Obs_GateRead_9 ;
+    dmfo:manifestationTimestamp "2026-04-12T13:03:00Z"^^xsd:dateTimeStamp .
+
+# Custody + customs situations
+ex:Sit_Custody_9  a mar:CustodyTransferSituation ;
+    dul:includesObject ex:M_InYard_9 , ex:M_Discharged_9 ;
+    dmfo:governedBy    ex:Regime_ISPS ;
+    dmfo:inZone        ex:ISPSZone_CTA .
+
+ex:Sit_Customs_9  a mar:CustomsControlSituation ;
+    dul:includesObject ex:M_GateOut_9 ;
+    dmfo:governedBy    ex:Regime_EU_UCC ;
+    dmfo:inZone        ex:Gate_CTA_South .
+
+# LCL deconsolidation chain (every 5th container)
+# ── Container 10 (full port-call + LCL deconsolidation) ──
+ex:CONT_10  a mar:Container ;
+    mar:bicCode          "HLXU0000010" ;
+    dmfo:identifierScheme "urn:iso:std:iso:6346"^^xsd:anyURI .
+
+ex:Disch_10  a mar:VesselDischarge ;
+    prov:startedAtTime  "2026-04-12T09:10:00Z"^^xsd:dateTime ;
+    prov:endedAtTime    "2026-04-12T09:16:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith ex:Agent_CraneOp .
+
+ex:CraneTrf_10  a mar:CraneTransfer ;
+    prov:startedAtTime  "2026-04-12T09:16:00Z"^^xsd:dateTime ;
+    prov:endedAtTime    "2026-04-12T09:20:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy  ex:Disch_10 ;
+    prov:wasAssociatedWith ex:Agent_CraneOp ;
+    prov:qualifiedUsage [
+        a prov:Usage ;
+        prov:entity  ex:M_Discharged_10 ;
+        prov:hadRole ex:Role_PredecessorState
+    ] .
+
+ex:GateOut_10  a mar:GateMovement ;
+    prov:startedAtTime  "2026-04-12T13:10:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy  ex:CraneTrf_10 ;
+    prov:wasAssociatedWith ex:Agent_GateController ;
+    prov:qualifiedUsage [
+        a prov:Usage ;
+        prov:entity  ex:M_InYard_10 ;
+        prov:hadRole ex:Role_PredecessorState
+    ] .
+
+ex:Obs_AIS_10  a mar:Observation_AIS ;
+    sosa:hasFeatureOfInterest ex:M_OnVessel_10 ;
+    sosa:resultTime "2026-04-12T09:10:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T09:10:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_AIS .
+
+ex:Obs_Disch_10  a mar:Observation_GateRead ;
+    sosa:hasFeatureOfInterest ex:M_Discharged_10 ;
+    sosa:resultTime "2026-04-12T09:16:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T09:16:00Z"^^xsd:dateTime .
+
+ex:Obs_GateRead_10  a mar:Observation_GateRead ;
+    sosa:hasFeatureOfInterest ex:M_GateOut_10 ;
+    sosa:resultTime "2026-04-12T13:10:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T13:10:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_OCR .
+
+ex:M_OnVessel_10  a mar:OnVessel ;
+    dmfo:manifestationOf      ex:CONT_10 ;
+    dmfo:manifestationTimestamp "2026-04-12T08:40:00Z"^^xsd:dateTimeStamp .
+
+ex:M_Discharged_10  a mar:Discharged ;
+    dmfo:manifestationOf      ex:CONT_10 ;
+    dmfo:stateWasGeneratedBy  ex:Disch_10 ;
+    dmfo:evidencedBy          ex:Obs_Disch_10 ;
+    dmfo:manifestationTimestamp "2026-04-12T09:16:00Z"^^xsd:dateTimeStamp .
+
+ex:M_InYard_10  a mar:InYard ;
+    dmfo:manifestationOf      ex:CONT_10 ;
+    dmfo:stateWasGeneratedBy  ex:CraneTrf_10 ;
+    dmfo:manifestationTimestamp "2026-04-12T09:20:00Z"^^xsd:dateTimeStamp .
+
+ex:M_GateOut_10  a mar:GateOut ;
+    dmfo:manifestationOf      ex:CONT_10 ;
+    dmfo:stateWasGeneratedBy  ex:GateOut_10 ;
+    dmfo:evidencedBy          ex:Obs_GateRead_10 ;
+    dmfo:manifestationTimestamp "2026-04-12T13:10:00Z"^^xsd:dateTimeStamp .
+
+# Custody + customs situations
+ex:Sit_Custody_10  a mar:CustodyTransferSituation ;
+    dul:includesObject ex:M_InYard_10 , ex:M_Discharged_10 ;
+    dmfo:governedBy    ex:Regime_ISPS ;
+    dmfo:inZone        ex:ISPSZone_CTA .
+
+ex:Sit_Customs_10  a mar:CustomsControlSituation ;
+    dul:includesObject ex:M_GateOut_10 ;
+    dmfo:governedBy    ex:Regime_EU_UCC ;
+    dmfo:inZone        ex:Gate_CTA_South .
+
+# LCL deconsolidation chain (every 5th container)
+ex:CargoLot_BL_10  a mar:CargoLot , dmfo:SplitSourceIdentity ;
+    dmfo:hasIdentifier "BL-10" ;
+    dmfo:identifierScheme "urn:un:cefact:bl"^^xsd:anyURI .
+
+ex:Decon_τ_10  a mar:DeconsolidationActivity ;
+    prov:wasInformedBy ex:GateOut_10 ;
+    prov:wasAssociatedWith ex:Agent_CFSOperator ;
+    prov:qualifiedUsage [
+        a prov:Usage ;
+        prov:entity  ex:M_GateOut_10 ;
+        prov:hadRole ex:Role_GroupageInput
+    ] .
+
+ex:CargoSubLot_10_a  a mar:CargoLot ;
+    dmfo:hasIdentifier "HBL-10-A" ;
+    prov:wasDerivedFrom ex:CargoLot_BL_10 ;
+    prov:wasGeneratedBy ex:Decon_τ_10 .
+ex:CargoSubLot_10_b  a mar:CargoLot ;
+    dmfo:hasIdentifier "HBL-10-B" ;
+    prov:wasDerivedFrom ex:CargoLot_BL_10 ;
+    prov:wasGeneratedBy ex:Decon_τ_10 .
+ex:CargoSubLot_10_c  a mar:CargoLot ;
+    dmfo:hasIdentifier "HBL-10-C" ;
+    prov:wasDerivedFrom ex:CargoLot_BL_10 ;
+    prov:wasGeneratedBy ex:Decon_τ_10 .
+
+ex:M_Distributed_10_a  a mar:Distributed ;
+    dmfo:manifestationOf ex:CargoSubLot_10_a ;
+    dmfo:stateWasGeneratedBy ex:Decon_τ_10 ;
+    dmfo:manifestationTimestamp "2026-04-12T17:10:00Z"^^xsd:dateTimeStamp .
+ex:M_Distributed_10_b  a mar:Distributed ;
+    dmfo:manifestationOf ex:CargoSubLot_10_b ;
+    dmfo:stateWasGeneratedBy ex:Decon_τ_10 ;
+    dmfo:manifestationTimestamp "2026-04-12T17:10:00Z"^^xsd:dateTimeStamp .
+ex:M_Distributed_10_c  a mar:Distributed ;
+    dmfo:manifestationOf ex:CargoSubLot_10_c ;
+    dmfo:stateWasGeneratedBy ex:Decon_τ_10 ;
+    dmfo:manifestationTimestamp "2026-04-12T17:10:00Z"^^xsd:dateTimeStamp .
+
+# Class IV gaps (ABox-size-independent)
+ex:CONT_GAP_evidence  a mar:Container ;
+    mar:bicCode "GAPE0000001" ;
+    dmfo:identifierScheme "urn:iso:std:iso:6346"^^xsd:anyURI .
+ex:M_GAP_NoEvidence  a mar:InYard ;
+    dmfo:manifestationOf ex:CONT_GAP_evidence ;
+    dmfo:manifestationTimestamp "2026-04-12T10:00:00Z"^^xsd:dateTimeStamp .
+
+ex:CONT_GAP_causal  a mar:Container ;
+    mar:bicCode "GAPC0000002" ;
+    dmfo:identifierScheme "urn:iso:std:iso:6346"^^xsd:anyURI .
+ex:M_GAP_NoCausal  a mar:InYard ;
+    dmfo:manifestationOf ex:CONT_GAP_causal ;
+    dmfo:manifestationTimestamp "2026-04-12T11:00:00Z"^^xsd:dateTimeStamp .
+
+ex:CONT_GAP_scheme  a mar:Container ;
+    mar:bicCode "GAPS0000003" .
+
+ex:Sit_GAP_governance  a dul:Situation ;
+    dul:includesObject ex:M_GAP_NoEvidence ;
+    dmfo:inZone ex:Yard_CTA .

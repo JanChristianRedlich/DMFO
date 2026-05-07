@@ -1,0 +1,17 @@
+# ACQ-II-03  State → evidence traversal (Class II)
+# Source: SOSA/SSN, ISO 8000-61
+# Bridges required: A3 (evidencedBy)
+# Question: Which Observations ground each Manifestation, and at what
+#           phenomenonTime / resultTime?
+
+PREFIX dmfo: <https://w3id.org/dmfo#>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+
+SELECT ?manifestation ?observation ?phenomenonTime ?resultTime ?sensor
+WHERE {
+  ?manifestation dmfo:evidencedBy ?observation .
+  OPTIONAL { ?observation sosa:phenomenonTime ?phenomenonTime . }
+  OPTIONAL { ?observation sosa:resultTime     ?resultTime .     }
+  OPTIONAL { ?observation sosa:madeBySensor   ?sensor .         }
+}
+ORDER BY ?resultTime

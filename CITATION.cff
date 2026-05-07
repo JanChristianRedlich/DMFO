@@ -1,0 +1,45 @@
+cff-version: 1.2.0
+title: "DMFO: A Modular Alignment Architecture for Situationally Interpretable State Representations"
+type: software
+version: 1.0.0
+date-released: "2026-05-07"
+license: CC-BY-4.0
+authors:
+  - family-names: Redlich
+    given-names: Jan Christian
+    email: jan.redlich@bonnsystems.com
+    affiliation: "Bonn Systems GmbH, Bonn, Germany"
+  - family-names: Kloke
+    given-names: Peter
+    email: peter.kloke@bonnsystems.com
+    affiliation: "Bonn Systems GmbH, Bonn, Germany"
+  - family-names: Bosse
+    given-names: Sebastian
+    email: sebastian.bosse@hhi.fraunhofer.de
+    affiliation: "Fraunhofer Heinrich-Hertz-Institut (HHI), Berlin, Germany"
+repository-code: "https://github.com/redlich/DMFO"
+keywords:
+  - ontology design patterns
+  - modular ontology
+  - OWL 2 DL
+  - fluent entities
+  - temporal representation
+  - bridge relations
+preferred-citation:
+  type: unpublished
+  title: "DMFO: A Modular Alignment Architecture for Situationally Interpretable State Representations"
+  authors:
+    - family-names: Redlich
+      given-names: Jan Christian
+      email: jan.redlich@bonnsystems.com
+      affiliation: "Bonn Systems GmbH, Bonn, Germany"
+    - family-names: Kloke
+      given-names: Peter
+      email: peter.kloke@bonnsystems.com
+      affiliation: "Bonn Systems GmbH, Bonn, Germany"
+    - family-names: Bosse
+      given-names: Sebastian
+      email: sebastian.bosse@hhi.fraunhofer.de
+      affiliation: "Fraunhofer Heinrich-Hertz-Institut (HHI), Berlin, Germany"
+  year: 2026
+  status: unpublished

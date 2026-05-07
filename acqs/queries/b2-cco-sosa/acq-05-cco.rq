@@ -1,0 +1,14 @@
+# ACQ-II-03 (B2-CCO, variant a — SOSA co-import) — State → evidence
+# Classification: (a) directly translatable, but the FoI target
+# is a Quality instance (ADR-001) rather than a Manifestation.
+
+PREFIX bfo:  <http://purl.obolibrary.org/obo/>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+
+SELECT ?quality ?observation ?phenomenonTime ?resultTime ?sensor
+WHERE {
+  ?observation sosa:hasFeatureOfInterest ?quality .
+  OPTIONAL { ?observation sosa:phenomenonTime ?phenomenonTime }
+  OPTIONAL { ?observation sosa:resultTime     ?resultTime     }
+  OPTIONAL { ?observation sosa:madeBySensor   ?sensor         }
+}

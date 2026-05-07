@@ -1,0 +1,18 @@
+# ACQ-III-02  State → situation → regime (Class III)
+# Source: WCO data model, EU UCC, IMO ISPS, EU Reg. 178/2002
+# Bridges required: A2 (manifestationOf), A4 (governedBy), DUL includesObject
+# Question: For each TVE, which regulatory regimes apply via the situation
+#           that includes its current manifestation? Returns one row per
+#           (TVE, regime) pair — a Class-III multi-regime query is
+#           returnable here precisely because A4 is in place.
+
+PREFIX dmfo: <https://w3id.org/dmfo#>
+PREFIX dul:  <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#>
+
+SELECT ?tve ?manifestation ?situation ?regime
+WHERE {
+  ?manifestation dmfo:manifestationOf ?tve .
+  ?situation     dul:includesObject   ?manifestation ;
+                 dmfo:governedBy      ?regime .
+}
+ORDER BY ?tve

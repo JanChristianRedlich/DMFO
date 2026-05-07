@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <!--
+      Protégé catalog mapping logical IRIs to local files for
+      DMFO modules and the imported W3C / OGC vocabularies.
+
+      The DMFO modules are in this directory; the imported
+      vocabularies are cached in ./imports/ (run
+      `validation/scripts/fetch_imports.sh` to populate).
+    -->
+
+    <!-- DMFO modules -->
+    <uri name="https://w3id.org/dmfo"                 uri="dmfo-base.ttl"/>
+    <uri name="https://w3id.org/dmfo/identity"        uri="dmfo-identity.ttl"/>
+    <uri name="https://w3id.org/dmfo/state"           uri="dmfo-state.ttl"/>
+    <uri name="https://w3id.org/dmfo/evidence"        uri="dmfo-evidence.ttl"/>
+    <uri name="https://w3id.org/dmfo/context"         uri="dmfo-context.ttl"/>
+    <uri name="https://w3id.org/dmfo/activity"        uri="dmfo-activity.ttl"/>
+    <uri name="https://w3id.org/dmfo/location"        uri="dmfo-location.ttl"/>
+    <uri name="https://w3id.org/dmfo/identity-deriv"  uri="dmfo-identity-deriv.ttl"/>
+    <uri name="https://w3id.org/dmfo/full"            uri="dmfo-full.ttl"/>
+
+    <!-- Imported W3C / OGC vocabularies (local cache) -->
+    <uri name="http://www.w3.org/ns/prov-o"                            uri="imports/prov-o.ttl"/>
+    <uri name="http://www.w3.org/ns/prov"                              uri="imports/prov-o.ttl"/>
+    <uri name="http://www.w3.org/ns/sosa/"                             uri="imports/sosa.ttl"/>
+    <uri name="http://www.w3.org/ns/ssn/"                              uri="imports/ssn.ttl"/>
+    <uri name="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"  uri="imports/dul.owl"/>
+    <uri name="http://www.opengis.net/ont/geosparql"                   uri="imports/geosparql.ttl"/>
+    <uri name="http://www.w3.org/2006/time"                            uri="imports/time.ttl"/>
+</catalog>

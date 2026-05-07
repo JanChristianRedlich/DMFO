@@ -1,0 +1,681 @@
+@prefix b2cco:  <https://w3id.org/dmfo/baseline/cco#> .
+@prefix b2mar:  <https://w3id.org/dmfo/baseline/cco/maritime#> .
+@prefix bfo:    <http://purl.obolibrary.org/obo/> .
+@prefix cco:    <https://www.commoncoreontologies.org/> .
+@prefix ex:     <https://w3id.org/dmfo/baseline/cco/maritime/scale#> .
+@prefix sosa:   <http://www.w3.org/ns/sosa/> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+
+<https://w3id.org/dmfo/baseline/cco/maritime/scale-abox>
+    a owl:Ontology ;
+    owl:imports <https://w3id.org/dmfo/baseline/cco/maritime> .
+
+ex:Berth_HHLA_CTA_03   a b2mar:Berth .
+ex:Yard_CTA            a b2mar:TerminalYard .
+ex:ISPSZone_CTA        a b2mar:ISPSZone ; bfo:BFO_0000171 ex:Yard_CTA .
+ex:Gate_CTA_South      a b2mar:TerminalYard .
+ex:CFS_CTA             a b2mar:CFS ; bfo:BFO_0000171 ex:Yard_CTA .
+ex:Agent_CraneOp       a cco:ont00001017 .
+ex:Agent_GateController a cco:ont00001017 .
+ex:Agent_CFSOperator   a cco:ont00001017 .
+ex:Sensor_AIS          a sosa:Sensor .
+ex:Sensor_OCR          a sosa:Sensor .
+
+ex:Regime_EU_UCC  a b2mar:RegulatoryRegime .
+ex:Regime_ISPS    a b2mar:RegulatoryRegime .
+ex:CONT_1  a b2mar:Container .
+ex:BIC_1   a b2mar:BICCode ;
+    cco:ont00001916 ex:CONT_1 ;
+    rdfs:label "HLXU0000001" .
+
+ex:Q_1_OnVessel    a b2mar:OnVesselLocationQuality ; bfo:BFO_0000197 ex:CONT_1 .
+ex:Q_1_Discharged  a b2mar:DischargedLocationQuality ; bfo:BFO_0000197 ex:CONT_1 .
+ex:Q_1_InYard      a b2mar:InYardLocationQuality ; bfo:BFO_0000197 ex:CONT_1 .
+ex:Q_1_GateOut     a b2mar:GateOutLocationQuality ; bfo:BFO_0000197 ex:CONT_1 .
+
+ex:Disch_1  a b2mar:VesselDischarge ;
+    cco:ont00001833 ex:Agent_CraneOp ;
+    cco:ont00001986 ex:Q_1_Discharged ;
+    cco:ont00001918 ex:Berth_HHLA_CTA_03 .
+
+ex:CraneTrf_1  a b2mar:CraneTransfer ;
+    cco:ont00001833 ex:Agent_CraneOp ;
+    cco:ont00001986 ex:Q_1_InYard ;
+    cco:ont00001921 ex:Q_1_Discharged ;
+    cco:ont00001918 ex:Yard_CTA ;
+    bfo:BFO_0000062 ex:Disch_1 .
+
+ex:GateOut_1  a b2mar:GateMovement ;
+    cco:ont00001833 ex:Agent_GateController ;
+    cco:ont00001986 ex:Q_1_GateOut ;
+    cco:ont00001921 ex:Q_1_InYard ;
+    cco:ont00001918 ex:Gate_CTA_South ;
+    bfo:BFO_0000062 ex:CraneTrf_1 .
+
+ex:Obs_AIS_1      a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_1_OnVessel ;
+    sosa:resultTime "2026-04-12T08:07:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:07:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_AIS .
+
+ex:Obs_Disch_1    a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_1_Discharged ;
+    sosa:resultTime "2026-04-12T08:13:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:13:00Z"^^xsd:dateTime .
+
+ex:Obs_GateRead_1 a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_1_GateOut ;
+    sosa:resultTime "2026-04-12T12:07:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T12:07:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_OCR .
+
+# Variant-b Measurement ICEs (parallel, for native variant)
+ex:Meas_AIS_1      a b2mar:AIS_Measurement ;
+    cco:ont00001808 ex:Q_1_OnVessel .
+ex:Meas_GateRead_1 a b2mar:GateRead_Measurement ;
+    cco:ont00001808 ex:Q_1_GateOut .
+ex:Meas_Disch_1    a b2mar:GateRead_Measurement ;
+    cco:ont00001808 ex:Q_1_Discharged .
+
+ex:CustodyTransfer_1  a b2mar:CustodyTransfer_Act ;
+    bfo:BFO_0000171 ex:ISPSZone_CTA .
+ex:CustomsControl_1   a b2mar:CustomsControl_Act ;
+    bfo:BFO_0000171 ex:Gate_CTA_South .
+ex:Regime_EU_UCC cco:ont00001942 ex:CustomsControl_1 .
+ex:Regime_ISPS   cco:ont00001942 ex:CustodyTransfer_1 .
+ex:CONT_2  a b2mar:Container .
+ex:BIC_2   a b2mar:BICCode ;
+    cco:ont00001916 ex:CONT_2 ;
+    rdfs:label "HLXU0000002" .
+
+ex:Q_2_OnVessel    a b2mar:OnVesselLocationQuality ; bfo:BFO_0000197 ex:CONT_2 .
+ex:Q_2_Discharged  a b2mar:DischargedLocationQuality ; bfo:BFO_0000197 ex:CONT_2 .
+ex:Q_2_InYard      a b2mar:InYardLocationQuality ; bfo:BFO_0000197 ex:CONT_2 .
+ex:Q_2_GateOut     a b2mar:GateOutLocationQuality ; bfo:BFO_0000197 ex:CONT_2 .
+
+ex:Disch_2  a b2mar:VesselDischarge ;
+    cco:ont00001833 ex:Agent_CraneOp ;
+    cco:ont00001986 ex:Q_2_Discharged ;
+    cco:ont00001918 ex:Berth_HHLA_CTA_03 .
+
+ex:CraneTrf_2  a b2mar:CraneTransfer ;
+    cco:ont00001833 ex:Agent_CraneOp ;
+    cco:ont00001986 ex:Q_2_InYard ;
+    cco:ont00001921 ex:Q_2_Discharged ;
+    cco:ont00001918 ex:Yard_CTA ;
+    bfo:BFO_0000062 ex:Disch_2 .
+
+ex:GateOut_2  a b2mar:GateMovement ;
+    cco:ont00001833 ex:Agent_GateController ;
+    cco:ont00001986 ex:Q_2_GateOut ;
+    cco:ont00001921 ex:Q_2_InYard ;
+    cco:ont00001918 ex:Gate_CTA_South ;
+    bfo:BFO_0000062 ex:CraneTrf_2 .
+
+ex:Obs_AIS_2      a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_2_OnVessel ;
+    sosa:resultTime "2026-04-12T08:14:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:14:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_AIS .
+
+ex:Obs_Disch_2    a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_2_Discharged ;
+    sosa:resultTime "2026-04-12T08:20:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:20:00Z"^^xsd:dateTime .
+
+ex:Obs_GateRead_2 a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_2_GateOut ;
+    sosa:resultTime "2026-04-12T12:14:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T12:14:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_OCR .
+
+# Variant-b Measurement ICEs (parallel, for native variant)
+ex:Meas_AIS_2      a b2mar:AIS_Measurement ;
+    cco:ont00001808 ex:Q_2_OnVessel .
+ex:Meas_GateRead_2 a b2mar:GateRead_Measurement ;
+    cco:ont00001808 ex:Q_2_GateOut .
+ex:Meas_Disch_2    a b2mar:GateRead_Measurement ;
+    cco:ont00001808 ex:Q_2_Discharged .
+
+ex:CustodyTransfer_2  a b2mar:CustodyTransfer_Act ;
+    bfo:BFO_0000171 ex:ISPSZone_CTA .
+ex:CustomsControl_2   a b2mar:CustomsControl_Act ;
+    bfo:BFO_0000171 ex:Gate_CTA_South .
+ex:Regime_EU_UCC cco:ont00001942 ex:CustomsControl_2 .
+ex:Regime_ISPS   cco:ont00001942 ex:CustodyTransfer_2 .
+ex:CONT_3  a b2mar:Container .
+ex:BIC_3   a b2mar:BICCode ;
+    cco:ont00001916 ex:CONT_3 ;
+    rdfs:label "HLXU0000003" .
+
+ex:Q_3_OnVessel    a b2mar:OnVesselLocationQuality ; bfo:BFO_0000197 ex:CONT_3 .
+ex:Q_3_Discharged  a b2mar:DischargedLocationQuality ; bfo:BFO_0000197 ex:CONT_3 .
+ex:Q_3_InYard      a b2mar:InYardLocationQuality ; bfo:BFO_0000197 ex:CONT_3 .
+ex:Q_3_GateOut     a b2mar:GateOutLocationQuality ; bfo:BFO_0000197 ex:CONT_3 .
+
+ex:Disch_3  a b2mar:VesselDischarge ;
+    cco:ont00001833 ex:Agent_CraneOp ;
+    cco:ont00001986 ex:Q_3_Discharged ;
+    cco:ont00001918 ex:Berth_HHLA_CTA_03 .
+
+ex:CraneTrf_3  a b2mar:CraneTransfer ;
+    cco:ont00001833 ex:Agent_CraneOp ;
+    cco:ont00001986 ex:Q_3_InYard ;
+    cco:ont00001921 ex:Q_3_Discharged ;
+    cco:ont00001918 ex:Yard_CTA ;
+    bfo:BFO_0000062 ex:Disch_3 .
+
+ex:GateOut_3  a b2mar:GateMovement ;
+    cco:ont00001833 ex:Agent_GateController ;
+    cco:ont00001986 ex:Q_3_GateOut ;
+    cco:ont00001921 ex:Q_3_InYard ;
+    cco:ont00001918 ex:Gate_CTA_South ;
+    bfo:BFO_0000062 ex:CraneTrf_3 .
+
+ex:Obs_AIS_3      a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_3_OnVessel ;
+    sosa:resultTime "2026-04-12T08:21:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:21:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_AIS .
+
+ex:Obs_Disch_3    a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_3_Discharged ;
+    sosa:resultTime "2026-04-12T08:27:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:27:00Z"^^xsd:dateTime .
+
+ex:Obs_GateRead_3 a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_3_GateOut ;
+    sosa:resultTime "2026-04-12T12:21:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T12:21:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_OCR .
+
+# Variant-b Measurement ICEs (parallel, for native variant)
+ex:Meas_AIS_3      a b2mar:AIS_Measurement ;
+    cco:ont00001808 ex:Q_3_OnVessel .
+ex:Meas_GateRead_3 a b2mar:GateRead_Measurement ;
+    cco:ont00001808 ex:Q_3_GateOut .
+ex:Meas_Disch_3    a b2mar:GateRead_Measurement ;
+    cco:ont00001808 ex:Q_3_Discharged .
+
+ex:CustodyTransfer_3  a b2mar:CustodyTransfer_Act ;
+    bfo:BFO_0000171 ex:ISPSZone_CTA .
+ex:CustomsControl_3   a b2mar:CustomsControl_Act ;
+    bfo:BFO_0000171 ex:Gate_CTA_South .
+ex:Regime_EU_UCC cco:ont00001942 ex:CustomsControl_3 .
+ex:Regime_ISPS   cco:ont00001942 ex:CustodyTransfer_3 .
+ex:CONT_4  a b2mar:Container .
+ex:BIC_4   a b2mar:BICCode ;
+    cco:ont00001916 ex:CONT_4 ;
+    rdfs:label "HLXU0000004" .
+
+ex:Q_4_OnVessel    a b2mar:OnVesselLocationQuality ; bfo:BFO_0000197 ex:CONT_4 .
+ex:Q_4_Discharged  a b2mar:DischargedLocationQuality ; bfo:BFO_0000197 ex:CONT_4 .
+ex:Q_4_InYard      a b2mar:InYardLocationQuality ; bfo:BFO_0000197 ex:CONT_4 .
+ex:Q_4_GateOut     a b2mar:GateOutLocationQuality ; bfo:BFO_0000197 ex:CONT_4 .
+
+ex:Disch_4  a b2mar:VesselDischarge ;
+    cco:ont00001833 ex:Agent_CraneOp ;
+    cco:ont00001986 ex:Q_4_Discharged ;
+    cco:ont00001918 ex:Berth_HHLA_CTA_03 .
+
+ex:CraneTrf_4  a b2mar:CraneTransfer ;
+    cco:ont00001833 ex:Agent_CraneOp ;
+    cco:ont00001986 ex:Q_4_InYard ;
+    cco:ont00001921 ex:Q_4_Discharged ;
+    cco:ont00001918 ex:Yard_CTA ;
+    bfo:BFO_0000062 ex:Disch_4 .
+
+ex:GateOut_4  a b2mar:GateMovement ;
+    cco:ont00001833 ex:Agent_GateController ;
+    cco:ont00001986 ex:Q_4_GateOut ;
+    cco:ont00001921 ex:Q_4_InYard ;
+    cco:ont00001918 ex:Gate_CTA_South ;
+    bfo:BFO_0000062 ex:CraneTrf_4 .
+
+ex:Obs_AIS_4      a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_4_OnVessel ;
+    sosa:resultTime "2026-04-12T08:28:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:28:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_AIS .
+
+ex:Obs_Disch_4    a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_4_Discharged ;
+    sosa:resultTime "2026-04-12T08:34:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:34:00Z"^^xsd:dateTime .
+
+ex:Obs_GateRead_4 a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_4_GateOut ;
+    sosa:resultTime "2026-04-12T12:28:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T12:28:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_OCR .
+
+# Variant-b Measurement ICEs (parallel, for native variant)
+ex:Meas_AIS_4      a b2mar:AIS_Measurement ;
+    cco:ont00001808 ex:Q_4_OnVessel .
+ex:Meas_GateRead_4 a b2mar:GateRead_Measurement ;
+    cco:ont00001808 ex:Q_4_GateOut .
+ex:Meas_Disch_4    a b2mar:GateRead_Measurement ;
+    cco:ont00001808 ex:Q_4_Discharged .
+
+ex:CustodyTransfer_4  a b2mar:CustodyTransfer_Act ;
+    bfo:BFO_0000171 ex:ISPSZone_CTA .
+ex:CustomsControl_4   a b2mar:CustomsControl_Act ;
+    bfo:BFO_0000171 ex:Gate_CTA_South .
+ex:Regime_EU_UCC cco:ont00001942 ex:CustomsControl_4 .
+ex:Regime_ISPS   cco:ont00001942 ex:CustodyTransfer_4 .
+ex:CONT_5  a b2mar:Container .
+ex:BIC_5   a b2mar:BICCode ;
+    cco:ont00001916 ex:CONT_5 ;
+    rdfs:label "HLXU0000005" .
+
+ex:Q_5_OnVessel    a b2mar:OnVesselLocationQuality ; bfo:BFO_0000197 ex:CONT_5 .
+ex:Q_5_Discharged  a b2mar:DischargedLocationQuality ; bfo:BFO_0000197 ex:CONT_5 .
+ex:Q_5_InYard      a b2mar:InYardLocationQuality ; bfo:BFO_0000197 ex:CONT_5 .
+ex:Q_5_GateOut     a b2mar:GateOutLocationQuality ; bfo:BFO_0000197 ex:CONT_5 .
+
+ex:Disch_5  a b2mar:VesselDischarge ;
+    cco:ont00001833 ex:Agent_CraneOp ;
+    cco:ont00001986 ex:Q_5_Discharged ;
+    cco:ont00001918 ex:Berth_HHLA_CTA_03 .
+
+ex:CraneTrf_5  a b2mar:CraneTransfer ;
+    cco:ont00001833 ex:Agent_CraneOp ;
+    cco:ont00001986 ex:Q_5_InYard ;
+    cco:ont00001921 ex:Q_5_Discharged ;
+    cco:ont00001918 ex:Yard_CTA ;
+    bfo:BFO_0000062 ex:Disch_5 .
+
+ex:GateOut_5  a b2mar:GateMovement ;
+    cco:ont00001833 ex:Agent_GateController ;
+    cco:ont00001986 ex:Q_5_GateOut ;
+    cco:ont00001921 ex:Q_5_InYard ;
+    cco:ont00001918 ex:Gate_CTA_South ;
+    bfo:BFO_0000062 ex:CraneTrf_5 .
+
+ex:Obs_AIS_5      a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_5_OnVessel ;
+    sosa:resultTime "2026-04-12T08:35:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:35:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_AIS .
+
+ex:Obs_Disch_5    a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_5_Discharged ;
+    sosa:resultTime "2026-04-12T08:41:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:41:00Z"^^xsd:dateTime .
+
+ex:Obs_GateRead_5 a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_5_GateOut ;
+    sosa:resultTime "2026-04-12T12:35:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T12:35:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_OCR .
+
+# Variant-b Measurement ICEs (parallel, for native variant)
+ex:Meas_AIS_5      a b2mar:AIS_Measurement ;
+    cco:ont00001808 ex:Q_5_OnVessel .
+ex:Meas_GateRead_5 a b2mar:GateRead_Measurement ;
+    cco:ont00001808 ex:Q_5_GateOut .
+ex:Meas_Disch_5    a b2mar:GateRead_Measurement ;
+    cco:ont00001808 ex:Q_5_Discharged .
+
+ex:CustodyTransfer_5  a b2mar:CustodyTransfer_Act ;
+    bfo:BFO_0000171 ex:ISPSZone_CTA .
+ex:CustomsControl_5   a b2mar:CustomsControl_Act ;
+    bfo:BFO_0000171 ex:Gate_CTA_South .
+ex:Regime_EU_UCC cco:ont00001942 ex:CustomsControl_5 .
+ex:Regime_ISPS   cco:ont00001942 ex:CustodyTransfer_5 .
+ex:CargoLot_BL_5  a b2mar:CargoLot .
+ex:Identifier_BL_5  a cco:ont00000292 ;
+    cco:ont00001916 ex:CargoLot_BL_5 ;
+    rdfs:label "BL-5" .
+
+ex:CargoSubLot_5_a  a b2mar:CargoLot .
+ex:CargoSubLot_5_b  a b2mar:CargoLot .
+ex:CargoSubLot_5_c  a b2mar:CargoLot .
+
+ex:Q_5_a_Distributed  a b2mar:DistributedLocationQuality ; bfo:BFO_0000197 ex:CargoSubLot_5_a .
+ex:Q_5_b_Distributed  a b2mar:DistributedLocationQuality ; bfo:BFO_0000197 ex:CargoSubLot_5_b .
+ex:Q_5_c_Distributed  a b2mar:DistributedLocationQuality ; bfo:BFO_0000197 ex:CargoSubLot_5_c .
+
+ex:Decon_τ_5  a b2mar:DeconsolidationActivity ;
+    cco:ont00001833 ex:Agent_CFSOperator ;
+    cco:ont00001921 ex:CargoLot_BL_5 ;
+    cco:ont00001986 ex:CargoSubLot_5_a , ex:CargoSubLot_5_b , ex:CargoSubLot_5_c ,
+                    ex:Q_5_a_Distributed , ex:Q_5_b_Distributed , ex:Q_5_c_Distributed ;
+    cco:ont00001918 ex:CFS_CTA ;
+    bfo:BFO_0000062 ex:GateOut_5 .
+
+ex:CONT_6  a b2mar:Container .
+ex:BIC_6   a b2mar:BICCode ;
+    cco:ont00001916 ex:CONT_6 ;
+    rdfs:label "HLXU0000006" .
+
+ex:Q_6_OnVessel    a b2mar:OnVesselLocationQuality ; bfo:BFO_0000197 ex:CONT_6 .
+ex:Q_6_Discharged  a b2mar:DischargedLocationQuality ; bfo:BFO_0000197 ex:CONT_6 .
+ex:Q_6_InYard      a b2mar:InYardLocationQuality ; bfo:BFO_0000197 ex:CONT_6 .
+ex:Q_6_GateOut     a b2mar:GateOutLocationQuality ; bfo:BFO_0000197 ex:CONT_6 .
+
+ex:Disch_6  a b2mar:VesselDischarge ;
+    cco:ont00001833 ex:Agent_CraneOp ;
+    cco:ont00001986 ex:Q_6_Discharged ;
+    cco:ont00001918 ex:Berth_HHLA_CTA_03 .
+
+ex:CraneTrf_6  a b2mar:CraneTransfer ;
+    cco:ont00001833 ex:Agent_CraneOp ;
+    cco:ont00001986 ex:Q_6_InYard ;
+    cco:ont00001921 ex:Q_6_Discharged ;
+    cco:ont00001918 ex:Yard_CTA ;
+    bfo:BFO_0000062 ex:Disch_6 .
+
+ex:GateOut_6  a b2mar:GateMovement ;
+    cco:ont00001833 ex:Agent_GateController ;
+    cco:ont00001986 ex:Q_6_GateOut ;
+    cco:ont00001921 ex:Q_6_InYard ;
+    cco:ont00001918 ex:Gate_CTA_South ;
+    bfo:BFO_0000062 ex:CraneTrf_6 .
+
+ex:Obs_AIS_6      a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_6_OnVessel ;
+    sosa:resultTime "2026-04-12T08:42:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:42:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_AIS .
+
+ex:Obs_Disch_6    a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_6_Discharged ;
+    sosa:resultTime "2026-04-12T08:48:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:48:00Z"^^xsd:dateTime .
+
+ex:Obs_GateRead_6 a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_6_GateOut ;
+    sosa:resultTime "2026-04-12T12:42:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T12:42:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_OCR .
+
+# Variant-b Measurement ICEs (parallel, for native variant)
+ex:Meas_AIS_6      a b2mar:AIS_Measurement ;
+    cco:ont00001808 ex:Q_6_OnVessel .
+ex:Meas_GateRead_6 a b2mar:GateRead_Measurement ;
+    cco:ont00001808 ex:Q_6_GateOut .
+ex:Meas_Disch_6    a b2mar:GateRead_Measurement ;
+    cco:ont00001808 ex:Q_6_Discharged .
+
+ex:CustodyTransfer_6  a b2mar:CustodyTransfer_Act ;
+    bfo:BFO_0000171 ex:ISPSZone_CTA .
+ex:CustomsControl_6   a b2mar:CustomsControl_Act ;
+    bfo:BFO_0000171 ex:Gate_CTA_South .
+ex:Regime_EU_UCC cco:ont00001942 ex:CustomsControl_6 .
+ex:Regime_ISPS   cco:ont00001942 ex:CustodyTransfer_6 .
+ex:CONT_7  a b2mar:Container .
+ex:BIC_7   a b2mar:BICCode ;
+    cco:ont00001916 ex:CONT_7 ;
+    rdfs:label "HLXU0000007" .
+
+ex:Q_7_OnVessel    a b2mar:OnVesselLocationQuality ; bfo:BFO_0000197 ex:CONT_7 .
+ex:Q_7_Discharged  a b2mar:DischargedLocationQuality ; bfo:BFO_0000197 ex:CONT_7 .
+ex:Q_7_InYard      a b2mar:InYardLocationQuality ; bfo:BFO_0000197 ex:CONT_7 .
+ex:Q_7_GateOut     a b2mar:GateOutLocationQuality ; bfo:BFO_0000197 ex:CONT_7 .
+
+ex:Disch_7  a b2mar:VesselDischarge ;
+    cco:ont00001833 ex:Agent_CraneOp ;
+    cco:ont00001986 ex:Q_7_Discharged ;
+    cco:ont00001918 ex:Berth_HHLA_CTA_03 .
+
+ex:CraneTrf_7  a b2mar:CraneTransfer ;
+    cco:ont00001833 ex:Agent_CraneOp ;
+    cco:ont00001986 ex:Q_7_InYard ;
+    cco:ont00001921 ex:Q_7_Discharged ;
+    cco:ont00001918 ex:Yard_CTA ;
+    bfo:BFO_0000062 ex:Disch_7 .
+
+ex:GateOut_7  a b2mar:GateMovement ;
+    cco:ont00001833 ex:Agent_GateController ;
+    cco:ont00001986 ex:Q_7_GateOut ;
+    cco:ont00001921 ex:Q_7_InYard ;
+    cco:ont00001918 ex:Gate_CTA_South ;
+    bfo:BFO_0000062 ex:CraneTrf_7 .
+
+ex:Obs_AIS_7      a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_7_OnVessel ;
+    sosa:resultTime "2026-04-12T08:49:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:49:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_AIS .
+
+ex:Obs_Disch_7    a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_7_Discharged ;
+    sosa:resultTime "2026-04-12T08:55:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:55:00Z"^^xsd:dateTime .
+
+ex:Obs_GateRead_7 a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_7_GateOut ;
+    sosa:resultTime "2026-04-12T12:49:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T12:49:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_OCR .
+
+# Variant-b Measurement ICEs (parallel, for native variant)
+ex:Meas_AIS_7      a b2mar:AIS_Measurement ;
+    cco:ont00001808 ex:Q_7_OnVessel .
+ex:Meas_GateRead_7 a b2mar:GateRead_Measurement ;
+    cco:ont00001808 ex:Q_7_GateOut .
+ex:Meas_Disch_7    a b2mar:GateRead_Measurement ;
+    cco:ont00001808 ex:Q_7_Discharged .
+
+ex:CustodyTransfer_7  a b2mar:CustodyTransfer_Act ;
+    bfo:BFO_0000171 ex:ISPSZone_CTA .
+ex:CustomsControl_7   a b2mar:CustomsControl_Act ;
+    bfo:BFO_0000171 ex:Gate_CTA_South .
+ex:Regime_EU_UCC cco:ont00001942 ex:CustomsControl_7 .
+ex:Regime_ISPS   cco:ont00001942 ex:CustodyTransfer_7 .
+ex:CONT_8  a b2mar:Container .
+ex:BIC_8   a b2mar:BICCode ;
+    cco:ont00001916 ex:CONT_8 ;
+    rdfs:label "HLXU0000008" .
+
+ex:Q_8_OnVessel    a b2mar:OnVesselLocationQuality ; bfo:BFO_0000197 ex:CONT_8 .
+ex:Q_8_Discharged  a b2mar:DischargedLocationQuality ; bfo:BFO_0000197 ex:CONT_8 .
+ex:Q_8_InYard      a b2mar:InYardLocationQuality ; bfo:BFO_0000197 ex:CONT_8 .
+ex:Q_8_GateOut     a b2mar:GateOutLocationQuality ; bfo:BFO_0000197 ex:CONT_8 .
+
+ex:Disch_8  a b2mar:VesselDischarge ;
+    cco:ont00001833 ex:Agent_CraneOp ;
+    cco:ont00001986 ex:Q_8_Discharged ;
+    cco:ont00001918 ex:Berth_HHLA_CTA_03 .
+
+ex:CraneTrf_8  a b2mar:CraneTransfer ;
+    cco:ont00001833 ex:Agent_CraneOp ;
+    cco:ont00001986 ex:Q_8_InYard ;
+    cco:ont00001921 ex:Q_8_Discharged ;
+    cco:ont00001918 ex:Yard_CTA ;
+    bfo:BFO_0000062 ex:Disch_8 .
+
+ex:GateOut_8  a b2mar:GateMovement ;
+    cco:ont00001833 ex:Agent_GateController ;
+    cco:ont00001986 ex:Q_8_GateOut ;
+    cco:ont00001921 ex:Q_8_InYard ;
+    cco:ont00001918 ex:Gate_CTA_South ;
+    bfo:BFO_0000062 ex:CraneTrf_8 .
+
+ex:Obs_AIS_8      a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_8_OnVessel ;
+    sosa:resultTime "2026-04-12T08:56:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T08:56:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_AIS .
+
+ex:Obs_Disch_8    a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_8_Discharged ;
+    sosa:resultTime "2026-04-12T09:02:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T09:02:00Z"^^xsd:dateTime .
+
+ex:Obs_GateRead_8 a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_8_GateOut ;
+    sosa:resultTime "2026-04-12T12:56:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T12:56:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_OCR .
+
+# Variant-b Measurement ICEs (parallel, for native variant)
+ex:Meas_AIS_8      a b2mar:AIS_Measurement ;
+    cco:ont00001808 ex:Q_8_OnVessel .
+ex:Meas_GateRead_8 a b2mar:GateRead_Measurement ;
+    cco:ont00001808 ex:Q_8_GateOut .
+ex:Meas_Disch_8    a b2mar:GateRead_Measurement ;
+    cco:ont00001808 ex:Q_8_Discharged .
+
+ex:CustodyTransfer_8  a b2mar:CustodyTransfer_Act ;
+    bfo:BFO_0000171 ex:ISPSZone_CTA .
+ex:CustomsControl_8   a b2mar:CustomsControl_Act ;
+    bfo:BFO_0000171 ex:Gate_CTA_South .
+ex:Regime_EU_UCC cco:ont00001942 ex:CustomsControl_8 .
+ex:Regime_ISPS   cco:ont00001942 ex:CustodyTransfer_8 .
+ex:CONT_9  a b2mar:Container .
+ex:BIC_9   a b2mar:BICCode ;
+    cco:ont00001916 ex:CONT_9 ;
+    rdfs:label "HLXU0000009" .
+
+ex:Q_9_OnVessel    a b2mar:OnVesselLocationQuality ; bfo:BFO_0000197 ex:CONT_9 .
+ex:Q_9_Discharged  a b2mar:DischargedLocationQuality ; bfo:BFO_0000197 ex:CONT_9 .
+ex:Q_9_InYard      a b2mar:InYardLocationQuality ; bfo:BFO_0000197 ex:CONT_9 .
+ex:Q_9_GateOut     a b2mar:GateOutLocationQuality ; bfo:BFO_0000197 ex:CONT_9 .
+
+ex:Disch_9  a b2mar:VesselDischarge ;
+    cco:ont00001833 ex:Agent_CraneOp ;
+    cco:ont00001986 ex:Q_9_Discharged ;
+    cco:ont00001918 ex:Berth_HHLA_CTA_03 .
+
+ex:CraneTrf_9  a b2mar:CraneTransfer ;
+    cco:ont00001833 ex:Agent_CraneOp ;
+    cco:ont00001986 ex:Q_9_InYard ;
+    cco:ont00001921 ex:Q_9_Discharged ;
+    cco:ont00001918 ex:Yard_CTA ;
+    bfo:BFO_0000062 ex:Disch_9 .
+
+ex:GateOut_9  a b2mar:GateMovement ;
+    cco:ont00001833 ex:Agent_GateController ;
+    cco:ont00001986 ex:Q_9_GateOut ;
+    cco:ont00001921 ex:Q_9_InYard ;
+    cco:ont00001918 ex:Gate_CTA_South ;
+    bfo:BFO_0000062 ex:CraneTrf_9 .
+
+ex:Obs_AIS_9      a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_9_OnVessel ;
+    sosa:resultTime "2026-04-12T09:03:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T09:03:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_AIS .
+
+ex:Obs_Disch_9    a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_9_Discharged ;
+    sosa:resultTime "2026-04-12T09:09:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T09:09:00Z"^^xsd:dateTime .
+
+ex:Obs_GateRead_9 a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_9_GateOut ;
+    sosa:resultTime "2026-04-12T13:03:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T13:03:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_OCR .
+
+# Variant-b Measurement ICEs (parallel, for native variant)
+ex:Meas_AIS_9      a b2mar:AIS_Measurement ;
+    cco:ont00001808 ex:Q_9_OnVessel .
+ex:Meas_GateRead_9 a b2mar:GateRead_Measurement ;
+    cco:ont00001808 ex:Q_9_GateOut .
+ex:Meas_Disch_9    a b2mar:GateRead_Measurement ;
+    cco:ont00001808 ex:Q_9_Discharged .
+
+ex:CustodyTransfer_9  a b2mar:CustodyTransfer_Act ;
+    bfo:BFO_0000171 ex:ISPSZone_CTA .
+ex:CustomsControl_9   a b2mar:CustomsControl_Act ;
+    bfo:BFO_0000171 ex:Gate_CTA_South .
+ex:Regime_EU_UCC cco:ont00001942 ex:CustomsControl_9 .
+ex:Regime_ISPS   cco:ont00001942 ex:CustodyTransfer_9 .
+ex:CONT_10  a b2mar:Container .
+ex:BIC_10   a b2mar:BICCode ;
+    cco:ont00001916 ex:CONT_10 ;
+    rdfs:label "HLXU0000010" .
+
+ex:Q_10_OnVessel    a b2mar:OnVesselLocationQuality ; bfo:BFO_0000197 ex:CONT_10 .
+ex:Q_10_Discharged  a b2mar:DischargedLocationQuality ; bfo:BFO_0000197 ex:CONT_10 .
+ex:Q_10_InYard      a b2mar:InYardLocationQuality ; bfo:BFO_0000197 ex:CONT_10 .
+ex:Q_10_GateOut     a b2mar:GateOutLocationQuality ; bfo:BFO_0000197 ex:CONT_10 .
+
+ex:Disch_10  a b2mar:VesselDischarge ;
+    cco:ont00001833 ex:Agent_CraneOp ;
+    cco:ont00001986 ex:Q_10_Discharged ;
+    cco:ont00001918 ex:Berth_HHLA_CTA_03 .
+
+ex:CraneTrf_10  a b2mar:CraneTransfer ;
+    cco:ont00001833 ex:Agent_CraneOp ;
+    cco:ont00001986 ex:Q_10_InYard ;
+    cco:ont00001921 ex:Q_10_Discharged ;
+    cco:ont00001918 ex:Yard_CTA ;
+    bfo:BFO_0000062 ex:Disch_10 .
+
+ex:GateOut_10  a b2mar:GateMovement ;
+    cco:ont00001833 ex:Agent_GateController ;
+    cco:ont00001986 ex:Q_10_GateOut ;
+    cco:ont00001921 ex:Q_10_InYard ;
+    cco:ont00001918 ex:Gate_CTA_South ;
+    bfo:BFO_0000062 ex:CraneTrf_10 .
+
+ex:Obs_AIS_10      a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_10_OnVessel ;
+    sosa:resultTime "2026-04-12T09:10:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T09:10:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_AIS .
+
+ex:Obs_Disch_10    a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_10_Discharged ;
+    sosa:resultTime "2026-04-12T09:16:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T09:16:00Z"^^xsd:dateTime .
+
+ex:Obs_GateRead_10 a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_10_GateOut ;
+    sosa:resultTime "2026-04-12T13:10:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-12T13:10:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_OCR .
+
+# Variant-b Measurement ICEs (parallel, for native variant)
+ex:Meas_AIS_10      a b2mar:AIS_Measurement ;
+    cco:ont00001808 ex:Q_10_OnVessel .
+ex:Meas_GateRead_10 a b2mar:GateRead_Measurement ;
+    cco:ont00001808 ex:Q_10_GateOut .
+ex:Meas_Disch_10    a b2mar:GateRead_Measurement ;
+    cco:ont00001808 ex:Q_10_Discharged .
+
+ex:CustodyTransfer_10  a b2mar:CustodyTransfer_Act ;
+    bfo:BFO_0000171 ex:ISPSZone_CTA .
+ex:CustomsControl_10   a b2mar:CustomsControl_Act ;
+    bfo:BFO_0000171 ex:Gate_CTA_South .
+ex:Regime_EU_UCC cco:ont00001942 ex:CustomsControl_10 .
+ex:Regime_ISPS   cco:ont00001942 ex:CustodyTransfer_10 .
+ex:CargoLot_BL_10  a b2mar:CargoLot .
+ex:Identifier_BL_10  a cco:ont00000292 ;
+    cco:ont00001916 ex:CargoLot_BL_10 ;
+    rdfs:label "BL-10" .
+
+ex:CargoSubLot_10_a  a b2mar:CargoLot .
+ex:CargoSubLot_10_b  a b2mar:CargoLot .
+ex:CargoSubLot_10_c  a b2mar:CargoLot .
+
+ex:Q_10_a_Distributed  a b2mar:DistributedLocationQuality ; bfo:BFO_0000197 ex:CargoSubLot_10_a .
+ex:Q_10_b_Distributed  a b2mar:DistributedLocationQuality ; bfo:BFO_0000197 ex:CargoSubLot_10_b .
+ex:Q_10_c_Distributed  a b2mar:DistributedLocationQuality ; bfo:BFO_0000197 ex:CargoSubLot_10_c .
+
+ex:Decon_τ_10  a b2mar:DeconsolidationActivity ;
+    cco:ont00001833 ex:Agent_CFSOperator ;
+    cco:ont00001921 ex:CargoLot_BL_10 ;
+    cco:ont00001986 ex:CargoSubLot_10_a , ex:CargoSubLot_10_b , ex:CargoSubLot_10_c ,
+                    ex:Q_10_a_Distributed , ex:Q_10_b_Distributed , ex:Q_10_c_Distributed ;
+    cco:ont00001918 ex:CFS_CTA ;
+    bfo:BFO_0000062 ex:GateOut_10 .
+
+# Class IV gaps
+ex:CONT_GAP_evidence  a b2mar:Container .
+ex:BIC_GAP_evidence   a b2mar:BICCode ; cco:ont00001916 ex:CONT_GAP_evidence ; rdfs:label "GAPE0000001" .
+ex:Q_GAP_NoEvidence   a b2mar:InYardLocationQuality ; bfo:BFO_0000197 ex:CONT_GAP_evidence .
+
+ex:CONT_GAP_causal    a b2mar:Container .
+ex:BIC_GAP_causal     a b2mar:BICCode ; cco:ont00001916 ex:CONT_GAP_causal ; rdfs:label "GAPC0000002" .
+ex:Q_GAP_NoCausal     a b2mar:InYardLocationQuality ; bfo:BFO_0000197 ex:CONT_GAP_causal .
+
+ex:CONT_GAP_scheme    a b2mar:Container .
+
+ex:Sit_GAP_governance a cco:ont00000005 ; bfo:BFO_0000171 ex:Yard_CTA .

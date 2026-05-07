@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:dcterms="http://purl.org/dc/terms/"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco/maritime#CraneTransfer">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="https://www.commoncoreontologies.org/ont00000005"/>
+    <rdfs:label xml:lang="en">Crane transfer act</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco#DocumentedAbsence_StateAnchor">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdfs:label xml:lang="en">ADR-001: no CCO equivalent of dmfo:Manifestation</rdfs:label>
+    <rdfs:comment>State-of-an-entity-at-a-moment is modelled via bfo:Quality + bfo:inheres in + cco:Stasis of Quality.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco/maritime#Container">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="https://www.commoncoreontologies.org/ont00000020"/>
+    <rdfs:label xml:lang="en">ISO 6346 sea container</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco/maritime#ISPSZone">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000029"/>
+    <rdfs:label xml:lang="en">ISPS-restricted zone</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco#DocumentedAbsence_Situation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdfs:label xml:lang="en">ADR-004: no CCO Situation class</rdfs:label>
+    <rdfs:comment>Contextual situations are reified as cco:Act tokens; cco:Process Regulation prescribes them.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco/sosa">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+    <rdfs:label xml:lang="en">B2-CCO Baseline + SOSA (variant a)</rdfs:label>
+    <owl:imports rdf:resource="https://w3id.org/dmfo/baseline/cco"/>
+    <owl:imports rdf:resource="http://www.w3.org/ns/sosa/"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco/maritime#Berth">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000029"/>
+    <rdfs:label xml:lang="en">Berth</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco/maritime#CustodyTransfer_Act">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="https://www.commoncoreontologies.org/ont00000005"/>
+    <rdfs:label xml:lang="en">Custody-transfer act (the situation reified)</rdfs:label>
+    <rdfs:comment xml:lang="en">ADR-004: the contextual situation is reified as the act token; the Process Regulation prescribes this act class.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco/maritime#DischargedLocationQuality">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="https://w3id.org/dmfo/baseline/cco/maritime#LocationQuality"/>
+    <rdfs:label xml:lang="en">Discharged location quality</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco/maritime#BICCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="https://www.commoncoreontologies.org/ont00000292"/>
+    <rdfs:label xml:lang="en">ISO 6346 BIC code</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco/maritime#AIS_Measurement">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="https://www.commoncoreontologies.org/ont00001163"/>
+    <rdfs:label xml:lang="en">AIS measurement</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco/maritime#CustomsControl_Act">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="https://www.commoncoreontologies.org/ont00000005"/>
+    <rdfs:label xml:lang="en">Customs-control act</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco/maritime#RegulatoryRegime">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="https://www.commoncoreontologies.org/ont00001324"/>
+    <rdfs:label xml:lang="en">Regulatory regime</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco/maritime#LocationQuality">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000019"/>
+    <rdfs:label xml:lang="en">Location quality (state-locating an object)</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco/maritime#GateMovement">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="https://www.commoncoreontologies.org/ont00000005"/>
+    <rdfs:label xml:lang="en">Gate movement act</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco/maritime#IMONumber">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="https://www.commoncoreontologies.org/ont00000292"/>
+    <rdfs:label xml:lang="en">IMO ship identification number</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco/maritime#RFID_Measurement">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="https://www.commoncoreontologies.org/ont00001163"/>
+    <rdfs:label xml:lang="en">RFID measurement</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco/maritime#GateOutLocationQuality">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="https://w3id.org/dmfo/baseline/cco/maritime#LocationQuality"/>
+    <rdfs:label xml:lang="en">GateOut location quality</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco#DocumentedAbsence_GeoSPARQL">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdfs:label xml:lang="en">ADR-005: no GeoSPARQL spatial-relation algebra</rdfs:label>
+    <rdfs:comment>Only bfo:located in / has spatial part are available; no sfWithin / sfTouches / sfIntersects.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco/maritime#GateRead_Measurement">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="https://www.commoncoreontologies.org/ont00001163"/>
+    <rdfs:label xml:lang="en">Gate-read measurement</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+    <owl:versionInfo>1.0.0</owl:versionInfo>
+    <rdfs:label xml:lang="en">B2-CCO Baseline (DMFO evaluation)</rdfs:label>
+    <rdfs:comment xml:lang="en">Alternative-architecture baseline for the DMFO ISWC paper.
+Imports CCO 2.0 (and BFO 2020 transitively) and adds nothing that
+re-introduces DMFO's typed bridges. Each modelling decision is
+recorded in docs/adr/. The Faithful-Translation-Rule (F1-F5) is the
+governing compliance criterion.</rdfs:comment>
+    <dcterms:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-05-03</dcterms:created>
+    <owl:imports rdf:resource="https://www.commoncoreontologies.org/CommonCoreOntologiesMerged/v2.0"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco/maritime#OnVesselLocationQuality">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="https://w3id.org/dmfo/baseline/cco/maritime#LocationQuality"/>
+    <rdfs:label xml:lang="en">OnVessel location quality</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco/maritime#InYardLocationQuality">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="https://w3id.org/dmfo/baseline/cco/maritime#LocationQuality"/>
+    <rdfs:label xml:lang="en">InYard location quality</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco/maritime">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+    <owl:versionInfo>1.0.0</owl:versionInfo>
+    <rdfs:label xml:lang="en">B2-CCO Maritime Profile</rdfs:label>
+    <dcterms:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <owl:imports rdf:resource="https://w3id.org/dmfo/baseline/cco/sosa"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco/maritime#Vessel">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000030"/>
+    <rdfs:label xml:lang="en">Seagoing vessel</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco/maritime#Pallet">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000030"/>
+    <rdfs:label xml:lang="en">Pallet</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco/maritime#TerminalYard">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000029"/>
+    <rdfs:label xml:lang="en">Terminal yard</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/dmfo/baseline/cco/maritime#VesselDischarge">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="https://www.commoncoreontologies.org/ont00000005"/>
+    <rdfs:label xml:lang="en">Vessel discharge act</rdfs:label>
+  </rdf:Description>
+</rdf:RDF>

@@ -1,0 +1,132 @@
+# =============================================================
+# B2-CCO Food-Production Traceability Profile
+#
+# Faithful-Translation-Rule: F1, F2, F3, F4, F5 — compliant
+#   ADR-001 (state via quality-inherence)
+#   ADR-002 (activity via cco:Act)
+#   ADR-003a (evidence via SOSA co-import)
+#   ADR-004 (context via cco:Process Regulation)
+#   ADR-005 (location via bfo:Site)
+#   ADR-006 (identity-derivation via Act-mediated input/output)
+#
+# Unlike the maritime profile, the food profile exercises identity
+# derivation: splitting and merging acts produce successor lots from
+# source lots. Per ADR-006 this is modelled via cco:has_input and
+# cco:has_output through act tokens; no fresh wasDerivedFrom property.
+# =============================================================
+
+@prefix b2cco:  <https://w3id.org/dmfo/baseline/cco#> .
+@prefix b2food: <https://w3id.org/dmfo/baseline/cco/food#> .
+# Note: b2food:SplittingActivity / MergingActivity are now also
+# rdfs:subClassOf b2cco:SplittingActivity / MergingActivity so the
+# same query template (acq-13/16) works across maritime + food.
+@prefix bfo:    <http://purl.obolibrary.org/obo/> .
+@prefix cco:    <https://www.commoncoreontologies.org/> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://w3id.org/dmfo/baseline/cco/food>
+    a owl:Ontology ;
+    owl:versionInfo "1.0.0" ;
+    rdfs:label "B2-CCO Food-Production Traceability Profile"@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    owl:imports <https://w3id.org/dmfo/baseline/cco/sosa> .
+
+# ── Identity (TraceabilityLot) ────────────────────────────────
+
+b2food:TraceabilityLot         a owl:Class ;
+    rdfs:subClassOf bfo:BFO_0000030 ;            # bfo:object
+    rdfs:label "FSMA-204 traceability lot"@en .
+
+b2food:RawIngredientLot        a owl:Class ;
+    rdfs:subClassOf b2food:TraceabilityLot ;
+    rdfs:label "Raw ingredient lot"@en .
+
+b2food:ProcessedLot            a owl:Class ;
+    rdfs:subClassOf b2food:TraceabilityLot ;
+    rdfs:label "Processed lot"@en .
+
+# ── State (Qualities inhering in lots) — ADR-001 ──────────────
+
+b2food:LotConditionQuality     a owl:Class ;
+    rdfs:subClassOf bfo:BFO_0000019 ;            # bfo:Quality
+    rdfs:label "Lot condition quality"@en .
+
+b2food:InProductionQuality     a owl:Class ;
+    rdfs:subClassOf b2food:LotConditionQuality ;
+    rdfs:label "InProduction quality"@en .
+
+b2food:InColdStorageQuality    a owl:Class ;
+    rdfs:subClassOf b2food:LotConditionQuality ;
+    rdfs:label "InColdStorage quality"@en .
+
+b2food:ReleasedQuality         a owl:Class ;
+    rdfs:subClassOf b2food:LotConditionQuality ;
+    rdfs:label "Released quality"@en .
+
+b2food:ShippedQuality          a owl:Class ;
+    rdfs:subClassOf b2food:LotConditionQuality ;
+    rdfs:label "Shipped quality"@en .
+
+# ── Activity (acts) — ADR-002 + ADR-006 ───────────────────────
+
+b2food:ProcessingActivity      a owl:Class ;
+    rdfs:subClassOf cco:ont00000005 ;            # cco:Act
+    rdfs:label "Processing activity"@en .
+
+b2food:SplittingActivity       a owl:Class ;
+    rdfs:subClassOf b2food:ProcessingActivity , b2cco:SplittingActivity ;
+    rdfs:label "Splitting activity (one input → many outputs)"@en ;
+    rdfs:comment "ADR-006: food-domain narrowing of b2cco:SplittingActivity."@en .
+
+b2food:MergingActivity         a owl:Class ;
+    rdfs:subClassOf b2food:ProcessingActivity , b2cco:MergingActivity ;
+    rdfs:label "Merging activity (many inputs → one output)"@en ;
+    rdfs:comment "ADR-006: food-domain narrowing of b2cco:MergingActivity."@en .
+
+b2food:ColdChainHandover       a owl:Class ;
+    rdfs:subClassOf cco:ont00000005 ;
+    rdfs:label "Cold-chain handover"@en .
+
+# ── Evidence (Measurement ICE / SOSA observation) — ADR-003 ───
+
+b2food:HACCPRecord             a owl:Class ;
+    rdfs:subClassOf cco:ont00001163 ;            # cco:Measurement ICE
+    rdfs:label "HACCP record"@en .
+
+b2food:TemperatureLog          a owl:Class ;
+    rdfs:subClassOf cco:ont00001163 ;
+    rdfs:label "Temperature log"@en .
+
+# ── Context (Process Regulation) — ADR-004 ────────────────────
+
+b2food:FoodLawRegime           a owl:Class ;
+    rdfs:subClassOf cco:ont00001324 ;            # cco:Process Regulation
+    rdfs:label "Food law regime"@en .
+
+b2food:RegulatoryControl_Act   a owl:Class ;
+    rdfs:subClassOf cco:ont00000005 ;            # cco:Act (situation reified)
+    rdfs:label "Regulatory-control act"@en ;
+    rdfs:comment "ADR-004: contextual situation reified as an act token."@en .
+
+b2food:RecallControl_Act       a owl:Class ;
+    rdfs:subClassOf cco:ont00000005 ;
+    rdfs:label "Recall-control act"@en .
+
+# ── Location (Site) — ADR-005 ─────────────────────────────────
+
+b2food:FoodFacility            a owl:Class ;
+    rdfs:subClassOf bfo:BFO_0000029 ;            # bfo:Site
+    rdfs:label "FSMA-registered food facility"@en .
+
+b2food:ColdStorageZone         a owl:Class ;
+    rdfs:subClassOf bfo:BFO_0000029 ;
+    rdfs:label "Cold-storage zone"@en .
+
+# ── Identifier ICE (FSMA-204 traceability lot code) ───────────
+
+b2food:TraceabilityLotCodeICE  a owl:Class ;
+    rdfs:subClassOf cco:ont00000292 ;            # cco:Artifact Identifier
+    rdfs:label "FSMA-204 Traceability Lot Code"@en .

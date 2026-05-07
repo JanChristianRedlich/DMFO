@@ -1,0 +1,12 @@
+# A6 — Spatial-Context bridge
+# dmfo:inZone is a sub-property of geo:sfWithin, typed dul:Situation × geo:Feature.
+PREFIX dmfo: <https://w3id.org/dmfo#>
+PREFIX geo:  <http://www.opengis.net/ont/geosparql#>
+PREFIX dul:  <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+ASK {
+  dmfo:inZone rdfs:subPropertyOf geo:sfWithin ;
+              rdfs:domain        dul:Situation ;
+              rdfs:range         geo:Feature .
+}

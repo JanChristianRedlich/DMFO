@@ -1,0 +1,17 @@
+# ACQ-IV-04  Governance gap (Class IV)
+# Source: EU Reg. 178/2002, FDA FSMA 204 (recall completeness)
+# Bridges required: A4 (negated absence)
+# Question: Which contextual situations include a manifestation but declare
+#           no governing regime? A governance gap that must be resolved
+#           before audit.
+
+PREFIX dmfo: <https://w3id.org/dmfo#>
+PREFIX dul:  <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#>
+
+SELECT ?situation ?manifestation
+WHERE {
+  ?situation dul:includesObject ?manifestation ;
+             a                  dul:Situation .
+  FILTER NOT EXISTS { ?situation dmfo:governedBy ?regime . }
+}
+ORDER BY ?situation

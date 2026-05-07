@@ -1,0 +1,21 @@
+# ACQ-II-06 (B2-CCO strict native — no SOSA) — Observation completeness for ISO 8000-61
+# Classification: (d) NOT MEANINGFULLY TRANSLATABLE.
+# Diagnosis: ADR-003b. The CCO Measurement Information Content Entity
+# pattern has no native bitemporal phenomenon/result-time distinction
+# and no native sensor link. The ISO 8000-61 §5.2 question
+# "are phenomenonTime, resultTime, and sensor all present?" cannot
+# be asked of a Measurement ICE — the relevant ontological
+# distinctions are simply absent.
+#
+# This query is left as a documented absence; expected zero rows.
+
+PREFIX cco: <https://www.commoncoreontologies.org/>
+
+SELECT ?measurement
+WHERE {
+  ?measurement a       cco:ont00001163 .       # Measurement ICE (no bitemporal slot)
+  # No phenomenonTime / resultTime / sensor properties exist on
+  # cco:Measurement ICE; the query body is intentionally empty in
+  # the structural sense.
+  FILTER (false)
+}

@@ -1,0 +1,208 @@
+# =============================================================
+# B2-CCO Food ABox (Instantiation II)
+#
+# Synthetic FDA FSMA-204 KDE/CTE sequence translated from
+# profiles/food/food-abox.ttl. ADR-006 governs the split/merge
+# pattern via act-mediated input/output chains.
+#
+# Scenario:
+#   α  = RAW lot NOR-2026-0312       (split source)
+#   τ1 = SplittingActivity, α → β1 + β2 (PROC_A, PROC_B)
+#   γ  = RAW lot ING-2026-0411       (merge co-source)
+#   τ2 = MergingActivity, β1 + γ → δ (FINAL_DELTA)
+# =============================================================
+
+@prefix b2cco:  <https://w3id.org/dmfo/baseline/cco#> .
+@prefix b2food: <https://w3id.org/dmfo/baseline/cco/food#> .
+@prefix bfo:    <http://purl.obolibrary.org/obo/> .
+@prefix cco:    <https://www.commoncoreontologies.org/> .
+@prefix ex:     <https://w3id.org/dmfo/baseline/cco/food/example#> .
+@prefix sosa:   <http://www.w3.org/ns/sosa/> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://w3id.org/dmfo/baseline/cco/food/abox>
+    a owl:Ontology ;
+    rdfs:label "B2-CCO Food ABox (synthetic FSMA-204 KDE/CTE sequence)"@en ;
+    owl:imports <https://w3id.org/dmfo/baseline/cco/food> .
+
+# ─────────────────────────────────────────────────────────────
+# Lots — Identity layer
+# ─────────────────────────────────────────────────────────────
+
+ex:Lot_RAW_NOR_2026_0312       a b2food:RawIngredientLot ;
+    rdfs:label "Raw ingredient lot NOR-2026-0312"@en .
+
+ex:Lot_RAW_ING_2026_0411       a b2food:RawIngredientLot ;
+    rdfs:label "Raw ingredient lot ING-2026-0411"@en .
+
+ex:Lot_PROC_A_2026_0413        a b2food:ProcessedLot ;
+    rdfs:label "Processed lot PROC-A-2026-0413"@en .
+
+ex:Lot_PROC_B_2026_0413        a b2food:ProcessedLot ;
+    rdfs:label "Processed lot PROC-B-2026-0413"@en .
+
+ex:Lot_FINAL_DELTA_2026_0414   a b2food:ProcessedLot ;
+    rdfs:label "Processed lot FINAL-Δ-2026-0414"@en .
+
+# ── Identifier ICEs (designate the lots) ──────────────────────
+
+ex:TLC_RAW_NOR  a b2food:TraceabilityLotCodeICE ;
+    cco:ont00001916 ex:Lot_RAW_NOR_2026_0312 ;
+    rdfs:label "TLC-RAW-NOR-2026-0312"@en .
+
+ex:TLC_RAW_ING  a b2food:TraceabilityLotCodeICE ;
+    cco:ont00001916 ex:Lot_RAW_ING_2026_0411 ;
+    rdfs:label "TLC-RAW-ING-2026-0411"@en .
+
+ex:TLC_PROC_A   a b2food:TraceabilityLotCodeICE ;
+    cco:ont00001916 ex:Lot_PROC_A_2026_0413 ;
+    rdfs:label "TLC-PROC-A-2026-0413"@en .
+
+ex:TLC_PROC_B   a b2food:TraceabilityLotCodeICE ;
+    cco:ont00001916 ex:Lot_PROC_B_2026_0413 ;
+    rdfs:label "TLC-PROC-B-2026-0413"@en .
+
+ex:TLC_FINAL_DELTA  a b2food:TraceabilityLotCodeICE ;
+    cco:ont00001916 ex:Lot_FINAL_DELTA_2026_0414 ;
+    rdfs:label "TLC-FINAL-Δ-2026-0414"@en .
+
+# ─────────────────────────────────────────────────────────────
+# Activities — ADR-002 + ADR-006
+# τ1 (split): RAW_NOR → PROC_A + PROC_B
+# τ2 (merge): PROC_A + RAW_ING → FINAL_DELTA
+# ─────────────────────────────────────────────────────────────
+
+ex:Agent_LineOperator_L7  a cco:ont00001017 ;     # cco:Agent
+    rdfs:label "Line operator L7"@en .
+
+# Splitting activity τ1: takes the raw lot, produces two successor
+# lots AND their initial state qualities. Per ADR-006 the
+# transformation act enumerates everything it brings into being via
+# cco:has_output; per ADR-001 the state qualities of the new lots are
+# also outputs of the act that established them.
+ex:Activity_Split_τ1  a b2food:SplittingActivity ;
+    cco:ont00001833 ex:Agent_LineOperator_L7 ;     # has agent
+    cco:ont00001921 ex:Lot_RAW_NOR_2026_0312 ;     # has input
+    cco:ont00001986 ex:Lot_PROC_A_2026_0413 ,      # has output (lot 1)
+                    ex:Lot_PROC_B_2026_0413 ,      # has output (lot 2)
+                    ex:Q_PROC_A_InProduction ,     # has output (state of lot 1)
+                    ex:Q_PROC_B_InColdStorage ;    # has output (state of lot 2)
+    cco:ont00001918 ex:Facility_Bonn ;             # occurs at
+    rdfs:label "Splitting activity τ1 2026-04-13 06:00–08:30"@en .
+
+# Merging activity τ2: takes processed lot A + raw ingredient lot,
+# produces the final lot AND its initial in-cold-storage state.
+ex:Activity_Merge_τ2  a b2food:MergingActivity ;
+    cco:ont00001833 ex:Agent_LineOperator_L7 ;
+    cco:ont00001921 ex:Lot_PROC_A_2026_0413 ,
+                    ex:Lot_RAW_ING_2026_0411 ;
+    cco:ont00001986 ex:Lot_FINAL_DELTA_2026_0414 ,
+                    ex:Q_FINAL_DELTA_InColdStorage ;
+    cco:ont00001918 ex:Facility_Bonn ;
+    bfo:BFO_0000062 ex:Activity_Split_τ1 ;          # preceded by
+    rdfs:label "Merging activity τ2 2026-04-14 05:30–08:00"@en .
+
+# Cold-chain handover: ships the final lot, producing its Shipped state.
+ex:Handover_FAC_to_DC  a b2food:ColdChainHandover ;
+    cco:ont00001833 ex:Agent_LineOperator_L7 ;     # has agent
+    cco:ont00001921 ex:Lot_FINAL_DELTA_2026_0414 ;
+    cco:ont00001986 ex:Q_FINAL_DELTA_Shipped ;
+    cco:ont00001918 ex:Facility_Bonn ;
+    bfo:BFO_0000062 ex:Activity_Merge_τ2 ;
+    rdfs:label "Cold-chain handover at facility 2026-04-14 16:00Z"@en .
+
+# Deliberate causal-gap orphan: receipt-only act with no
+# state-bearing output. Used by ACQ-IV-02 (causal gap).
+ex:Act_Orphan_Receipt a b2food:ProcessingActivity ;
+    cco:ont00001921 ex:Lot_RAW_ING_2026_0411 .
+    # NB: no cco:has output → the receipt has no documented
+    #     state-bearing genesis.
+
+# ─────────────────────────────────────────────────────────────
+# State qualities (inhering in lots) — ADR-001
+# ─────────────────────────────────────────────────────────────
+
+ex:Q_PROC_A_InProduction      a b2food:InProductionQuality ;
+    bfo:BFO_0000197 ex:Lot_PROC_A_2026_0413 .       # inheres in
+
+ex:Q_PROC_B_InColdStorage     a b2food:InColdStorageQuality ;
+    bfo:BFO_0000197 ex:Lot_PROC_B_2026_0413 .
+
+ex:Q_FINAL_DELTA_InColdStorage a b2food:InColdStorageQuality ;
+    bfo:BFO_0000197 ex:Lot_FINAL_DELTA_2026_0414 .
+
+ex:Q_FINAL_DELTA_Shipped       a b2food:ShippedQuality ;
+    bfo:BFO_0000197 ex:Lot_FINAL_DELTA_2026_0414 .
+
+# Deliberate causal-gap orphan quality (no producing act)
+ex:Q_RAW_ING_OrphanColdStorage a b2food:InColdStorageQuality ;
+    bfo:BFO_0000197 ex:Lot_RAW_ING_2026_0411 .
+
+# ─────────────────────────────────────────────────────────────
+# Evidence — ADR-003a (SOSA co-import variant)
+# ─────────────────────────────────────────────────────────────
+
+ex:Sensor_Thermo_C2  a sosa:Sensor ;
+    rdfs:label "Cold-zone C2 thermometer"@en .
+
+ex:Obs_HACCP_Split_τ1  a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_PROC_A_InProduction ;
+    sosa:resultTime "2026-04-13T08:30:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-13T07:15:00Z"^^xsd:dateTime .
+
+ex:Obs_TempLog_FINAL  a sosa:Observation ;
+    sosa:hasFeatureOfInterest ex:Q_FINAL_DELTA_InColdStorage ;
+    sosa:resultTime "2026-04-14T16:05:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime "2026-04-14T16:00:00Z"^^xsd:dateTime ;
+    sosa:madeBySensor ex:Sensor_Thermo_C2 .
+
+# Variant-b (CCO-native Measurement ICE) — emitted side by side
+ex:Meas_HACCP_Split_τ1   a b2food:HACCPRecord ;
+    cco:ont00001808 ex:Q_PROC_A_InProduction ;
+    rdfs:label "HACCP measurement of split-τ1 2026-04-13 08:30Z"@en .
+
+ex:Meas_TempLog_FINAL    a b2food:TemperatureLog ;
+    cco:ont00001808 ex:Q_FINAL_DELTA_InColdStorage ;
+    rdfs:label "Temperature log final-delta 2026-04-14 16:05Z"@en .
+
+# Deliberate evidence-gap on PROC_B: no observation references
+# Q_PROC_B_InColdStorage. Used by ACQ-IV-01.
+
+# ─────────────────────────────────────────────────────────────
+# Context (Process Regulations) — ADR-004
+# ─────────────────────────────────────────────────────────────
+
+ex:Compliance_FINAL  a b2food:RegulatoryControl_Act ;
+    bfo:BFO_0000171 ex:ColdZone_Bonn_C2 ;           # located in
+    rdfs:comment "Compliance act for FINAL-Δ in cold storage."@en .
+
+ex:Recall_PROC_B  a b2food:RecallControl_Act ;
+    bfo:BFO_0000171 ex:Facility_Bonn ;
+    rdfs:comment "Recall act triggered by missing temperature log on PROC_B."@en .
+
+ex:Pending_OrphanReceipt  a cco:ont00000005 ;       # bare act, no governance
+    bfo:BFO_0000171 ex:Facility_Bonn ;
+    rdfs:comment "Pending regulatory situation; no regime declared (ACQ-IV-04 gap)."@en .
+
+ex:Regime_EU_178_2002  a b2food:FoodLawRegime ;
+    cco:ont00001942 ex:Compliance_FINAL ;            # prescribes
+    rdfs:label "EU Regulation 178/2002 (General Food Law)"@en .
+
+ex:Regime_FDA_FSMA_204  a b2food:FoodLawRegime ;
+    cco:ont00001942 ex:Compliance_FINAL ;
+    cco:ont00001942 ex:Recall_PROC_B ;
+    rdfs:label "FDA FSMA Rule 204 (Traceability)"@en .
+
+# ─────────────────────────────────────────────────────────────
+# Location (Sites) — ADR-005
+# ─────────────────────────────────────────────────────────────
+
+ex:Facility_Bonn      a b2food:FoodFacility ;
+    rdfs:label "FSMA-registered facility (Bonn)"@en .
+
+ex:ColdZone_Bonn_C2   a b2food:ColdStorageZone ;
+    bfo:BFO_0000171 ex:Facility_Bonn ;              # located in (zone within facility)
+    rdfs:label "Cold-storage zone C2 (Bonn facility)"@en .

@@ -1,0 +1,52 @@
+# =============================================================
+# DMFO – Dimensional Modeling Framework for Persisting and
+#         Fluent Entities
+# Module: dmfo-base
+#
+# Ontology header for the DMFO Ontology Design Pattern Network.
+# This file declares the umbrella ontology only; classes,
+# properties, and alignment axioms are contributed by the
+# dimension modules and bridge axioms imported below.
+#
+# Reference: Paper §3 (The DMFO Architecture).
+# =============================================================
+
+@prefix dmfo:    <https://w3id.org/dmfo#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix vann:    <http://purl.org/vocab/vann/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+
+<https://w3id.org/dmfo>
+    a owl:Ontology ;
+    owl:versionIRI <https://w3id.org/dmfo/1.0.0> ;
+    owl:versionInfo "1.0.0" ;
+    dcterms:title "DMFO: A Modular Alignment Architecture for Situationally Interpretable State Representations"@en ;
+    dcterms:description """DMFO is an OWL 2 DL Ontology Design Pattern Network in which a
+situation decomposes into six dimensional slots (Identity, State, Location,
+Activity, Context, Evidence) connected by typed bridge relations. Each slot
+has an anchor class that domain ontologies populate via subclassing. Six
+alignment axioms (A1)–(A6) act as conformance constraints binding domain
+classes and imported W3C / OGC vocabularies (PROV-O, SOSA/SSN, DUL/DnS,
+GeoSPARQL) into a cross-dimensional whole."""@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:created "2026-04-09"^^xsd:date ;
+    dcterms:modified "2026-05-03"^^xsd:date ;
+    vann:preferredNamespacePrefix "dmfo" ;
+    vann:preferredNamespaceUri "https://w3id.org/dmfo#" ;
+    rdfs:comment """Module decomposition (Theorem 2):
+  O_base, O_Id, O_St, O_Lo, O_Act, O_Co, O_Ev, O_identity-deriv,
+  five bridge modules O_bridge(i,j) for the typed inter-dimensional links.
+Alignment axioms (A1)–(A6) are stated as OWL 2 DL axioms inside the
+relevant dimension modules; SHACL shapes encode closed-world conformance
+checks (no SHACL substitution for OWL inference, principle P3)."""@en ;
+    owl:imports <https://w3id.org/dmfo/identity> ,
+                <https://w3id.org/dmfo/state> ,
+                <https://w3id.org/dmfo/evidence> ,
+                <https://w3id.org/dmfo/context> ,
+                <https://w3id.org/dmfo/activity> ,
+                <https://w3id.org/dmfo/location> ,
+                <https://w3id.org/dmfo/identity-deriv> .

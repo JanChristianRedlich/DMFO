@@ -1,0 +1,17 @@
+# ACQ-III-06  Customs consistency (Class III)
+# Source: WCO data model, EU UCC, EU ICS2/CER
+# Bridges required: A2 + A4 + A6
+# Question: Are zone-occupancy and regime-governance consistent for each
+#           manifestation under customs/security control? Returns one row
+#           per (manifestation, regime, zone) triple.
+
+PREFIX dmfo: <https://w3id.org/dmfo#>
+PREFIX dul:  <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#>
+
+SELECT ?manifestation ?regime ?zone
+WHERE {
+  ?situation    dul:includesObject ?manifestation ;
+                dmfo:governedBy    ?regime ;
+                dmfo:inZone        ?zone .
+}
+ORDER BY ?manifestation

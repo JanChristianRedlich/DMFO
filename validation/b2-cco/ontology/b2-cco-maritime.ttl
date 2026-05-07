@@ -1,0 +1,157 @@
+# =============================================================
+# B2-CCO Maritime Profile
+#
+# Faithful-Translation-Rule: F1, F2, F3, F4, F5 — compliant
+#   ADR-001 (state via quality-inherence)
+#   ADR-002 (activity via cco:Act)
+#   ADR-003a/b (evidence via SOSA co-import / Measurement ICE)
+#   ADR-004 (context via cco:Process Regulation)
+#   ADR-005 (location via bfo:Site)
+#
+# One-to-one correspondence with DMFO's maritime profile classes
+# but typed under CCO/BFO instead of the dmfo:* anchors.
+# =============================================================
+
+@prefix b2cco: <https://w3id.org/dmfo/baseline/cco#> .
+@prefix b2mar: <https://w3id.org/dmfo/baseline/cco/maritime#> .
+@prefix bfo:   <http://purl.obolibrary.org/obo/> .
+@prefix cco:   <https://www.commoncoreontologies.org/> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://w3id.org/dmfo/baseline/cco/maritime>
+    a owl:Ontology ;
+    owl:versionInfo "1.0.0" ;
+    rdfs:label "B2-CCO Maritime Profile"@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    owl:imports <https://w3id.org/dmfo/baseline/cco/sosa> .
+
+# ── Identity (objects) — ADR-001 ──────────────────────────────
+
+b2mar:Container         a owl:Class ;
+    rdfs:subClassOf cco:ont00000020 ;        # cco:Container
+    rdfs:label "ISO 6346 sea container"@en .
+
+b2mar:Vessel            a owl:Class ;
+    rdfs:subClassOf bfo:BFO_0000030 ;         # bfo:object
+    rdfs:label "Seagoing vessel"@en .
+
+b2mar:Pallet            a owl:Class ;
+    rdfs:subClassOf bfo:BFO_0000030 ;
+    rdfs:label "Pallet"@en .
+
+b2mar:CargoLot          a owl:Class ;
+    rdfs:subClassOf bfo:BFO_0000030 ;
+    rdfs:label "Cargo Lot (Bill of Lading)"@en ;
+    rdfs:comment "ADR-006: A consolidated LCL groupage cargo unit identified by Master Bill of Lading. Subject to deconsolidation at the CFS — see b2mar:DeconsolidationActivity."@en .
+
+# ── State (qualities inhering in objects) — ADR-001 ───────────
+# Each "manifestation" in DMFO corresponds to a Quality instance
+# that inheres in the bearer for the duration of the relevant
+# Stasis-of-Quality.
+
+b2mar:LocationQuality       a owl:Class ;
+    rdfs:subClassOf bfo:BFO_0000019 ;         # bfo:Quality
+    rdfs:label "Location quality (state-locating an object)"@en .
+
+b2mar:InYardLocationQuality a owl:Class ;
+    rdfs:subClassOf b2mar:LocationQuality ;
+    rdfs:label "InYard location quality"@en .
+
+b2mar:OnVesselLocationQuality a owl:Class ;
+    rdfs:subClassOf b2mar:LocationQuality ;
+    rdfs:label "OnVessel location quality"@en .
+
+b2mar:DischargedLocationQuality a owl:Class ;
+    rdfs:subClassOf b2mar:LocationQuality ;
+    rdfs:label "Discharged location quality"@en .
+
+b2mar:GateOutLocationQuality a owl:Class ;
+    rdfs:subClassOf b2mar:LocationQuality ;
+    rdfs:label "GateOut location quality"@en .
+
+b2mar:DistributedLocationQuality a owl:Class ;
+    rdfs:subClassOf b2mar:LocationQuality ;
+    rdfs:label "Distributed location quality (post-deconsolidation)"@en ;
+    rdfs:comment "State quality of a successor cargo lot after CFS deconsolidation."@en .
+
+# ── Activity (acts) — ADR-002 ─────────────────────────────────
+
+b2mar:CraneTransfer     a owl:Class ;
+    rdfs:subClassOf cco:ont00000005 ;         # cco:Act
+    rdfs:label "Crane transfer act"@en .
+
+b2mar:VesselDischarge   a owl:Class ;
+    rdfs:subClassOf cco:ont00000005 ;
+    rdfs:label "Vessel discharge act"@en .
+
+b2mar:GateMovement      a owl:Class ;
+    rdfs:subClassOf cco:ont00000005 ;
+    rdfs:label "Gate movement act"@en .
+
+b2mar:DeconsolidationActivity a owl:Class ;
+    rdfs:subClassOf b2cco:SplittingActivity ;     # ADR-006
+    rdfs:label "CFS Deconsolidation"@en ;
+    rdfs:comment "Container Freight Station deconsolidation — opens a consolidated LCL container and splits its constituent cargo lots into separate onward shipments. Per ADR-006 the act has multiple cco:has_output values (one per successor cargo lot)."@en .
+
+b2mar:CustodyTransfer_Act a owl:Class ;
+    rdfs:subClassOf cco:ont00000005 ;
+    rdfs:label "Custody-transfer act (the situation reified)"@en ;
+    rdfs:comment "ADR-004: the contextual situation is reified as the act token; the Process Regulation prescribes this act class."@en .
+
+b2mar:CustomsControl_Act  a owl:Class ;
+    rdfs:subClassOf cco:ont00000005 ;
+    rdfs:label "Customs-control act"@en .
+
+# ── Evidence (Measurement ICE / SOSA observation) — ADR-003 ───
+# Variant b classes (CCO-native). Variant-a uses sosa:Observation
+# directly in the ABox; no class hierarchy needed here.
+
+b2mar:AIS_Measurement   a owl:Class ;
+    rdfs:subClassOf cco:ont00001163 ;         # cco:Measurement ICE
+    rdfs:label "AIS measurement"@en .
+
+b2mar:GateRead_Measurement a owl:Class ;
+    rdfs:subClassOf cco:ont00001163 ;
+    rdfs:label "Gate-read measurement"@en .
+
+b2mar:RFID_Measurement  a owl:Class ;
+    rdfs:subClassOf cco:ont00001163 ;
+    rdfs:label "RFID measurement"@en .
+
+# ── Context (Process Regulation) — ADR-004 ────────────────────
+
+b2mar:RegulatoryRegime  a owl:Class ;
+    rdfs:subClassOf cco:ont00001324 ;         # cco:Process Regulation
+    rdfs:label "Regulatory regime"@en .
+
+# ── Location (Site / Geospatial Region) — ADR-005 ─────────────
+
+b2mar:ISPSZone          a owl:Class ;
+    rdfs:subClassOf bfo:BFO_0000029 ;         # bfo:Site
+    rdfs:label "ISPS-restricted zone"@en .
+
+b2mar:TerminalYard      a owl:Class ;
+    rdfs:subClassOf bfo:BFO_0000029 ;
+    rdfs:label "Terminal yard"@en .
+
+b2mar:Berth             a owl:Class ;
+    rdfs:subClassOf bfo:BFO_0000029 ;
+    rdfs:label "Berth"@en .
+
+b2mar:CFS               a owl:Class ;
+    rdfs:subClassOf bfo:BFO_0000029 ;
+    rdfs:label "Container Freight Station"@en .
+
+# ── Identifier ICE (FAIR F1) ──────────────────────────────────
+
+b2mar:BICCode           a owl:Class ;
+    rdfs:subClassOf cco:ont00000292 ;         # cco:Artifact Identifier
+    rdfs:label "ISO 6346 BIC code"@en .
+
+b2mar:IMONumber         a owl:Class ;
+    rdfs:subClassOf cco:ont00000292 ;
+    rdfs:label "IMO ship identification number"@en .

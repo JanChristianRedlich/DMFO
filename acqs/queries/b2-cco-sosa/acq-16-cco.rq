@@ -1,0 +1,19 @@
+# ACQ-III-08 (B2-CCO) — FSMA-204 traceability via transitive chain
+# Classification: (b) translatable with modelling rework — under ADR-006.
+# DMFO uses prov:wasDerivedFrom+ (single property path); B2-CCO uses
+# a SPARQL 1.1 property path that hops through Act tokens via
+# inverse-has_output + has_input. The path is more verbose but
+# faithful to CCO 2.0 commitments (see ADR-006).
+
+PREFIX cco:    <https://www.commoncoreontologies.org/>
+PREFIX bfo:    <http://purl.obolibrary.org/obo/>
+PREFIX b2food: <https://w3id.org/dmfo/baseline/cco/food#>
+
+SELECT ?finalLot ?sourceLot ?transformation
+WHERE {
+  # Each derivation step: lot ← (was output of) → act → (had as input) → predecessor lot.
+  ?finalLot (^cco:ont00001986 / cco:ont00001921)+ ?sourceLot .
+  # Pick out the *direct* generating act for the final lot (closest hop).
+  ?transformation cco:ont00001986 ?finalLot .
+}
+ORDER BY ?finalLot

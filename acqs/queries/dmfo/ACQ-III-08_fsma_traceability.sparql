@@ -1,0 +1,17 @@
+# ACQ-III-08  FSMA-204 lot traceability through KDE/CTE chain (Class III)
+# Source: FDA FSMA Rule 204
+# Bridges required: A2 + A5 + identity-derivation
+# Question: For a given final lot, return all source lots (via
+#           prov:wasDerivedFrom transitive closure) together with the
+#           transformation activity that consumed them.
+
+PREFIX dmfo: <https://w3id.org/dmfo#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+
+SELECT ?finalLot ?sourceLot ?transformation
+WHERE {
+  ?finalLot   prov:wasDerivedFrom+ ?sourceLot .
+  ?manifestation dmfo:manifestationOf       ?finalLot ;
+                 dmfo:stateWasGeneratedBy   ?transformation .
+}
+ORDER BY ?finalLot

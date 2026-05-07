@@ -1,0 +1,22 @@
+# =============================================================
+# B2-CCO Base — variant a (SOSA co-import for evidence fallback)
+#
+# Faithful-Translation-Rule: F1 (documented absence — SOSA is an
+#   isolated co-import, not part of CCO 2.0), F2, F3, F4, F5
+#
+# See ADR-003a for the rationale. This variant adds nothing beyond
+# the SOSA import; observation events are populated in the ABox
+# with sosa:hasFeatureOfInterest pointing at bfo:Quality instances
+# from ADR-001.
+# =============================================================
+
+@prefix b2cco: <https://w3id.org/dmfo/baseline/cco#> .
+@prefix sosa:  <http://www.w3.org/ns/sosa/> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://w3id.org/dmfo/baseline/cco/sosa>
+    a owl:Ontology ;
+    rdfs:label "B2-CCO Baseline + SOSA (variant a)"@en ;
+    owl:imports <https://w3id.org/dmfo/baseline/cco> ,
+                <http://www.w3.org/ns/sosa/> .

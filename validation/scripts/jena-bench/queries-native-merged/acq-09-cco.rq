@@ -1,0 +1,15 @@
+# ACQ-III-01 (B2-CCO) — TVE → state → activity → agent
+# Classification: (b) — extra hop via Quality.
+# DMFO: ?m dmfo:manifestationOf ?tve ; dmfo:stateWasGeneratedBy ?a .
+#       ?a prov:wasAssociatedWith ?agent .
+
+PREFIX cco: <https://www.commoncoreontologies.org/>
+PREFIX bfo: <http://purl.obolibrary.org/obo/>
+
+SELECT ?tve ?quality ?activity ?agent
+WHERE {
+  ?quality bfo:BFO_0000197 ?tve .             # inheres in
+  ?activity cco:ont00001986 ?quality .        # has output
+  ?activity cco:ont00001833 ?agent .          # has agent
+}
+ORDER BY ?tve

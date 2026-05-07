@@ -1,0 +1,20 @@
+# ACQ-III-07  Cross-modal visibility (Class III)
+# Source: IATA ONE Record, UN/CEFACT Multi-Modal Transport
+# Bridges required: A2 + A5 + A6
+# Question: For each TVE in transport, return its current manifestation,
+#           the activity that produced it, and the institutional zone in
+#           which the situation includes that manifestation. The query
+#           binds State, Activity, and Location through the alignment
+#           layer simultaneously.
+
+PREFIX dmfo: <https://w3id.org/dmfo#>
+PREFIX dul:  <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#>
+
+SELECT ?tve ?manifestation ?activity ?zone
+WHERE {
+  ?manifestation dmfo:manifestationOf     ?tve ;
+                 dmfo:stateWasGeneratedBy ?activity .
+  ?situation     dul:includesObject       ?manifestation ;
+                 dmfo:inZone              ?zone .
+}
+ORDER BY ?tve

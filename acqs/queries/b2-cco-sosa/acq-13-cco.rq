@@ -1,0 +1,19 @@
+# ACQ-III-05 (B2-CCO) — Identity-derivation split chain
+# Classification: (b) translatable with modelling rework — under ADR-006.
+# DMFO uses dmfo:SplitSourceIdentity + prov:wasDerivedFrom; B2-CCO
+# uses an Act-mediated input/output join through cco:Act tokens.
+# Uses the cross-profile b2cco:SplittingActivity class so the same
+# query template runs against either maritime (DeconsolidationActivity)
+# or food (b2food:SplittingActivity).
+
+PREFIX cco:   <https://www.commoncoreontologies.org/>
+PREFIX bfo:   <http://purl.obolibrary.org/obo/>
+PREFIX b2cco: <https://w3id.org/dmfo/baseline/cco#>
+
+SELECT ?successor ?source ?transformation
+WHERE {
+  ?transformation a            b2cco:SplittingActivity ;
+                  cco:ont00001921 ?source ;          # has input
+                  cco:ont00001986 ?successor .       # has output
+}
+ORDER BY ?source

@@ -1,0 +1,30 @@
+# =============================================================
+# DMFO – Aggregated TBox
+#
+# Convenience file that pulls together all DMFO modules under a
+# single IRI. Suitable for loading into reasoners (HermiT) or
+# rdflib graphs in one go. The same logical content is reachable
+# via owl:imports closure of <https://w3id.org/dmfo>.
+#
+# For locality analysis (Theorem 2), use the per-module files
+# instead so the module decomposition is preserved.
+# =============================================================
+
+@prefix dmfo:    <https://w3id.org/dmfo#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://w3id.org/dmfo/full>
+    a owl:Ontology ;
+    owl:versionIRI <https://w3id.org/dmfo/full/1.0.0> ;
+    rdfs:label "DMFO Full TBox (aggregated)"@en ;
+    rdfs:comment "All DMFO modules in one file. Equivalent to the import closure of https://w3id.org/dmfo."@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    owl:imports <https://w3id.org/dmfo/identity> ,
+                <https://w3id.org/dmfo/state> ,
+                <https://w3id.org/dmfo/evidence> ,
+                <https://w3id.org/dmfo/context> ,
+                <https://w3id.org/dmfo/activity> ,
+                <https://w3id.org/dmfo/location> ,
+                <https://w3id.org/dmfo/identity-deriv> .

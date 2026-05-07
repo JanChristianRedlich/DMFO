@@ -1,0 +1,26 @@
+# Conda environment for the DMFO reproduction package.
+#
+# Create:    conda env create -f environment.yml
+# Activate:  conda activate dmfo
+#
+# If conda-forge alone is required (Anaconda ToS):
+#   conda create -n dmfo --override-channels -c conda-forge \
+#       python=3.12 pip openjdk rdflib pyshacl jpype1 -y
+#   conda run -n dmfo pip install owlready2 owlrl
+#
+# Pipeline:  bash validation/scripts/run_queries.sh
+name: dmfo
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python>=3.10,<3.13
+  - pip
+  - openjdk>=17
+  - rdflib>=7.0
+  - pyshacl>=0.25
+  - jpype1
+  - tabulate
+  - pip:
+      - owlready2>=0.45
+      - owlrl>=7.0

@@ -1,0 +1,63 @@
+# =============================================================
+# DMFO Module: dmfo-identity-deriv (O_identity-deriv)
+#
+# Identity derivation patterns for transformation-intensive
+# contexts where entity identity is not preserved across
+# processing steps:
+#   – Splitting:  α → β1, …, βn via activity τ
+#                 (each βi prov:wasDerivedFrom α, prov:wasGeneratedBy τ;
+#                  α a dmfo:SplitSourceIdentity)
+#   – Merging:    α1, …, αn → β  via activity τ
+#                 (β prov:wasDerivedFrom αi for each i;
+#                  each αi a dmfo:MergeSourceIdentity)
+#
+# Both patterns are representable through the existing causal
+# bridge using PROV-O derivation vocabulary — no additional
+# dimension is required (Paper §3.3).
+#
+# Acyclicity is a closed-world validation constraint, not an OWL
+# property; cycle prevention is a SHACL SPARQLConstraint enforced
+# in the validation layer (Paper §3.3, Principle P2).
+#
+# Reference: Paper §3.3, Appendix D.
+# =============================================================
+
+@prefix dmfo:    <https://w3id.org/dmfo#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+
+<https://w3id.org/dmfo/identity-deriv>
+    a owl:Ontology ;
+    owl:versionIRI <https://w3id.org/dmfo/identity-deriv/1.0.0> ;
+    rdfs:label "DMFO Identity-Derivation Module"@en ;
+    rdfs:comment "Split and merge identity-derivation classes for transformation-intensive entities."@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    owl:imports <https://w3id.org/dmfo/identity> ,
+                <http://www.w3.org/ns/prov-o> .
+
+# ── Identity-derivation marker classes ────────────────────────
+
+dmfo:SplitSourceIdentity
+    a owl:Class ;
+    rdfs:label "Split-Source Identity"@en ;
+    rdfs:isDefinedBy <https://w3id.org/dmfo> ;
+    rdfs:subClassOf dmfo:TimeVaryingEntity ;
+    rdfs:comment """A TimeVaryingEntity whose identity is consumed by a splitting
+activity τ that produces multiple successor identities β1, …, βn.
+Each successor βi carries prov:wasDerivedFrom α and prov:wasGeneratedBy τ."""@en .
+
+dmfo:MergeSourceIdentity
+    a owl:Class ;
+    rdfs:label "Merge-Source Identity"@en ;
+    rdfs:isDefinedBy <https://w3id.org/dmfo> ;
+    rdfs:subClassOf dmfo:TimeVaryingEntity ;
+    rdfs:comment """A TimeVaryingEntity whose identity is consumed by a merging
+activity τ that produces a single successor identity β. β carries
+prov:wasDerivedFrom αi for each input source. Obligation composition
+on the merged successor (strictest-applicable, union, negotiated rule)
+is a domain-profile decision encoded as SHACL/SPARQL constraints over
+the merging Situation, not a DMFO core commitment."""@en .

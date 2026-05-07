@@ -1,0 +1,274 @@
+{
+  "summary": {
+    "profile": "food",
+    "variant": "sosa",
+    "kb_triples": 347,
+    "closure_seconds": 0.011,
+    "score": "17/20",
+    "by_class": {
+      "I": {
+        "total": 2,
+        "answerable": 2
+      },
+      "II": {
+        "total": 6,
+        "answerable": 6
+      },
+      "III": {
+        "total": 8,
+        "answerable": 6
+      },
+      "IV": {
+        "total": 4,
+        "answerable": 3
+      }
+    },
+    "classification_breakdown": {
+      "a": 6,
+      "b": 12,
+      "c": 1,
+      "d": 1,
+      "b/c": 1
+    },
+    "per_class_perf": {
+      "I": {
+        "n": 2,
+        "median_ms": 2.264
+      },
+      "II": {
+        "n": 6,
+        "median_ms": 1.994
+      },
+      "III": {
+        "n": 8,
+        "median_ms": 1.386
+      },
+      "IV": {
+        "n": 4,
+        "median_ms": 1.23
+      }
+    }
+  },
+  "acqs": [
+    {
+      "id": "ACQ-I-01",
+      "class": "I",
+      "cco_query": "queries/acq-01-cco.rq",
+      "classification": "b",
+      "diagnosis_adr": "ADR-001",
+      "result_rows": 60,
+      "status": "\u2713",
+      "answerable": true,
+      "median_ms": 2.465
+    },
+    {
+      "id": "ACQ-I-02",
+      "class": "I",
+      "cco_query": "queries/acq-02-cco.rq",
+      "classification": "b",
+      "diagnosis_adr": "ADR-001+003a",
+      "result_rows": 5,
+      "status": "\u2713",
+      "answerable": true,
+      "median_ms": 2.063
+    },
+    {
+      "id": "ACQ-II-01",
+      "class": "II",
+      "cco_query": "queries/acq-03-cco.rq",
+      "classification": "b",
+      "diagnosis_adr": "ADR-001",
+      "result_rows": 20,
+      "status": "\u2713",
+      "answerable": true,
+      "median_ms": 2.436
+    },
+    {
+      "id": "ACQ-II-02",
+      "class": "II",
+      "cco_query": "queries/acq-04-cco.rq",
+      "classification": "a",
+      "diagnosis_adr": "ADR-002",
+      "result_rows": 33,
+      "status": "\u2713",
+      "answerable": true,
+      "median_ms": 2.54
+    },
+    {
+      "id": "ACQ-II-03",
+      "class": "II",
+      "cco_query": "queries/acq-05-cco.rq",
+      "classification": "a",
+      "diagnosis_adr": "ADR-003a (SOSA co-import)",
+      "result_rows": 2,
+      "status": "\u2713",
+      "answerable": true,
+      "median_ms": 1.676
+    },
+    {
+      "id": "ACQ-II-04",
+      "class": "II",
+      "cco_query": "queries/acq-06-cco.rq",
+      "classification": "b",
+      "diagnosis_adr": "ADR-005",
+      "result_rows": 9,
+      "status": "\u2713",
+      "answerable": true,
+      "median_ms": 1.326
+    },
+    {
+      "id": "ACQ-II-05",
+      "class": "II",
+      "cco_query": "queries/acq-07-cco.rq",
+      "classification": "b",
+      "diagnosis_adr": "ADR-004",
+      "result_rows": 3,
+      "status": "\u2713",
+      "answerable": true,
+      "median_ms": 1.26
+    },
+    {
+      "id": "ACQ-II-06",
+      "class": "II",
+      "cco_query": "queries/acq-08-cco.rq",
+      "classification": "a",
+      "diagnosis_adr": "ADR-003a (SOSA bitemporal annotations)",
+      "result_rows": 2,
+      "status": "\u2713",
+      "answerable": true,
+      "median_ms": 2.312
+    },
+    {
+      "id": "ACQ-III-01",
+      "class": "III",
+      "cco_query": "queries/acq-09-cco.rq",
+      "classification": "b",
+      "diagnosis_adr": "ADR-001+002",
+      "result_rows": 4,
+      "status": "\u2713",
+      "answerable": true,
+      "median_ms": 1.356
+    },
+    {
+      "id": "ACQ-III-02",
+      "class": "III",
+      "cco_query": "queries/acq-10-cco.rq",
+      "classification": "b/c",
+      "diagnosis_adr": "ADR-004",
+      "result_rows": 0,
+      "status": "\u25d1",
+      "answerable": false,
+      "median_ms": 1.369
+    },
+    {
+      "id": "ACQ-III-03",
+      "class": "III",
+      "cco_query": "queries/acq-11-cco.rq",
+      "classification": "a",
+      "diagnosis_adr": "ADR-003a (SOSA sensor link)",
+      "result_rows": 1,
+      "status": "\u2713",
+      "answerable": true,
+      "median_ms": 1.349
+    },
+    {
+      "id": "ACQ-III-04",
+      "class": "III",
+      "cco_query": "queries/acq-12-cco.rq",
+      "classification": "d",
+      "diagnosis_adr": "ADR-002 (no PROV-O qualified usage / hadRole in CCO)",
+      "result_rows": 0,
+      "status": "\u2717",
+      "answerable": false,
+      "median_ms": 2.007
+    },
+    {
+      "id": "ACQ-III-05",
+      "class": "III",
+      "cco_query": "queries/acq-13-cco.rq",
+      "classification": "b",
+      "diagnosis_adr": "ADR-006 (act-mediated)",
+      "result_rows": 4,
+      "status": "\u2713",
+      "answerable": true,
+      "median_ms": 1.418
+    },
+    {
+      "id": "ACQ-III-06",
+      "class": "III",
+      "cco_query": "queries/acq-14-cco.rq",
+      "classification": "b",
+      "diagnosis_adr": "ADR-004+005",
+      "result_rows": 3,
+      "status": "\u2713",
+      "answerable": true,
+      "median_ms": 1.242
+    },
+    {
+      "id": "ACQ-III-07",
+      "class": "III",
+      "cco_query": "queries/acq-15-cco.rq",
+      "classification": "b",
+      "diagnosis_adr": "ADR-002+005",
+      "result_rows": 4,
+      "status": "\u2713",
+      "answerable": true,
+      "median_ms": 1.403
+    },
+    {
+      "id": "ACQ-III-08",
+      "class": "III",
+      "cco_query": "queries/acq-16-cco.rq",
+      "classification": "b",
+      "diagnosis_adr": "ADR-006 (transitive Act-chain)",
+      "result_rows": 14,
+      "status": "\u2713",
+      "answerable": true,
+      "median_ms": 1.563
+    },
+    {
+      "id": "ACQ-IV-01",
+      "class": "IV",
+      "cco_query": "queries/acq-17-cco.rq",
+      "classification": "a",
+      "diagnosis_adr": "ADR-003a",
+      "result_rows": 3,
+      "status": "\u2713",
+      "answerable": true,
+      "median_ms": 1.192
+    },
+    {
+      "id": "ACQ-IV-02",
+      "class": "IV",
+      "cco_query": "queries/acq-18-cco.rq",
+      "classification": "a",
+      "diagnosis_adr": "ADR-002",
+      "result_rows": 1,
+      "status": "\u2713",
+      "answerable": true,
+      "median_ms": 1.212
+    },
+    {
+      "id": "ACQ-IV-03",
+      "class": "IV",
+      "cco_query": "queries/acq-19-cco.rq",
+      "classification": "c",
+      "diagnosis_adr": "ADR-001 (scheme shift)",
+      "result_rows": 0,
+      "status": "\u25d1",
+      "answerable": false,
+      "median_ms": 2.037
+    },
+    {
+      "id": "ACQ-IV-04",
+      "class": "IV",
+      "cco_query": "queries/acq-20-cco.rq",
+      "classification": "b",
+      "diagnosis_adr": "ADR-004",
+      "result_rows": 5,
+      "status": "\u2713",
+      "answerable": true,
+      "median_ms": 1.247
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "per_variant_per_profile_per_class_median_ms": {
+    "sosa": {
+      "maritime": {
+        "I": {
+          "n": 2,
+          "median_ms": 2.666
+        },
+        "II": {
+          "n": 6,
+          "median_ms": 2.321
+        },
+        "III": {
+          "n": 8,
+          "median_ms": 1.506
+        },
+        "IV": {
+          "n": 4,
+          "median_ms": 1.342
+        }
+      }
+    },
+    "native": {
+      "maritime": {
+        "I": {
+          "n": 2,
+          "median_ms": 2.527
+        },
+        "II": {
+          "n": 6,
+          "median_ms": 1.525
+        },
+        "III": {
+          "n": 8,
+          "median_ms": 1.478
+        },
+        "IV": {
+          "n": 4,
+          "median_ms": 1.589
+        }
+      }
+    }
+  },
+  "closure_seconds": {
+    "sosa": {
+      "maritime": 0.041
+    },
+    "native": {
+      "maritime": 0.039
+    }
+  },
+  "kb_triples_after_closure": {
+    "sosa": {
+      "maritime": 689
+    },
+    "native": {
+      "maritime": 689
+    }
+  }
+}

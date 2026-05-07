@@ -1,0 +1,209 @@
+# =============================================================
+# DMFO Food-Production Traceability Profile – ABox
+# (Instantiation II)
+#
+# Synthetic instance data following the FDA FSMA-204 KDE/CTE
+# sequence. Models the splitting and merging identity-derivation
+# patterns that transformation-intensive entities exhibit:
+#
+#   Raw lot α  →  splitting activity τ1  →  successor lots β1, β2
+#   β1, ingredient γ  →  merging activity τ2  →  product lot δ
+#
+# This contrasts with the maritime ABox where container identity
+# is preserved end-to-end; here the same bridge architecture
+# (manifestationOf + stateWasGeneratedBy + wasDerivedFrom) carries
+# both regimes (Paper §3.3, §4.2).
+# =============================================================
+
+@prefix dmfo:    <https://w3id.org/dmfo#> .
+@prefix food:    <https://w3id.org/dmfo/profiles/food#> .
+@prefix ex:      <https://w3id.org/dmfo/profiles/food/example#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix sosa:    <http://www.w3.org/ns/sosa/> .
+@prefix dul:     <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix time:    <http://www.w3.org/2006/time#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://w3id.org/dmfo/profiles/food/abox>
+    a owl:Ontology ;
+    owl:versionIRI <https://w3id.org/dmfo/profiles/food/abox/2.0.0> ;
+    rdfs:label "DMFO Food Profile ABox (Synthetic FSMA-204 sequence)"@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    owl:imports <https://w3id.org/dmfo/profiles/food> .
+
+# ─────────────────────────────────────────────────────────────
+#  Lots — Identity layer with split/merge derivation
+# ─────────────────────────────────────────────────────────────
+
+# Source raw ingredient lot (will be split)
+ex:Lot_RAW_NOR_2026_0312  a food:RawIngredientLot , dmfo:SplitSourceIdentity ;
+    food:traceabilityLotCode "TLC-RAW-NOR-2026-0312" ;
+    dmfo:identifierScheme    "urn:fda:fsma204"^^xsd:anyURI ;
+    rdfs:comment "Raw lot consumed by splitting activity τ1 to produce 2 successor lots."@en .
+
+# Successor lots from the split
+ex:Lot_PROC_A_2026_0413   a food:ProcessedLot ;
+    food:traceabilityLotCode "TLC-PROC-A-2026-0413" ;
+    prov:wasDerivedFrom      ex:Lot_RAW_NOR_2026_0312 ;
+    prov:wasGeneratedBy      ex:Activity_Split_τ1 .
+
+ex:Lot_PROC_B_2026_0413   a food:ProcessedLot ;
+    food:traceabilityLotCode "TLC-PROC-B-2026-0413" ;
+    prov:wasDerivedFrom      ex:Lot_RAW_NOR_2026_0312 ;
+    prov:wasGeneratedBy      ex:Activity_Split_τ1 .
+
+# A second source lot (will be merged with PROC_A)
+ex:Lot_RAW_ING_2026_0411  a food:RawIngredientLot , dmfo:MergeSourceIdentity ;
+    food:traceabilityLotCode "TLC-RAW-ING-2026-0411" .
+
+ex:Lot_PROC_A_2026_0413  a dmfo:MergeSourceIdentity .   # PROC_A is itself a merge source for δ
+
+# Final product (merge result)
+ex:Lot_FINAL_DELTA_2026_0414  a food:ProcessedLot ;
+    food:traceabilityLotCode "TLC-FINAL-Δ-2026-0414" ;
+    prov:wasDerivedFrom       ex:Lot_PROC_A_2026_0413 ;
+    prov:wasDerivedFrom       ex:Lot_RAW_ING_2026_0411 ;
+    prov:wasGeneratedBy       ex:Activity_Merge_τ2 .
+
+# ─────────────────────────────────────────────────────────────
+#  Locations
+# ─────────────────────────────────────────────────────────────
+
+ex:Facility_Bonn       a food:FoodFacility ;
+    rdfs:label "FSMA-registered facility (Bonn)"@en .
+ex:ColdZone_Bonn_C2    a food:ColdStorageZone ;
+    rdfs:label "Cold-storage zone C2 (Bonn facility)"@en .
+
+# ─────────────────────────────────────────────────────────────
+#  Regulatory regimes
+# ─────────────────────────────────────────────────────────────
+
+ex:Regime_EU_178_2002    a food:FoodLawRegime ;
+    rdfs:label "EU Regulation 178/2002 (General Food Law)"@en .
+ex:Regime_FDA_FSMA_204   a food:FoodLawRegime ;
+    rdfs:label "FDA FSMA Rule 204 (Traceability)"@en .
+
+# ─────────────────────────────────────────────────────────────
+#  Activities
+# ─────────────────────────────────────────────────────────────
+
+ex:Activity_Split_τ1  a food:SplittingActivity ;
+    prov:startedAtTime "2026-04-13T06:00:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-04-13T08:30:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith ex:Agent_LineOperator_L7 .
+
+ex:Activity_Merge_τ2  a food:MergingActivity ;
+    prov:startedAtTime "2026-04-14T05:30:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-04-14T08:00:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy ex:Activity_Split_τ1 ;
+    prov:wasAssociatedWith ex:Agent_LineOperator_L7 ;
+    prov:qualifiedUsage [
+        a prov:Usage ;
+        prov:entity  ex:M_InProduction_PROC_A ;
+        prov:hadRole ex:Role_TransformationInput ;
+        prov:atTime  "2026-04-14T05:30:00Z"^^xsd:dateTime ;
+    ] .
+
+ex:Handover_FAC_to_DC  a food:ColdChainHandover ;
+    prov:startedAtTime "2026-04-14T16:00:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy ex:Activity_Merge_τ2 ;
+    prov:qualifiedUsage [
+        a prov:Usage ;
+        prov:entity  ex:M_InColdStorage_FINAL ;
+        prov:hadRole ex:Role_HandoverInput ;
+        prov:atTime  "2026-04-14T16:00:00Z"^^xsd:dateTime ;
+    ] .
+
+# Carrier roles for qualified usage (PROV-O §5.7)
+ex:Role_TransformationInput  a prov:Role ;
+    rdfs:label "Transformation-input carrier role"@en ;
+    rdfs:comment "The carrier State manifestation is consumed as a transformation input by the dependent activity."@en .
+
+ex:Role_HandoverInput        a prov:Role ;
+    rdfs:label "Handover-input carrier role"@en ;
+    rdfs:comment "The carrier State manifestation is the predecessor state at the moment of cold-chain handover."@en .
+
+ex:Agent_LineOperator_L7  a prov:Agent ;
+    rdfs:label "Line operator L7"@en .
+
+# ─────────────────────────────────────────────────────────────
+#  Evidence
+# ─────────────────────────────────────────────────────────────
+
+ex:HACCP_Split_τ1     a food:HACCPRecord ;
+    sosa:resultTime         "2026-04-13T08:30:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime     "2026-04-13T07:15:00Z"^^xsd:dateTime ;
+    sosa:hasFeatureOfInterest ex:M_InProduction_PROC_A .
+
+ex:TempLog_ColdHandover a food:TemperatureLog ;
+    sosa:resultTime         "2026-04-14T16:05:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime     "2026-04-14T16:00:00Z"^^xsd:dateTime ;
+    sosa:hasFeatureOfInterest ex:M_InColdStorage_FINAL ;
+    sosa:madeBySensor        ex:Sensor_Thermo_C2 .
+
+# Deliberate cold-chain gap (Class IV ACQ): no temperature log for PROC_B between split and shipping
+# (no triple referencing ex:M_InColdStorage_PROC_B as feature-of-interest)
+
+ex:Sensor_Thermo_C2   a sosa:Sensor ;
+    rdfs:label "Cold-zone C2 thermometer"@en .
+
+# ─────────────────────────────────────────────────────────────
+#  Manifestations
+# ─────────────────────────────────────────────────────────────
+
+ex:M_InProduction_PROC_A  a food:InProduction ;
+    dmfo:manifestationOf      ex:Lot_PROC_A_2026_0413 ;
+    dmfo:stateWasGeneratedBy  ex:Activity_Split_τ1 ;
+    dmfo:evidencedBy          ex:HACCP_Split_τ1 ;
+    dmfo:manifestationTimestamp "2026-04-13T08:30:00Z"^^xsd:dateTimeStamp .
+
+ex:M_InColdStorage_PROC_B  a food:InColdStorage ;
+    dmfo:manifestationOf      ex:Lot_PROC_B_2026_0413 ;
+    dmfo:stateWasGeneratedBy  ex:Activity_Split_τ1 ;
+    dmfo:manifestationTimestamp "2026-04-13T08:30:00Z"^^xsd:dateTimeStamp .
+    # NOTE: deliberately NO dmfo:evidencedBy — used by Class IV ACQ
+
+ex:M_InColdStorage_FINAL  a food:InColdStorage ;
+    dmfo:manifestationOf      ex:Lot_FINAL_DELTA_2026_0414 ;
+    dmfo:stateWasGeneratedBy  ex:Activity_Merge_τ2 ;
+    dmfo:evidencedBy          ex:TempLog_ColdHandover ;
+    dmfo:manifestationTimestamp "2026-04-14T08:00:00Z"^^xsd:dateTimeStamp .
+
+ex:M_Shipped_FINAL  a food:Shipped ;
+    dmfo:manifestationOf      ex:Lot_FINAL_DELTA_2026_0414 ;
+    dmfo:stateWasGeneratedBy  ex:Handover_FAC_to_DC ;
+    dmfo:manifestationTimestamp "2026-04-14T16:30:00Z"^^xsd:dateTimeStamp .
+
+# Deliberate causal gap (ACQ-IV-02): a manifestation observed in cold
+# storage without an attributable generating activity. Used to test the
+# absence-detection ACQ class.
+ex:M_InColdStorage_OrphanReceipt  a food:InColdStorage ;
+    dmfo:manifestationOf      ex:Lot_RAW_ING_2026_0411 ;
+    dmfo:manifestationTimestamp "2026-04-13T08:30:00Z"^^xsd:dateTimeStamp .
+
+# ─────────────────────────────────────────────────────────────
+#  Situations (Context, A4 + A6)
+# ─────────────────────────────────────────────────────────────
+
+ex:Situation_Compliance_FINAL  a food:RegulatorySituation ;
+    dul:includesObject  ex:M_InColdStorage_FINAL ;
+    dmfo:governedBy     ex:Regime_EU_178_2002 ;
+    dmfo:governedBy     ex:Regime_FDA_FSMA_204 ;
+    dmfo:inZone         ex:ColdZone_Bonn_C2 ;
+    rdfs:comment "Compliance situation for the merged final product under both EU and FDA regimes."@en .
+
+ex:Situation_Recall_PROC_B    a food:RecallSituation ;
+    dul:includesObject  ex:M_InColdStorage_PROC_B ;
+    dmfo:governedBy     ex:Regime_FDA_FSMA_204 ;
+    dmfo:inZone         ex:Facility_Bonn ;
+    rdfs:comment "Recall situation triggered by missing temperature observations on PROC_B."@en .
+
+# Deliberate governance gap (ACQ-IV-04): a regulatory situation whose
+# governing regime is not yet declared (regime adjudication pending).
+ex:Situation_PendingRegime_OrphanReceipt  a food:RegulatorySituation ;
+    dul:includesObject  ex:M_InColdStorage_OrphanReceipt ;
+    dmfo:inZone         ex:Facility_Bonn ;
+    rdfs:comment "Regulatory situation with no declared regime — used by ACQ-IV-04 absence detection."@en .

@@ -1,0 +1,16 @@
+# ACQ-II-05  Situation → governing regime (Class II)
+# Source: DUL/DnS, EU Reg. 178/2002, FDA FSMA 204
+# Bridges required: A4 (governedBy)
+# Question: Which regulatory regimes govern each contextual situation?
+
+PREFIX dmfo: <https://w3id.org/dmfo#>
+PREFIX dul:  <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?situation ?regime ?regimeLabel
+WHERE {
+  ?situation a       dul:Situation ;
+             dmfo:governedBy ?regime .
+  OPTIONAL { ?regime rdfs:label ?regimeLabel . }
+}
+ORDER BY ?situation

@@ -1,0 +1,20 @@
+# ACQ-I-02 (B2-CCO) — EPCIS 4-attribute approximation
+# Classification: (b) — last-time approximation via Observation
+# resultTime, since CCO Qualities have no native time-anchor.
+
+PREFIX cco:  <https://www.commoncoreontologies.org/>
+PREFIX bfo:  <http://purl.obolibrary.org/obo/>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?tve ?id ?lastTime
+WHERE {
+  ?ice cco:ont00001916 ?tve ;                # designates
+       rdfs:label ?id .
+  OPTIONAL {
+    ?q bfo:BFO_0000197 ?tve .                 # quality inheres in tve
+    ?obs sosa:hasFeatureOfInterest ?q ;
+         sosa:resultTime ?lastTime .
+  }
+}
+ORDER BY ?id

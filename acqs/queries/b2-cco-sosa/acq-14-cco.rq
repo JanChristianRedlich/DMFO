@@ -1,0 +1,12 @@
+# ACQ-III-06 (B2-CCO) — Customs consistency: act + regime + zone
+# Classification: (b) — translatable.
+
+PREFIX cco: <https://www.commoncoreontologies.org/>
+PREFIX bfo: <http://purl.obolibrary.org/obo/>
+
+SELECT ?act ?regime ?zone
+WHERE {
+  ?regime cco:ont00001942 ?act .              # prescribes
+  ?act    bfo:BFO_0000171 ?zone .             # located in
+}
+ORDER BY ?act

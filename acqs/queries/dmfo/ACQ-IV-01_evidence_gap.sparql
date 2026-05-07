@@ -1,0 +1,15 @@
+# ACQ-IV-01  Evidence gap (Class IV: absence detection)
+# Source: ISO 8000-61, FAIR (F-attributes)
+# Bridges required: A2 (presence) + A3 (negated absence via NOT EXISTS)
+# Question: Which manifestations have NO grounding sosa:Observation?
+#           These represent epistemic evidence gaps — queryable, not
+#           silent (Paper Corollary of Theorem 2).
+
+PREFIX dmfo: <https://w3id.org/dmfo#>
+
+SELECT ?manifestation ?tve
+WHERE {
+  ?manifestation dmfo:manifestationOf ?tve .
+  FILTER NOT EXISTS { ?manifestation dmfo:evidencedBy ?obs . }
+}
+ORDER BY ?tve

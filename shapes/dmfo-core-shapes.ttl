@@ -1,0 +1,126 @@
+# =============================================================
+# DMFO Core SHACL Shapes
+#
+# Closed-world conformance shapes for the DMFO alignment layer
+# (A1)–(A6). These are *deployment artefacts*: they refine OWL
+# entailment under a closed-world assumption. They never relax
+# OWL claims (Principle P3, Paper §3 / P3).
+#
+# Mandatory Identity–State coupling: every dmfo:Manifestation
+# MUST have exactly one dmfo:manifestationOf. All other bridges
+# are OPTIONAL — absent bridges are queryable epistemic gaps,
+# not modelling errors (Corollary of Theorem 2 / Paper §4.3
+# Negative Cases).
+#
+# Profile-binding shapes verify the (A1)–(A6) constraints at
+# the profile-binding level (every State subclass binds via
+# rdfs:subClassOf to dmfo:Manifestation, etc.).
+# =============================================================
+
+@prefix dmfo:    <https://w3id.org/dmfo#> .
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix sosa:    <http://www.w3.org/ns/sosa/> .
+@prefix dul:     <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix geo:     <http://www.opengis.net/ont/geosparql#> .
+
+<https://w3id.org/dmfo/shapes/core>
+    a owl:Ontology ;
+    rdfs:label "DMFO Core SHACL Shapes"@en ;
+    rdfs:comment "A1-A6 conformance shapes. To be combined with profile-specific shapes via SHACL imports."@en .
+
+# ─────────────────────────────────────────────────────────────
+#  ManifestationShape
+#    Mandatory: identity-state bridge (A2). Every Manifestation
+#    must project to exactly one TVE.
+#    Optional: A3 (evidencedBy), A5 (stateWasGeneratedBy) — no
+#    sh:minCount enforcement, by design.
+# ─────────────────────────────────────────────────────────────
+
+dmfo:ManifestationShape
+    a sh:NodeShape ;
+    sh:targetClass dmfo:Manifestation ;
+    sh:property [
+        sh:path dmfo:manifestationOf ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:class dmfo:TimeVaryingEntity ;
+        sh:message "(A2) every dmfo:Manifestation must have exactly one dmfo:manifestationOf reaching a dmfo:TimeVaryingEntity."@en ;
+    ] ;
+    sh:property [
+        sh:path dmfo:stateWasGeneratedBy ;
+        sh:class prov:Activity ;
+        sh:severity sh:Warning ;
+        sh:message "(A5) values of dmfo:stateWasGeneratedBy must be prov:Activity instances."@en ;
+    ] ;
+    sh:property [
+        sh:path dmfo:evidencedBy ;
+        sh:class sosa:Observation ;
+        sh:severity sh:Warning ;
+        sh:message "(A3) values of dmfo:evidencedBy must be sosa:Observation instances."@en ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────
+#  Bridge typing shapes (range checks for the optional bridges)
+# ─────────────────────────────────────────────────────────────
+
+dmfo:GovernedByShape
+    a sh:NodeShape ;
+    sh:targetSubjectsOf dmfo:governedBy ;
+    sh:class dul:Situation ;
+    sh:property [
+        sh:path dmfo:governedBy ;
+        sh:class dul:Description ;
+        sh:message "(A4) dmfo:governedBy: domain dul:Situation, range dul:Description."@en ;
+    ] .
+
+dmfo:InZoneShape
+    a sh:NodeShape ;
+    sh:targetSubjectsOf dmfo:inZone ;
+    sh:class dul:Situation ;
+    sh:property [
+        sh:path dmfo:inZone ;
+        sh:class geo:Feature ;
+        sh:message "(A6) dmfo:inZone: domain dul:Situation, range geo:Feature."@en ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────
+#  TimeVaryingEntity-shape — invariant identifier guard
+# ─────────────────────────────────────────────────────────────
+
+dmfo:TVEShape
+    a sh:NodeShape ;
+    sh:targetClass dmfo:TimeVaryingEntity ;
+    sh:property [
+        sh:path dmfo:hasIdentifier ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "every dmfo:TimeVaryingEntity must carry at least one dmfo:hasIdentifier."@en ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────
+#  Profile-binding conformance shapes
+#  (verified at profile-author time: every domain class declared
+#   under a binding axiom must inherit from the corresponding
+#   anchor)
+# ─────────────────────────────────────────────────────────────
+
+dmfo:ManifestationBindingShape
+    a sh:NodeShape ;
+    sh:targetSubjectsOf dmfo:manifestationOf ;
+    sh:class dmfo:Manifestation ;
+    sh:message "(A2) profile binding: subjects of dmfo:manifestationOf must be dmfo:Manifestation."@en .
+
+dmfo:StateWasGeneratedByDomainShape
+    a sh:NodeShape ;
+    sh:targetSubjectsOf dmfo:stateWasGeneratedBy ;
+    sh:class dmfo:Manifestation ;
+    sh:message "(A5) subjects of dmfo:stateWasGeneratedBy must be dmfo:Manifestation."@en .
+
+dmfo:EvidencedByDomainShape
+    a sh:NodeShape ;
+    sh:targetSubjectsOf dmfo:evidencedBy ;
+    sh:class dmfo:Manifestation ;
+    sh:message "(A3) subjects of dmfo:evidencedBy must be dmfo:Manifestation."@en .

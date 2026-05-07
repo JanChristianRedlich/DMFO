@@ -1,0 +1,16 @@
+# ACQ-III-03  State → evidence → sensor (Class III)
+# Source: SOSA/SSN, ISO 8000-61, FAIR (F-attributes)
+# Bridges required: A2, A3
+# Question: For each TVE, list the evidential chain: manifestation →
+#           observation → sensor that grounds the state assertion.
+
+PREFIX dmfo: <https://w3id.org/dmfo#>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+
+SELECT ?tve ?manifestation ?observation ?sensor
+WHERE {
+  ?manifestation dmfo:manifestationOf ?tve ;
+                 dmfo:evidencedBy     ?observation .
+  ?observation   sosa:madeBySensor    ?sensor .
+}
+ORDER BY ?tve

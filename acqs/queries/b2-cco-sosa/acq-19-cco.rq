@@ -1,0 +1,17 @@
+# ACQ-IV-03 (B2-CCO) — Identifier-scheme gap
+# Classification: (c) — semantic shift. CCO encodes the scheme as
+# the ICE class itself (BICCode vs. IMONumber); the analogue of
+# "TVE has identifier but no scheme" is "Object has no designating
+# Identifier ICE at all", which is a different question.
+# Diagnosis: returns objects that are not designated by any Identifier ICE.
+
+PREFIX cco: <https://www.commoncoreontologies.org/>
+PREFIX bfo: <http://purl.obolibrary.org/obo/>
+
+SELECT ?obj
+WHERE {
+  ?obj a ?cls .
+  ?cls rdfs:subClassOf*/rdfs:subClassOf* bfo:BFO_0000030 .   # bfo:Object
+  FILTER NOT EXISTS { ?ice cco:ont00001916 ?obj }            # designates
+}
+LIMIT 50

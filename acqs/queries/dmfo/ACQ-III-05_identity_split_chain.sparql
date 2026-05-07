@@ -1,0 +1,17 @@
+# ACQ-III-05  Identity-derivation split chain (Class III)
+# Source: FDA FSMA Rule 204 (transformation CTE), ISO 22005
+# Bridges required: A2 + identity-derivation module (PROV wasDerivedFrom +
+#                   wasGeneratedBy chain typed by dmfo:SplitSourceIdentity)
+# Question: For each successor TVE produced by a splitting activity, what
+#           was the source TVE and via which transformation activity?
+
+PREFIX dmfo: <https://w3id.org/dmfo#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+
+SELECT ?successor ?source ?transformation
+WHERE {
+  ?source     a                 dmfo:SplitSourceIdentity .
+  ?successor  prov:wasDerivedFrom ?source ;
+              prov:wasGeneratedBy ?transformation .
+}
+ORDER BY ?source

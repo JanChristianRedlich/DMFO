@@ -1,0 +1,18 @@
+# ACQ-I-01  Identity persistence (Class I: identity-only lookup)
+# Source: UN/CEFACT BUY/SHIP/PAY, GS1 EPCIS 2.0
+# Bridges required: none (identity layer only)
+# Question: For a given identifier scheme, what stable TVE identifiers exist
+#           in the knowledge base, and what sortal types do they carry?
+
+PREFIX dmfo: <https://w3id.org/dmfo#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?tve ?identifier ?scheme ?sortal
+WHERE {
+  ?tve a            ?sortal ;
+       dmfo:hasIdentifier ?identifier ;
+       dmfo:identifierScheme ?scheme .
+  ?sortal rdfs:subClassOf* dmfo:TimeVaryingEntity .
+}
+ORDER BY ?scheme ?identifier

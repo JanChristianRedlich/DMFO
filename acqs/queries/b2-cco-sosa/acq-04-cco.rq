@@ -1,0 +1,13 @@
+# ACQ-II-02 (B2-CCO) — State → activity traversal
+# Classification: (a) directly translatable.
+
+PREFIX cco:  <https://www.commoncoreontologies.org/>
+PREFIX bfo:  <http://purl.obolibrary.org/obo/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?quality ?activity ?actClass
+WHERE {
+  ?activity cco:ont00001986 ?quality .        # has output
+  ?activity a ?actClass .
+  OPTIONAL { ?activity rdfs:label ?label }
+}

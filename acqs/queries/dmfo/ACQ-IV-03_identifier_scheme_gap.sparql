@@ -1,0 +1,14 @@
+# ACQ-IV-03  Identifier-scheme gap (Class IV)
+# Source: FAIR (F1: globally unique persistent identifier)
+# Bridges required: identity layer only + NOT EXISTS
+# Question: Which TVEs lack an explicit identifier scheme — a FAIR F1
+#           violation that should be flagged for repair?
+
+PREFIX dmfo: <https://w3id.org/dmfo#>
+
+SELECT ?tve ?identifier
+WHERE {
+  ?tve dmfo:hasIdentifier ?identifier .
+  FILTER NOT EXISTS { ?tve dmfo:identifierScheme ?scheme . }
+}
+ORDER BY ?tve

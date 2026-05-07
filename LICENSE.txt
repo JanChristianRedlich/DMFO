@@ -1,0 +1,22 @@
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+Copyright (c) 2026 Jan Christian Redlich, Bonn Consulting Group GmbH
+
+Sie dürfen:
+  Teilen   — das Material in jedwedem Format oder Medium vervielfältigen
+             und weiterverbreiten
+  Bearbeiten — das Material remixen, verändern und darauf aufbauen,
+               und zwar für beliebige Zwecke, sogar kommerziell.
+
+Unter den Bedingungen:
+  Namensnennung — Sie müssen angemessene Urheber- und Rechteangaben machen,
+                  einen Link zur Lizenz beifügen und angeben, ob Änderungen
+                  vorgenommen wurden. Dies darf auf jede zumutbare Art und
+                  Weise geschehen, allerdings nicht so, dass der Eindruck
+                  entsteht, der Lizenzgeber unterstütze gerade Sie oder Ihre
+                  Nutzung besonders.
+
+Vollständiger Lizenztext: https://creativecommons.org/licenses/by/4.0/legalcode
+
+Dieses Projekt wurde im Rahmen des BMBF-Verbundprojekts CritSupPort
+(Förderkennzeichen: 13N16432) entwickelt.

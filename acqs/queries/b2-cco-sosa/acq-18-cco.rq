@@ -1,0 +1,11 @@
+# ACQ-IV-02 (B2-CCO) — Causal gap (no generating act)
+# Classification: (a)
+
+PREFIX cco: <https://www.commoncoreontologies.org/>
+PREFIX bfo: <http://purl.obolibrary.org/obo/>
+
+SELECT ?quality ?bearer
+WHERE {
+  ?quality bfo:BFO_0000197 ?bearer .          # inheres in
+  FILTER NOT EXISTS { ?act cco:ont00001986 ?quality }   # has output
+}

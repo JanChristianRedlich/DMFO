@@ -1,0 +1,71 @@
+# =============================================================
+# B2-CCO Base — Common Core Ontologies baseline for the DMFO
+# evaluation
+#
+# Faithful-Translation-Rule: F1, F2, F3, F4, F5 — compliant
+#   See docs/faithful-translation-rule.md
+#
+# This base file pulls in the CCO 2.0 merged TTL and adds *only*
+# the minimal CCO-conformant additions justified in the ADRs:
+#   - ADR-001: quality-inherence pattern (no fresh axioms; we
+#              reuse bfo:Quality + bfo:inheres in)
+#   - ADR-003a: SOSA co-import (variant a — see b2-cco-base-sosa.ttl)
+#   - ADR-005: bfo:Site institutional zones (no fresh axioms)
+#
+# No DMFO bridges. No typed inter-dimensional properties.
+# =============================================================
+
+@prefix b2cco: <https://w3id.org/dmfo/baseline/cco#> .
+@prefix bfo:   <http://purl.obolibrary.org/obo/> .
+@prefix cco:   <https://www.commoncoreontologies.org/> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://w3id.org/dmfo/baseline/cco>
+    a owl:Ontology ;
+    owl:versionInfo "1.0.0" ;
+    rdfs:label "B2-CCO Baseline (DMFO evaluation)"@en ;
+    rdfs:comment """Alternative-architecture baseline for the DMFO paper.
+Imports CCO 2.0 (and BFO 2020 transitively) and adds nothing that
+re-introduces DMFO's typed bridges. Each modelling decision is
+recorded in docs/adr/. The Faithful-Translation-Rule (F1-F5) is the
+governing compliance criterion."""@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:created "2026-05-03"^^<http://www.w3.org/2001/XMLSchema#date> ;
+    owl:imports <https://www.commoncoreontologies.org/CommonCoreOntologiesMerged/v2.0> .
+
+# ── Documented absences (placeholder annotations, not new axioms) ─
+
+b2cco:DocumentedAbsence_StateAnchor
+    a owl:NamedIndividual ;
+    rdfs:label "ADR-001: no CCO equivalent of dmfo:Manifestation"@en ;
+    rdfs:comment "State-of-an-entity-at-a-moment is modelled via bfo:Quality + bfo:inheres in + cco:Stasis of Quality." .
+
+b2cco:DocumentedAbsence_Situation
+    a owl:NamedIndividual ;
+    rdfs:label "ADR-004: no CCO Situation class"@en ;
+    rdfs:comment "Contextual situations are reified as cco:Act tokens; cco:Process Regulation prescribes them." .
+
+b2cco:DocumentedAbsence_GeoSPARQL
+    a owl:NamedIndividual ;
+    rdfs:label "ADR-005: no GeoSPARQL spatial-relation algebra"@en ;
+    rdfs:comment "Only bfo:located in / has spatial part are available; no sfWithin / sfTouches / sfIntersects." .
+
+# ── ADR-006: identity-derivation marker classes (cross-profile) ─
+# Promoted from the food profile to the base namespace so the same
+# act-mediated derivation pattern is usable from any B2-CCO profile.
+# See docs/adr/006-identity-derivation-via-act-mediation.md.
+
+b2cco:SplittingActivity
+    a owl:Class ;
+    rdfs:subClassOf cco:ont00000005 ;            # cco:Act
+    rdfs:label "Splitting Activity"@en ;
+    rdfs:comment "ADR-006: act-mediated identity-derivation marker. The act has ≥ 2 distinct outputs from one input. Subclassed by domain profiles (b2food:SplittingActivity, b2mar:DeconsolidationActivity)."@en .
+
+b2cco:MergingActivity
+    a owl:Class ;
+    rdfs:subClassOf cco:ont00000005 ;
+    rdfs:label "Merging Activity"@en ;
+    rdfs:comment "ADR-006: act-mediated identity-derivation marker. The act has ≥ 2 distinct inputs and one output."@en .

@@ -1,0 +1,67 @@
+# =============================================================
+# DMFO Identity-Derivation SHACL Shapes
+#
+# Acyclicity is a closed-world validation constraint, not an OWL
+# property: the OWL ontology permits derivation cycles under
+# open-world semantics, and prov:wasDerivedFrom is reflexive- and
+# cycle-permissive in PROV-O. DMFO requires deployed instances
+# whose derivation graph contains a cycle to be REJECTED at the
+# validation layer (Paper §3.3, Principle P2).
+#
+# This file uses sh:SPARQLConstraint for the cycle check, which
+# is the canonical SHACL idiom for transitive-closure
+# constraints. Top-locality of the OWL alignment axioms is
+# preserved because no SHACL rule re-introduces OWL claims.
+# =============================================================
+
+@prefix dmfo:    <https://w3id.org/dmfo#> .
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+
+<https://w3id.org/dmfo/shapes/identity-deriv>
+    a owl:Ontology ;
+    rdfs:label "DMFO Identity-Derivation SHACL Shapes"@en .
+
+dmfo:IdentityDerivationAcyclicityShape
+    a sh:NodeShape ;
+    sh:targetClass dmfo:TimeVaryingEntity ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Acyclicity violation: a TVE appears in its own prov:wasDerivedFrom transitive closure (Paper §3.3 P2)."@en ;
+        sh:prefixes [
+            sh:declare [ sh:prefix "prov" ; sh:namespace "http://www.w3.org/ns/prov#"^^<http://www.w3.org/2001/XMLSchema#anyURI> ] ,
+                       [ sh:prefix "dmfo" ; sh:namespace "https://w3id.org/dmfo#"^^<http://www.w3.org/2001/XMLSchema#anyURI> ]
+        ] ;
+        sh:select """
+            SELECT $this WHERE {
+              $this prov:wasDerivedFrom+ $this .
+            }
+        """ ;
+    ] .
+
+# Additional SHACL rule: a SplitSourceIdentity should have at
+# least 2 successors via prov:wasDerivedFrom (otherwise it is not
+# a split, just a relabel). Reported as warning to allow
+# transitional states during ABox loading.
+
+dmfo:SplitSourceIdentityShape
+    a sh:NodeShape ;
+    sh:targetClass dmfo:SplitSourceIdentity ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:severity sh:Warning ;
+        sh:message "A dmfo:SplitSourceIdentity should have at least 2 distinct successors via prov:wasDerivedFrom."@en ;
+        sh:prefixes [
+            sh:declare [ sh:prefix "prov" ; sh:namespace "http://www.w3.org/ns/prov#"^^<http://www.w3.org/2001/XMLSchema#anyURI> ]
+        ] ;
+        sh:select """
+            SELECT $this WHERE {
+              { SELECT $this (COUNT(DISTINCT ?s) AS ?n)
+                WHERE { ?s prov:wasDerivedFrom $this . }
+                GROUP BY $this }
+              FILTER (?n < 2)
+            }
+        """ ;
+    ] .

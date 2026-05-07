@@ -1,0 +1,59 @@
+# =============================================================
+# DMFO Maritime Profile – SHACL Shapes
+#
+# Closed-world deployment-time validation specific to the
+# maritime profile. Generic A1-A6 conformance shapes are in
+# /shapes/dmfo-core-shapes.ttl; this file holds profile-level
+# constraints that go beyond the framework's core commitments.
+#
+# Profile rules encoded here:
+#   M-01  Every mar:Container instance MUST carry a mar:bicCode
+#         (closed-world identifier requirement).
+#   M-02  Every mar:CustodyTransferSituation MUST include both
+#         a prior and a successor State manifestation
+#         (custody-handover atomicity, Paper §4.4 step 3).
+#   M-03  Every mar:Observation_AIS MUST carry a sosa:resultTime.
+# =============================================================
+
+@prefix dmfo:    <https://w3id.org/dmfo#> .
+@prefix mar:     <https://w3id.org/dmfo/profiles/maritime#> .
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix sosa:    <http://www.w3.org/ns/sosa/> .
+@prefix dul:     <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+
+mar:ContainerShape
+    a sh:NodeShape ;
+    sh:targetClass mar:Container ;
+    sh:property [
+        sh:path mar:bicCode ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[A-Z]{4}[0-9]{7}$" ;
+        sh:message "M-01: every mar:Container must carry exactly one ISO 6346 BIC code (4 letters + 7 digits)."@en ;
+    ] .
+
+mar:CustodyTransferSituationShape
+    a sh:NodeShape ;
+    sh:targetClass mar:CustodyTransferSituation ;
+    sh:property [
+        sh:path dul:includesObject ;
+        sh:minCount 2 ;
+        sh:message "M-02: a custody-transfer situation must include at least a prior and a successor manifestation."@en ;
+    ] ;
+    sh:property [
+        sh:path dmfo:governedBy ;
+        sh:minCount 1 ;
+        sh:message "M-02: a custody-transfer situation must declare its governing regime."@en ;
+    ] .
+
+mar:ObservationAISShape
+    a sh:NodeShape ;
+    sh:targetClass mar:Observation_AIS ;
+    sh:property [
+        sh:path sosa:resultTime ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:datatype xsd:dateTime ;
+        sh:message "M-03: AIS observations must carry a sosa:resultTime timestamp."@en ;
+    ] .

@@ -1,0 +1,4 @@
+{
+  "status": "service-unreachable",
+  "note": "Run again when http://oops.linkeddata.es/rest is reachable. The merged TBox is in results/b2-cco-merged-for-oops.owl."
+}

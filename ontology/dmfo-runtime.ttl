@@ -1,0 +1,65 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dmfo: <https://w3id.org/dmfo#> .
+@prefix dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+dmfo:MergeSourceIdentity a owl:Class ;
+    rdfs:subClassOf dmfo:TimeVaryingEntity .
+
+dmfo:SplitSourceIdentity a owl:Class ;
+    rdfs:subClassOf dmfo:TimeVaryingEntity .
+
+dmfo:evidencedBy a owl:ObjectProperty ;
+    rdfs:domain dmfo:Manifestation ;
+    rdfs:range sosa:Observation ;
+    rdfs:subPropertyOf [ owl:inverseOf sosa:hasFeatureOfInterest ] .
+
+dmfo:governedBy a owl:ObjectProperty ;
+    rdfs:domain dul:Situation ;
+    rdfs:range dul:Description .
+
+dmfo:hasIdentifier a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:domain dmfo:TimeVaryingEntity ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:identifier .
+
+dmfo:hasManifestationTime a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:domain dmfo:Manifestation ;
+    rdfs:range time:TemporalEntity .
+
+dmfo:identifierScheme a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:domain dmfo:TimeVaryingEntity ;
+    rdfs:range xsd:anyURI .
+
+dmfo:inZone a owl:ObjectProperty ;
+    rdfs:domain dul:Situation ;
+    rdfs:range geo:Feature ;
+    rdfs:subPropertyOf geo:sfWithin .
+
+dmfo:manifestationOf a owl:ObjectProperty ;
+    rdfs:domain dmfo:Manifestation ;
+    rdfs:range dmfo:TimeVaryingEntity .
+
+dmfo:stateWasGeneratedBy a owl:ObjectProperty ;
+    rdfs:domain dmfo:Manifestation ;
+    rdfs:range prov:Activity ;
+    rdfs:subPropertyOf prov:wasGeneratedBy .
+
+<https://w3id.org/dmfo/runtime> a owl:Ontology .
+
+dmfo:Manifestation a owl:Class ;
+    rdfs:subClassOf [ a owl:Class ;
+            owl:intersectionOf ( prov:Entity dul:Event sosa:FeatureOfInterest ) ] .
+
+dmfo:TimeVaryingEntity a owl:Class .
+

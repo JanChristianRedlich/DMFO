@@ -1,0 +1,9 @@
+# A2 — Identity-State projection
+# dmfo:manifestationOf domain dmfo:Manifestation, range dmfo:TimeVaryingEntity.
+PREFIX dmfo: <https://w3id.org/dmfo#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+ASK {
+  dmfo:manifestationOf rdfs:domain dmfo:Manifestation ;
+                       rdfs:range  dmfo:TimeVaryingEntity .
+}

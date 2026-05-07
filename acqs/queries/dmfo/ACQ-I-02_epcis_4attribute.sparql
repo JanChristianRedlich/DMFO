@@ -1,0 +1,17 @@
+# ACQ-I-02  EPCIS 4-attribute lookup (Class I: identity-only lookup)
+# Source: GS1 EPCIS 2.0 §6 (what/when/where/why)
+# Bridges required: A2 (manifestationOf) — minimal traversal still classifies
+#                   as identity-only because no second dimension is reached.
+# Question: Identity, last manifestation timestamp, and identifier per TVE.
+
+PREFIX dmfo: <https://w3id.org/dmfo#>
+
+SELECT ?tve ?id ?lastTime
+WHERE {
+  ?tve dmfo:hasIdentifier ?id .
+  OPTIONAL {
+    ?m dmfo:manifestationOf       ?tve ;
+       dmfo:manifestationTimestamp ?lastTime .
+  }
+}
+ORDER BY ?id

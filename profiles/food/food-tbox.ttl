@@ -1,0 +1,113 @@
+# =============================================================
+# DMFO Food-Production Traceability Profile – TBox
+#
+# Profile P_food = (D, B, S):
+#   D — domain classes & properties for food batch traceability
+#   B — bindings to DMFO anchors
+#   S — SHACL shapes (food-shapes.ttl)
+#
+# Instantiation II (Paper §4.2): structurally stronger than the
+# maritime profile because batch identity is NOT preserved across
+# processing steps — splitting/merging activities create successor
+# identities. The profile imports the dmfo-identity-deriv module
+# and uses dmfo:SplitSourceIdentity / dmfo:MergeSourceIdentity to
+# mark transformation-input batches.
+#
+# Bindings:
+#   food:Batch              ⊑ dmfo:TimeVaryingEntity   (Identity)
+#   food:Production         ⊑ dmfo:Manifestation       (State)
+#   food:InCold Storage     ⊑ dmfo:Manifestation       (State)
+#   food:ProcessingActivity ⊑ prov:Activity            (Activity)
+#   food:HACCPRecord        ⊑ sosa:Observation         (Evidence)
+#   food:RegulatorySituation ⊑ dul:Situation           (Context)
+#   food:FoodLawRegime      ⊑ dul:Description          (Context)
+#   food:FoodFacility       ⊑ geo:Feature              (Location)
+#
+# Source: FDA FSMA Rule 204 KDE (Key Data Elements) / CTE (Critical
+#         Tracking Events); ISO 22005; EU Reg. 178/2002.
+# =============================================================
+
+@prefix dmfo:    <https://w3id.org/dmfo#> .
+@prefix food:    <https://w3id.org/dmfo/profiles/food#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix sosa:    <http://www.w3.org/ns/sosa/> .
+@prefix dul:     <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix geo:     <http://www.opengis.net/ont/geosparql#> .
+
+<https://w3id.org/dmfo/profiles/food>
+    a owl:Ontology ;
+    owl:versionIRI <https://w3id.org/dmfo/profiles/food/1.0.0> ;
+    rdfs:label "DMFO Food-Production Traceability Profile"@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    owl:imports <https://w3id.org/dmfo> ,
+                <https://w3id.org/dmfo/identity-deriv> .
+
+# ── Identity (TVE, with split/merge derivation marker) ────────
+
+food:Batch            a owl:Class ; rdfs:subClassOf dmfo:TimeVaryingEntity ;
+                      rdfs:label "Food Batch"@en ;
+                      rdfs:comment "Traceability lot per FDA FSMA Rule 204 (Traceability Lot Code)."@en .
+food:RawIngredientLot a owl:Class ; rdfs:subClassOf food:Batch ;
+                      rdfs:label "Raw Ingredient Lot"@en .
+food:ProcessedLot     a owl:Class ; rdfs:subClassOf food:Batch ;
+                      rdfs:label "Processed Lot"@en .
+
+# ── State (Manifestation) ─────────────────────────────────────
+
+food:InProduction     a owl:Class ; rdfs:subClassOf dmfo:Manifestation ;
+                      rdfs:label "InProduction manifestation"@en .
+food:InColdStorage    a owl:Class ; rdfs:subClassOf dmfo:Manifestation ;
+                      rdfs:label "InColdStorage manifestation"@en .
+food:Released         a owl:Class ; rdfs:subClassOf dmfo:Manifestation ;
+                      rdfs:label "Released manifestation"@en .
+food:Shipped          a owl:Class ; rdfs:subClassOf dmfo:Manifestation ;
+                      rdfs:label "Shipped manifestation"@en .
+
+# ── Activity (prov:Activity) ──────────────────────────────────
+
+food:ProcessingActivity a owl:Class ; rdfs:subClassOf prov:Activity ;
+                        rdfs:label "Processing Activity"@en .
+food:SplittingActivity  a owl:Class ; rdfs:subClassOf food:ProcessingActivity ;
+                        rdfs:label "Splitting Activity"@en ;
+                        rdfs:comment "Transformation that produces multiple successor lots from one source (FSMA-204 CTE: Transformation)."@en .
+food:MergingActivity    a owl:Class ; rdfs:subClassOf food:ProcessingActivity ;
+                        rdfs:label "Merging Activity"@en ;
+                        rdfs:comment "Transformation that produces a single successor lot from multiple source lots."@en .
+food:ColdChainHandover  a owl:Class ; rdfs:subClassOf prov:Activity ;
+                        rdfs:label "Cold-Chain Handover"@en .
+
+# ── Evidence (sosa:Observation) ───────────────────────────────
+
+food:HACCPRecord      a owl:Class ; rdfs:subClassOf sosa:Observation ;
+                      rdfs:label "HACCP Record"@en ;
+                      rdfs:comment "Observation in support of an HACCP critical control point."@en .
+food:TemperatureLog   a owl:Class ; rdfs:subClassOf sosa:Observation ;
+                      rdfs:label "Temperature Log"@en .
+
+# ── Context (dul:Situation / dul:Description) ─────────────────
+
+food:RegulatorySituation a owl:Class ; rdfs:subClassOf dul:Situation ;
+                         rdfs:label "Food Regulatory Situation"@en .
+food:RecallSituation     a owl:Class ; rdfs:subClassOf dul:Situation ;
+                         rdfs:label "Recall Situation"@en .
+food:FoodLawRegime       a owl:Class ; rdfs:subClassOf dul:Description ;
+                         rdfs:label "Food Law Regime"@en .
+
+# ── Location (geo:Feature) ────────────────────────────────────
+
+food:FoodFacility     a owl:Class ; rdfs:subClassOf geo:Feature ;
+                      rdfs:label "Food Facility"@en ;
+                      rdfs:comment "FSMA-registered food production / processing facility."@en .
+food:ColdStorageZone  a owl:Class ; rdfs:subClassOf geo:Feature ;
+                      rdfs:label "Cold-Storage Zone"@en .
+
+# ── Profile-specific datatype properties ──────────────────────
+
+food:traceabilityLotCode a owl:DatatypeProperty , owl:FunctionalProperty ;
+                         rdfs:domain food:Batch ; rdfs:range xsd:string ;
+                         rdfs:subPropertyOf dmfo:hasIdentifier ;
+                         rdfs:label "Traceability Lot Code (FSMA-204 KDE)"@en .

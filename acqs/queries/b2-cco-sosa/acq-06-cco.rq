@@ -1,0 +1,12 @@
+# ACQ-II-04 (B2-CCO) — Situation → zone (act located in site)
+# Classification: (b) — Situation reified as Act per ADR-004.
+
+PREFIX cco:  <https://www.commoncoreontologies.org/>
+PREFIX bfo:  <http://purl.obolibrary.org/obo/>
+
+SELECT ?act ?zone ?zoneClass
+WHERE {
+  ?act a cco:ont00000005 .                    # cco:Act
+  ?act bfo:BFO_0000171 ?zone .                # located in
+  OPTIONAL { ?zone a ?zoneClass }
+}

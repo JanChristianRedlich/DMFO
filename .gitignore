@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# DMFO-specific
+ontology/imports/*.ttl
+ontology/imports/*.owl
+!ontology/imports/README.md
+validation/results/*.json
+validation/results/*.txt
+validation/results/*.log
+visualization/results/*.html
+!validation/results/.gitkeep
+!visualization/results/.gitkeep
+
+# Java / HermiT
+*.class
+HermiT.jar
+

@@ -1,0 +1,18 @@
+# ACQ-II-06 (B2-CCO, variant a — SOSA co-import) — Observation
+# completeness for ISO 8000-61.
+# Classification: (a) under variant a (SOSA properties available
+# directly). Under variant b (Measurement ICE without phenomenon /
+# result time): (c) unanswerable.
+
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+
+SELECT ?observation
+       (BOUND(?pt) AS ?hasPhenomenonTime)
+       (BOUND(?rt) AS ?hasResultTime)
+       (BOUND(?sn) AS ?hasSensor)
+WHERE {
+  ?observation a sosa:Observation .
+  OPTIONAL { ?observation sosa:phenomenonTime ?pt }
+  OPTIONAL { ?observation sosa:resultTime     ?rt }
+  OPTIONAL { ?observation sosa:madeBySensor   ?sn }
+}

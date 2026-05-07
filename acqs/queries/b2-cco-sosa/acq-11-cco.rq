@@ -1,0 +1,13 @@
+# ACQ-III-03 (B2-CCO, variant a) — TVE → state → evidence → sensor
+# Classification: (a) under variant a, (c) under variant b.
+
+PREFIX bfo:  <http://purl.obolibrary.org/obo/>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+
+SELECT ?tve ?quality ?observation ?sensor
+WHERE {
+  ?quality bfo:BFO_0000197 ?tve .             # inheres in
+  ?observation sosa:hasFeatureOfInterest ?quality ;
+               sosa:madeBySensor ?sensor .
+}
+ORDER BY ?tve

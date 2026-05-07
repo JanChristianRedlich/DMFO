@@ -1,0 +1,54 @@
+# =============================================================
+# DMFO Module: dmfo-evidence (O_Ev) + bridge O_bridge(St, Ev)
+#
+# Anchor: sosa:Observation (imported from SOSA/SSN)
+# Bridge: dmfo:evidencedBy (State ↔ Evidence)
+#
+# Alignment axiom contributed by this module:
+#   (A3) dmfo:evidencedBy ⊑ inverse(sosa:hasFeatureOfInterest)
+#
+# Optional bridge: a Manifestation without a dmfo:evidencedBy
+# link represents an undocumented observational basis, not a
+# modelling error (data-of-opportunity constraint, Paper §3.2).
+#
+# Reference: Paper §3.1 (Evidence), Table 1, Haller et al. [16].
+# =============================================================
+
+@prefix dmfo:    <https://w3id.org/dmfo#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix sosa:    <http://www.w3.org/ns/sosa/> .
+
+<https://w3id.org/dmfo/evidence>
+    a owl:Ontology ;
+    owl:versionIRI <https://w3id.org/dmfo/evidence/1.0.0> ;
+    rdfs:label "DMFO Evidence Module"@en ;
+    rdfs:comment "Bridge dmfo:evidencedBy, alignment axiom (A3)."@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    owl:imports <https://w3id.org/dmfo/state> ,
+                <http://www.w3.org/ns/sosa/> .
+
+# ── Bridge: State–Evidence (A3) ───────────────────────────────
+
+dmfo:evidencedBy
+    a owl:ObjectProperty ;
+    rdfs:label "evidenced by"@en ;
+    rdfs:isDefinedBy <https://w3id.org/dmfo> ;
+    rdfs:domain dmfo:Manifestation ;
+    rdfs:range  sosa:Observation ;
+    rdfs:comment """(A3) Links a Manifestation to one or more sosa:Observations that
+ground its assertion. Stated as a sub-property of the inverse of
+sosa:hasFeatureOfInterest, so DMFO does not invent a new evidence
+relation but localises the typed sub-relation that connects a
+state-anchor (Manifestation, qua sosa:FeatureOfInterest) back to
+its observations."""@en .
+
+# OWL 2 DL: inverse-of is expressible inline as an anonymous
+# property, so subPropertyOf(inverse(P)) is a simple sub-property
+# axiom over the inverse.
+
+dmfo:evidencedBy
+    rdfs:subPropertyOf [ owl:inverseOf sosa:hasFeatureOfInterest ] .

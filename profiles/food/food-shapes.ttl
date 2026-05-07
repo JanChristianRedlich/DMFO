@@ -1,0 +1,59 @@
+# =============================================================
+# DMFO Food Profile – SHACL Shapes
+#
+# Closed-world deployment-time validation specific to the food
+# profile. Generic A1-A6 conformance shapes live in
+# /shapes/dmfo-core-shapes.ttl; identity-derivation acyclicity
+# is in /shapes/identity-deriv-shapes.ttl.
+#
+# Profile rules:
+#   F-01  Every food:Batch MUST carry a traceability lot code
+#         (FSMA-204 KDE).
+#   F-02  Every food:HACCPRecord MUST carry a sosa:resultTime
+#         and a sosa:phenomenonTime (HACCP record completeness).
+#   F-03  Every food:RecallSituation MUST be governedBy at least
+#         one food:FoodLawRegime.
+# =============================================================
+
+@prefix dmfo:    <https://w3id.org/dmfo#> .
+@prefix food:    <https://w3id.org/dmfo/profiles/food#> .
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix sosa:    <http://www.w3.org/ns/sosa/> .
+
+food:BatchShape
+    a sh:NodeShape ;
+    sh:targetClass food:Batch ;
+    sh:property [
+        sh:path food:traceabilityLotCode ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "F-01: every food:Batch must carry exactly one FSMA-204 traceability lot code."@en ;
+    ] .
+
+food:HACCPRecordShape
+    a sh:NodeShape ;
+    sh:targetClass food:HACCPRecord ;
+    sh:property [
+        sh:path sosa:resultTime ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:datatype xsd:dateTime ;
+        sh:message "F-02: HACCP records must carry sosa:resultTime."@en ;
+    ] ;
+    sh:property [
+        sh:path sosa:phenomenonTime ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:datatype xsd:dateTime ;
+        sh:message "F-02: HACCP records must carry sosa:phenomenonTime."@en ;
+    ] .
+
+food:RecallSituationShape
+    a sh:NodeShape ;
+    sh:targetClass food:RecallSituation ;
+    sh:property [
+        sh:path dmfo:governedBy ;
+        sh:minCount 1 ;
+        sh:class food:FoodLawRegime ;
+        sh:message "F-03: a recall situation must be governed by at least one food-law regime."@en ;
+    ] .

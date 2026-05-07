@@ -1,0 +1,17 @@
+# ACQ-II-01 (B2-CCO) — State history
+# Classification: (b) — quality-class as state-class proxy.
+
+PREFIX cco:  <https://www.commoncoreontologies.org/>
+PREFIX bfo:  <http://purl.obolibrary.org/obo/>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+
+SELECT ?tve ?qualityClass ?ts
+WHERE {
+  ?q  bfo:BFO_0000197 ?tve ;                  # inheres in
+      a ?qualityClass .
+  OPTIONAL {
+    ?obs sosa:hasFeatureOfInterest ?q ;
+         sosa:resultTime ?ts .
+  }
+}
+ORDER BY ?tve ?ts

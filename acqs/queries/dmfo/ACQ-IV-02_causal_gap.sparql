@@ -1,0 +1,14 @@
+# ACQ-IV-02  Causal gap (Class IV)
+# Source: PROV-O, IATA ONE Record (accountability)
+# Bridges required: A2 + A5 (negated absence)
+# Question: Which manifestations have NO generating activity? An undocumented
+#           causal genesis — a queryable epistemic gap, not a modelling error.
+
+PREFIX dmfo: <https://w3id.org/dmfo#>
+
+SELECT ?manifestation ?tve
+WHERE {
+  ?manifestation dmfo:manifestationOf ?tve .
+  FILTER NOT EXISTS { ?manifestation dmfo:stateWasGeneratedBy ?act . }
+}
+ORDER BY ?tve

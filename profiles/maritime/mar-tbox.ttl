@@ -1,0 +1,131 @@
+# =============================================================
+# DMFO Maritime Profile – TBox
+#
+# Profile P_mar = (D, B, S):
+#   D — domain classes & properties for maritime port logistics
+#   B — binding axioms relating each class in D to a DMFO anchor
+#       via rdfs:subClassOf / rdfs:subPropertyOf
+#   S — SHACL shapes (in mar-shapes.ttl)
+#
+# Bindings (cf. Paper §3.4 Listing 1, §4.4 Profile Authoring):
+#   mar:Container            ⊑ dmfo:TimeVaryingEntity   (Identity)
+#   mar:InYard               ⊑ dmfo:Manifestation        (State)
+#   mar:Discharged           ⊑ dmfo:Manifestation        (State)
+#   mar:OnVessel             ⊑ dmfo:Manifestation        (State)
+#   mar:GateOut              ⊑ dmfo:Manifestation        (State)
+#   mar:CraneTransfer        ⊑ prov:Activity             (Activity)
+#   mar:VesselDischarge      ⊑ prov:Activity             (Activity)
+#   mar:GateMovement         ⊑ prov:Activity             (Activity)
+#   mar:Observation_AIS      ⊑ sosa:Observation          (Evidence)
+#   mar:Observation_GateRead ⊑ sosa:Observation          (Evidence)
+#   mar:CustodyTransferSituation ⊑ dul:Situation         (Context)
+#   mar:RegulatoryRegime     ⊑ dul:Description           (Context)
+#   mar:ISPSZone             ⊑ geo:Feature               (Location)
+#   mar:TerminalYard         ⊑ geo:Feature               (Location)
+#
+# Source: IMO FAL.5/Circ.42 port-call sequence; UN/CEFACT BUY/SHIP/PAY;
+#         GS1 EPCIS 2.0 BizSteps for transport-level events.
+# =============================================================
+
+@prefix dmfo:    <https://w3id.org/dmfo#> .
+@prefix mar:     <https://w3id.org/dmfo/profiles/maritime#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix sosa:    <http://www.w3.org/ns/sosa/> .
+@prefix dul:     <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix geo:     <http://www.opengis.net/ont/geosparql#> .
+
+<https://w3id.org/dmfo/profiles/maritime>
+    a owl:Ontology ;
+    owl:versionIRI <https://w3id.org/dmfo/profiles/maritime/1.0.0> ;
+    rdfs:label "DMFO Maritime Port Logistics Profile"@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    owl:imports <https://w3id.org/dmfo> .
+
+# ── Identity (TVE) ────────────────────────────────────────────
+
+mar:Container         a owl:Class ; rdfs:subClassOf dmfo:TimeVaryingEntity ;
+                      rdfs:label "ISO Container"@en ;
+                      rdfs:comment "ISO 6346 sea container; identifier scheme: BIC code (4 letters + 7 digits)."@en .
+mar:Vessel            a owl:Class ; rdfs:subClassOf dmfo:TimeVaryingEntity ;
+                      rdfs:label "Vessel"@en ;
+                      rdfs:comment "IMO-registered seagoing vessel; identifier scheme: IMO number."@en .
+mar:Pallet            a owl:Class ; rdfs:subClassOf dmfo:TimeVaryingEntity ;
+                      rdfs:label "Pallet"@en ;
+                      rdfs:comment "Unit-load pallet (e.g. SSCC under GS1)."@en .
+mar:CargoLot          a owl:Class ; rdfs:subClassOf dmfo:TimeVaryingEntity ;
+                      rdfs:label "Cargo Lot (Bill of Lading)"@en ;
+                      rdfs:comment "A unit of consolidated cargo identified by a Master Bill of Lading. Subject to LCL/groupage deconsolidation: at a CFS the consolidated cargo lot is split into successor cargo lots (one per house BL or onward consignee). Identity is therefore *not* preserved across the deconsolidation activity — see UN/CEFACT MMT, IMO FAL.5/Circ.42 §3.5."@en .
+
+# ── State (Manifestation) ─────────────────────────────────────
+
+mar:InYard            a owl:Class ; rdfs:subClassOf dmfo:Manifestation ;
+                      rdfs:label "InYard manifestation"@en .
+mar:OnVessel          a owl:Class ; rdfs:subClassOf dmfo:Manifestation ;
+                      rdfs:label "OnVessel manifestation"@en .
+mar:Discharged        a owl:Class ; rdfs:subClassOf dmfo:Manifestation ;
+                      rdfs:label "Discharged manifestation"@en .
+mar:GateOut           a owl:Class ; rdfs:subClassOf dmfo:Manifestation ;
+                      rdfs:label "GateOut manifestation"@en .
+mar:Distributed       a owl:Class ; rdfs:subClassOf dmfo:Manifestation ;
+                      rdfs:label "Distributed manifestation"@en ;
+                      rdfs:comment "State of a successor cargo lot directly after deconsolidation: the cargo unit has been split out from its consolidated parent and is held at the CFS awaiting onward dispatch."@en .
+
+# ── Activity (prov:Activity) ──────────────────────────────────
+
+mar:CraneTransfer     a owl:Class ; rdfs:subClassOf prov:Activity ;
+                      rdfs:label "Crane Transfer"@en .
+mar:VesselDischarge   a owl:Class ; rdfs:subClassOf prov:Activity ;
+                      rdfs:label "Vessel Discharge"@en .
+mar:GateMovement      a owl:Class ; rdfs:subClassOf prov:Activity ;
+                      rdfs:label "Gate Movement"@en .
+mar:DeconsolidationActivity a owl:Class ; rdfs:subClassOf prov:Activity ;
+                      rdfs:label "CFS Deconsolidation"@en ;
+                      rdfs:comment "Container Freight Station (CFS) deconsolidation activity: a consolidated LCL container is opened and its constituent cargo lots are split out onto separate onward shipments."@en .
+
+# ── Evidence (sosa:Observation) ───────────────────────────────
+
+mar:Observation_AIS         a owl:Class ; rdfs:subClassOf sosa:Observation ;
+                            rdfs:label "AIS Observation"@en ;
+                            rdfs:comment "Vessel-position observation from the ITU-R AIS system."@en .
+mar:Observation_GateRead    a owl:Class ; rdfs:subClassOf sosa:Observation ;
+                            rdfs:label "Gate-Read Observation"@en .
+mar:Observation_RFID        a owl:Class ; rdfs:subClassOf sosa:Observation ;
+                            rdfs:label "RFID Observation"@en .
+
+# ── Context (dul:Situation / dul:Description) ─────────────────
+
+mar:CustodyTransferSituation a owl:Class ; rdfs:subClassOf dul:Situation ;
+                             rdfs:label "Custody-Transfer Situation"@en .
+mar:CustomsControlSituation  a owl:Class ; rdfs:subClassOf dul:Situation ;
+                             rdfs:label "Customs-Control Situation"@en .
+mar:RegulatoryRegime         a owl:Class ; rdfs:subClassOf dul:Description ;
+                             rdfs:label "Regulatory Regime"@en ;
+                             rdfs:comment "An institutional regime (e.g. EU UCC, ISPS Code)."@en .
+
+# ── Location (geo:Feature) ────────────────────────────────────
+
+mar:ISPSZone          a owl:Class ; rdfs:subClassOf geo:Feature ;
+                      rdfs:label "ISPS Zone"@en ;
+                      rdfs:comment "Port-facility zone regulated under the IMO ISPS Code."@en .
+mar:TerminalYard      a owl:Class ; rdfs:subClassOf geo:Feature ;
+                      rdfs:label "Terminal Yard"@en .
+mar:Berth             a owl:Class ; rdfs:subClassOf geo:Feature ;
+                      rdfs:label "Berth"@en .
+mar:CFS               a owl:Class ; rdfs:subClassOf geo:Feature ;
+                      rdfs:label "Container Freight Station"@en ;
+                      rdfs:comment "On-port or near-port facility where LCL groupage cargo is consolidated / deconsolidated."@en .
+
+# ── Profile-specific datatype properties ──────────────────────
+
+mar:bicCode           a owl:DatatypeProperty , owl:FunctionalProperty ;
+                      rdfs:domain mar:Container ; rdfs:range xsd:string ;
+                      rdfs:subPropertyOf dmfo:hasIdentifier ;
+                      rdfs:label "BIC code"@en .
+mar:imoNumber         a owl:DatatypeProperty , owl:FunctionalProperty ;
+                      rdfs:domain mar:Vessel ; rdfs:range xsd:string ;
+                      rdfs:subPropertyOf dmfo:hasIdentifier ;
+                      rdfs:label "IMO number"@en .

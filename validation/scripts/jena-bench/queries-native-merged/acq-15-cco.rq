@@ -1,0 +1,13 @@
+# ACQ-III-07 (B2-CCO) — Cross-modal visibility (state + activity + zone)
+# Classification: (b) — via cco:occurs at on the act.
+
+PREFIX cco: <https://www.commoncoreontologies.org/>
+PREFIX bfo: <http://purl.obolibrary.org/obo/>
+
+SELECT ?tve ?quality ?activity ?zone
+WHERE {
+  ?quality bfo:BFO_0000197 ?tve .             # inheres in
+  ?activity cco:ont00001986 ?quality ;        # has output
+            cco:ont00001918 ?zone .           # occurs at
+}
+ORDER BY ?tve

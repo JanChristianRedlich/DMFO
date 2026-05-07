@@ -1,0 +1,17 @@
+# ACQ-II-02  State → activity traversal (Class II)
+# Source: PROV-O accountability, IATA ONE Record
+# Bridges required: A5 (stateWasGeneratedBy)
+# Question: Which activity generated each Manifestation in the KB?
+
+PREFIX dmfo: <https://w3id.org/dmfo#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?manifestation ?activity ?actClass ?start ?end
+WHERE {
+  ?manifestation dmfo:stateWasGeneratedBy ?activity .
+  OPTIONAL { ?activity a               ?actClass . }
+  OPTIONAL { ?activity prov:startedAtTime ?start . }
+  OPTIONAL { ?activity prov:endedAtTime   ?end .   }
+}
+ORDER BY ?start

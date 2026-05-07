@@ -1,0 +1,42 @@
+# ACQ-III-04 (B2-CCO) — Qualified causal-information antecedent
+# Classification: (d) NOT MEANINGFULLY TRANSLATABLE.
+# Diagnosis: ADR-002 (no PROV-O integration in CCO).
+#
+# The DMFO version (PROV-O Rec §5.7 strict reading) requires
+# bound values for FOUR variables: ?activity, ?antecedent, ?carrier,
+# ?carrierRole. The PROV-O qualified-usage construct exposes the
+# carrier-role binding via prov:qualifiedUsage / prov:Usage / prov:hadRole.
+#
+# CCO 2.0 has no analogue of prov:Role and no qualifying construct
+# over cco:has_input. The best CCO substitute below recovers the
+# entity-flow witness (carrier moving from antecedent's output to
+# dependent activity's input) but cannot bind ?carrierRole, since
+# no CCO property exposes a typed role for an act's input. The query
+# therefore returns 0 rows under the SELECT shape required.
+#
+# Classification (d): the role-qualification piece is structurally
+# absent in CCO. Adding a typed role-property would violate the
+# Faithful-Translation-Rule F3.
+
+PREFIX cco: <https://www.commoncoreontologies.org/>
+PREFIX bfo: <http://purl.obolibrary.org/obo/>
+
+SELECT ?manifestation ?activity ?antecedent ?carrier ?carrierRole
+WHERE {
+  # Best-effort CCO substitute: entity-flow witness via input/output.
+  ?activity   bfo:BFO_0000062 ?antecedent .         # preceded by
+  ?activity   cco:ont00001921 ?carrier .             # has input
+  ?antecedent cco:ont00001986 ?carrier .             # has output
+
+  # Manifestation linkage (via the act's quality output)
+  ?activity   cco:ont00001986 ?manifestation .
+  ?manifestation a            ?cls .
+  ?cls        rdfs:subClassOf*/rdfs:subClassOf* bfo:BFO_0000019 .  # bfo:Quality
+
+  # The role binding has no CCO analogue. The pattern below cannot
+  # match anything in a CCO-faithful graph (Faithful-Translation-Rule F3
+  # forbids adding a typed-role property), so the SELECT returns zero
+  # rows for ?carrierRole — which means zero rows overall under
+  # SELECT-with-required-binding semantics.
+  ?carrier    <https://w3id.org/dmfo/baseline/cco#hasNoRoleAnalogue> ?carrierRole .
+}

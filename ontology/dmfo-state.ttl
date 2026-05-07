@@ -1,0 +1,105 @@
+# =============================================================
+# DMFO Module: dmfo-state (O_St) + bridge O_bridge(Id, St)
+#
+# Anchor: dmfo:Manifestation
+# Bridge: dmfo:manifestationOf (Identity ↔ State)
+#
+# Alignment axioms contributed by this module:
+#   (A1) dmfo:Manifestation ⊑ prov:Entity ⊓ dul:Event
+#                            ⊓ sosa:FeatureOfInterest
+#   (A2) Domain/Range(dmfo:manifestationOf)
+#                            = dmfo:Manifestation / dmfo:TimeVaryingEntity
+#
+# (A1) and (A2) are the two non-top-local axioms identified in
+# Paper Theorem 2(b): they are the Identity–State core
+# commitments (definitional rather than conservative w.r.t. O_Id
+# alone). All other DMFO axioms are top-local.
+#
+# Reference: Paper §3.1, §3.2, Table 1.
+# =============================================================
+
+@prefix dmfo:    <https://w3id.org/dmfo#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix sosa:    <http://www.w3.org/ns/sosa/> .
+@prefix dul:     <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix time:    <http://www.w3.org/2006/time#> .
+
+<https://w3id.org/dmfo/state>
+    a owl:Ontology ;
+    owl:versionIRI <https://w3id.org/dmfo/state/1.0.0> ;
+    rdfs:label "DMFO State Module"@en ;
+    rdfs:comment "Anchor class dmfo:Manifestation, alignment axioms (A1) and (A2)."@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    owl:imports <https://w3id.org/dmfo/identity> ,
+                <http://www.w3.org/ns/prov-o> ,
+                <http://www.w3.org/ns/sosa/> ,
+                <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl> ,
+                <http://www.w3.org/2006/time> .
+
+# ── Anchor class ──────────────────────────────────────────────
+
+dmfo:Manifestation
+    a owl:Class ;
+    rdfs:label "Manifestation"@en , "Manifestation"@de ;
+    rdfs:isDefinedBy <https://w3id.org/dmfo> ;
+    rdfs:comment """An immutable, time-stamped record of the state of a TimeVaryingEntity
+at a specific moment. State properties are assigned exclusively to
+Manifestations, never directly to the TVE (identity-description split).
+Historical data are augmented through new Manifestation instances rather
+than overwritten."""@en .
+
+# (A1) DMFO joint typing — state/PROV/evidence anchor
+# State phases are simultaneously prov:Entity (provenance-attributable),
+# dul:Event (perdurant), and sosa:FeatureOfInterest (observation target).
+# See Paper §3.2: not a category violation but an explicit commitment
+# strengthening three role-bearing super-classes.
+
+dmfo:Manifestation
+    rdfs:subClassOf [
+        a owl:Class ;
+        owl:intersectionOf (
+            prov:Entity
+            dul:Event
+            sosa:FeatureOfInterest
+        )
+    ] .
+
+# ── Bridge: Identity–State (A2) ──────────────────────────────
+
+dmfo:manifestationOf
+    a owl:ObjectProperty ;
+    rdfs:label "manifestation of"@en ;
+    rdfs:isDefinedBy <https://w3id.org/dmfo> ;
+    rdfs:domain dmfo:Manifestation ;
+    rdfs:range  dmfo:TimeVaryingEntity ;
+    rdfs:comment """(A2) The identity-state projection: every Manifestation is the
+manifestation of exactly one TVE at a given moment. Functional from
+the State side. The non-rigid TVE role is assigned only via this
+bridge — Manifestation itself is non-rigid as a per-instance property
+of the TVE (cf. Paper §3.2 proof sketch)."""@en .
+
+# ── State-side temporal anchoring (OWL-Time) ──────────────────
+# Manifestations are timestamped via OWL-Time. This is a regular
+# datatype/object-property hookup; OWL-Time reaches Manifestation
+# through these properties without DMFO introducing a new bridge.
+
+dmfo:hasManifestationTime
+    a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:label "has manifestation time"@en ;
+    rdfs:isDefinedBy <https://w3id.org/dmfo> ;
+    rdfs:domain dmfo:Manifestation ;
+    rdfs:range  time:TemporalEntity ;
+    rdfs:comment "The temporal entity (instant or interval) at which this Manifestation holds. Optional indirection via OWL-Time — for runtime efficiency, profiles may use the direct datatype property dmfo:manifestationTimestamp instead."@en .
+
+dmfo:manifestationTimestamp
+    a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "manifestation timestamp"@en ;
+    rdfs:isDefinedBy <https://w3id.org/dmfo> ;
+    rdfs:domain dmfo:Manifestation ;
+    rdfs:range  xsd:dateTimeStamp ;
+    rdfs:comment "Direct ISO 8601 timestamp at which the Manifestation holds. Runtime-efficient alternative to dmfo:hasManifestationTime ↔ time:Instant indirection; preferred for ABox population when OWL-Time temporal-operator reasoning is not exercised."@en .

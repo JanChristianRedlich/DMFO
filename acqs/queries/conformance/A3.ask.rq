@@ -1,0 +1,11 @@
+# A3 — Evidence bridge
+# dmfo:evidencedBy is a sub-property of inverse(sosa:hasFeatureOfInterest).
+PREFIX dmfo: <https://w3id.org/dmfo#>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+
+ASK {
+  dmfo:evidencedBy rdfs:subPropertyOf ?inv .
+  ?inv owl:inverseOf sosa:hasFeatureOfInterest .
+}

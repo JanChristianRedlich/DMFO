@@ -1,0 +1,17 @@
+# ACQ-III-01  State → activity → agent (Class III: multi-bridge traversal)
+# Source: PROV-O accountability, IATA ONE Record §4
+# Bridges required: A2 + A5 + PROV qualified-association traversal
+# Question: For each TVE, list every (manifestation, activity, agent) tuple.
+#           This is the canonical three-step state-history-and-accountability
+#           query (Paper §3.2 "temporal-causal traversal chain").
+
+PREFIX dmfo: <https://w3id.org/dmfo#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+
+SELECT ?tve ?manifestation ?activity ?agent
+WHERE {
+  ?manifestation dmfo:manifestationOf      ?tve ;
+                 dmfo:stateWasGeneratedBy ?activity .
+  ?activity      prov:wasAssociatedWith   ?agent .
+}
+ORDER BY ?tve

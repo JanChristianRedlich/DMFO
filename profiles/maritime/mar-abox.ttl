@@ -1,0 +1,293 @@
+# =============================================================
+# DMFO Maritime Profile – ABox (Instantiation I)
+#
+# Synthetic instance data constructed against published process
+# descriptions (port-call sequence per IMO FAL.5/Circ.42, GS1
+# EPCIS 2.0 transport BizSteps). Models a small but complete
+# port-call workflow for one container, plus a deliberately
+# under-determined entity for absence-detection (Class IV) ACQs.
+#
+# Reference: Paper §4.2, Listing 1 (b).
+# =============================================================
+
+@prefix dmfo:    <https://w3id.org/dmfo#> .
+@prefix mar:     <https://w3id.org/dmfo/profiles/maritime#> .
+@prefix ex:      <https://w3id.org/dmfo/profiles/maritime/example#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix sosa:    <http://www.w3.org/ns/sosa/> .
+@prefix dul:     <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix geo:     <http://www.opengis.net/ont/geosparql#> .
+@prefix time:    <http://www.w3.org/2006/time#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://w3id.org/dmfo/profiles/maritime/abox>
+    a owl:Ontology ;
+    owl:versionIRI <https://w3id.org/dmfo/profiles/maritime/abox/2.0.0> ;
+    rdfs:label "DMFO Maritime Profile ABox (Synthetic Port-Call)"@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    owl:imports <https://w3id.org/dmfo/profiles/maritime> .
+
+# ─────────────────────────────────────────────────────────────
+#  TVE: a single container HLXU3456789-3 traversing port call
+# ─────────────────────────────────────────────────────────────
+
+ex:CONT_HLXU3456789  a mar:Container ;
+    mar:bicCode          "HLXU3456789" ;
+    dmfo:identifierScheme "urn:iso:std:iso:6346"^^xsd:anyURI .
+
+ex:CONT_MSKU7654321  a mar:Container ;
+    mar:bicCode          "MSKU7654321" ;
+    dmfo:identifierScheme "urn:iso:std:iso:6346"^^xsd:anyURI .
+
+# Vessels involved in the call
+
+ex:VSL_ALINA  a mar:Vessel ;
+    mar:imoNumber          "9876543" ;
+    dmfo:identifierScheme  "urn:iso:std:imo"^^xsd:anyURI .
+
+# Deliberately under-determined entity (Class IV / absence detection)
+ex:CONT_UNKN1234567  a mar:Container ;
+    mar:bicCode "UNKN1234567" .   # no further dimensional coverage
+
+# ─────────────────────────────────────────────────────────────
+#  Spatial features (Location)
+# ─────────────────────────────────────────────────────────────
+
+ex:Berth_HHLA_CTA_03   a mar:Berth ;
+    rdfs:label "Berth CTA-03 (Hamburg HHLA)"@en .
+ex:Yard_CTA            a mar:TerminalYard ;
+    rdfs:label "Container Terminal Altenwerder Yard"@en .
+ex:ISPSZone_CTA        a mar:ISPSZone ;
+    rdfs:label "ISPS-restricted zone CTA"@en ;
+    geo:sfWithin ex:Yard_CTA .
+ex:Gate_CTA_South      a mar:TerminalYard ;
+    rdfs:label "CTA Gate South"@en .
+
+# ─────────────────────────────────────────────────────────────
+#  Regulatory regimes (Context Description)
+# ─────────────────────────────────────────────────────────────
+
+ex:Regime_EU_UCC       a mar:RegulatoryRegime ;
+    rdfs:label "EU Union Customs Code"@en .
+ex:Regime_ISPS         a mar:RegulatoryRegime ;
+    rdfs:label "IMO ISPS Code (Reg. XI-2)"@en .
+ex:Regime_IMO_FAL      a mar:RegulatoryRegime ;
+    rdfs:label "IMO FAL Convention"@en .
+
+# ─────────────────────────────────────────────────────────────
+#  Activities (PROV-O)
+# ─────────────────────────────────────────────────────────────
+
+ex:Disch_77      a mar:VesselDischarge ;
+    prov:startedAtTime  "2026-04-12T08:15:00Z"^^xsd:dateTime ;
+    prov:endedAtTime    "2026-04-12T08:21:00Z"^^xsd:dateTime ;
+    prov:wasAssociatedWith ex:Agent_HHLA_CraneOp_K12 .
+
+ex:CraneTrf_77   a mar:CraneTransfer ;
+    prov:startedAtTime  "2026-04-12T08:21:00Z"^^xsd:dateTime ;
+    prov:endedAtTime    "2026-04-12T08:25:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy  ex:Disch_77 ;
+    prov:wasAssociatedWith ex:Agent_HHLA_CraneOp_K12 ;
+    prov:qualifiedUsage [
+        a prov:Usage ;
+        prov:entity  ex:M_Discharged_HLXU ;
+        prov:hadRole ex:Role_PredecessorState ;
+        prov:atTime  "2026-04-12T08:21:00Z"^^xsd:dateTime ;
+    ] .
+
+ex:GateOut_99    a mar:GateMovement ;
+    prov:startedAtTime  "2026-04-12T14:42:00Z"^^xsd:dateTime ;
+    prov:endedAtTime    "2026-04-12T14:43:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy  ex:CraneTrf_77 ;
+    prov:wasAssociatedWith ex:Agent_HHLA_GateController ;
+    prov:qualifiedUsage [
+        a prov:Usage ;
+        prov:entity  ex:M_InYard_HLXU ;
+        prov:hadRole ex:Role_PredecessorState ;
+        prov:atTime  "2026-04-12T14:42:00Z"^^xsd:dateTime ;
+    ] .
+
+# Carrier-roles for qualified usage (PROV-O §5.7)
+ex:Role_PredecessorState  a prov:Role ;
+    rdfs:label "Predecessor-state carrier role"@en ;
+    rdfs:comment "The carrier entity is the immediately-prior State manifestation that the dependent activity reads to schedule itself."@en .
+
+ex:Role_GroupageInput     a prov:Role ;
+    rdfs:label "Groupage-input carrier role"@en ;
+    rdfs:comment "The carrier entity is the consolidated cargo lot that the deconsolidation activity opens."@en .
+
+# Agents
+
+ex:Agent_HHLA_CraneOp_K12   a prov:Agent ;
+    rdfs:label "HHLA Crane Operator K12"@en .
+ex:Agent_HHLA_GateController a prov:Agent ;
+    rdfs:label "HHLA Gate Controller"@en .
+
+# ─────────────────────────────────────────────────────────────
+#  Evidence (SOSA)
+# ─────────────────────────────────────────────────────────────
+
+ex:Obs_AIS_Alina_Berth     a mar:Observation_AIS ;
+    sosa:resultTime         "2026-04-12T07:58:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime     "2026-04-12T07:58:00Z"^^xsd:dateTime ;
+    sosa:hasFeatureOfInterest ex:M_OnBerth_Alina ;
+    sosa:madeBySensor        ex:Sensor_AIS_HamburgVTS .
+
+ex:Obs_GateRead_HLXU       a mar:Observation_GateRead ;
+    sosa:resultTime         "2026-04-12T14:42:30Z"^^xsd:dateTime ;
+    sosa:phenomenonTime     "2026-04-12T14:42:30Z"^^xsd:dateTime ;
+    sosa:hasFeatureOfInterest ex:M_GateOut_HLXU ;
+    sosa:madeBySensor        ex:Sensor_OCR_GateSouth .
+
+ex:Obs_Disch_HLXU          a mar:Observation_GateRead ;
+    sosa:resultTime         "2026-04-12T08:21:00Z"^^xsd:dateTime ;
+    sosa:phenomenonTime     "2026-04-12T08:21:00Z"^^xsd:dateTime ;
+    sosa:hasFeatureOfInterest ex:M_Discharged_HLXU .
+
+ex:Sensor_AIS_HamburgVTS    a sosa:Sensor ;
+    rdfs:label "Hamburg VTS AIS receiver"@en .
+ex:Sensor_OCR_GateSouth     a sosa:Sensor ;
+    rdfs:label "Gate South OCR camera"@en .
+
+# ─────────────────────────────────────────────────────────────
+#  Manifestations (State, with bridges populated per the paper
+#  pattern: manifestationOf [A2], stateWasGeneratedBy [A5],
+#  evidencedBy [A3])
+# ─────────────────────────────────────────────────────────────
+
+ex:M_OnBerth_Alina  a mar:OnVessel ;
+    dmfo:manifestationOf      ex:VSL_ALINA ;
+    dmfo:manifestationTimestamp "2026-04-12T07:58:00Z"^^xsd:dateTimeStamp .
+
+ex:M_OnVessel_HLXU  a mar:OnVessel ;
+    dmfo:manifestationOf      ex:CONT_HLXU3456789 ;
+    dmfo:manifestationTimestamp "2026-04-12T07:30:00Z"^^xsd:dateTimeStamp .
+
+ex:M_Discharged_HLXU  a mar:Discharged ;
+    dmfo:manifestationOf      ex:CONT_HLXU3456789 ;
+    dmfo:stateWasGeneratedBy  ex:Disch_77 ;
+    dmfo:evidencedBy          ex:Obs_Disch_HLXU ;
+    dmfo:manifestationTimestamp "2026-04-12T08:21:00Z"^^xsd:dateTimeStamp .
+
+ex:M_InYard_HLXU    a mar:InYard ;
+    dmfo:manifestationOf      ex:CONT_HLXU3456789 ;
+    dmfo:stateWasGeneratedBy  ex:CraneTrf_77 ;
+    dmfo:manifestationTimestamp "2026-04-12T08:25:00Z"^^xsd:dateTimeStamp .
+
+ex:M_GateOut_HLXU   a mar:GateOut ;
+    dmfo:manifestationOf      ex:CONT_HLXU3456789 ;
+    dmfo:stateWasGeneratedBy  ex:GateOut_99 ;
+    dmfo:evidencedBy          ex:Obs_GateRead_HLXU ;
+    dmfo:manifestationTimestamp "2026-04-12T14:42:30Z"^^xsd:dateTimeStamp .
+
+# Second container (covers MSKU7654321) — minimum dimensional coverage
+ex:M_InYard_MSKU    a mar:InYard ;
+    dmfo:manifestationOf      ex:CONT_MSKU7654321 ;
+    dmfo:manifestationTimestamp "2026-04-12T08:25:00Z"^^xsd:dateTimeStamp .
+
+# ─────────────────────────────────────────────────────────────
+#  LCL deconsolidation scenario (identity-derivation in maritime)
+#  ────────────────────────────────────────────────────────────
+#  Container HLXU3456789 carries a consolidated LCL groupage cargo
+#  identified by Master Bill of Lading BL-2026-4711. After arrival
+#  at CFS, the consolidated cargo is split into three successor
+#  cargo lots (one per house BL / onward consignee). The
+#  consolidated lot's identity ceases at deconsolidation; the
+#  successor lots carry it forward separately. This is the
+#  canonical maritime split scenario per UN/CEFACT MMT and IMO
+#  FAL.5/Circ.42 §3.5.
+# ─────────────────────────────────────────────────────────────
+
+ex:CFS_CTA  a mar:CFS ;
+    rdfs:label "Container Freight Station — CTA"@en ;
+    geo:sfWithin ex:Yard_CTA .
+
+ex:Agent_HHLA_CFS_Operator  a prov:Agent ;
+    rdfs:label "HHLA CFS Operator"@en .
+
+# Source: consolidated cargo lot, marked as a split source.
+ex:CargoLot_BL_2026_4711  a mar:CargoLot , dmfo:SplitSourceIdentity ;
+    dmfo:hasIdentifier        "BL-2026-4711" ;
+    dmfo:identifierScheme     "urn:un:cefact:bl"^^xsd:anyURI ;
+    rdfs:label "Master BL 2026-4711 (consolidated cargo on HLXU3456789)"@en .
+
+# CFS deconsolidation activity (the splitting transformation τ).
+ex:Decon_τ_HLXU  a mar:DeconsolidationActivity ;
+    prov:startedAtTime "2026-04-12T15:30:00Z"^^xsd:dateTime ;
+    prov:endedAtTime   "2026-04-12T16:45:00Z"^^xsd:dateTime ;
+    prov:wasInformedBy ex:GateOut_99 ;
+    prov:wasAssociatedWith ex:Agent_HHLA_CFS_Operator ;
+    prov:qualifiedUsage [
+        a prov:Usage ;
+        prov:entity  ex:M_GateOut_HLXU ;
+        prov:hadRole ex:Role_GroupageInput ;
+        prov:atTime  "2026-04-12T15:30:00Z"^^xsd:dateTime ;
+    ] .
+
+# Three successor cargo lots, each derived from BL-2026-4711.
+ex:CargoSubLot_BL_4711_a  a mar:CargoLot ;
+    dmfo:hasIdentifier        "HBL-2026-4711-A" ;
+    dmfo:identifierScheme     "urn:un:cefact:hbl"^^xsd:anyURI ;
+    prov:wasDerivedFrom       ex:CargoLot_BL_2026_4711 ;
+    prov:wasGeneratedBy       ex:Decon_τ_HLXU ;
+    rdfs:label "House BL 2026-4711-A"@en .
+
+ex:CargoSubLot_BL_4711_b  a mar:CargoLot ;
+    dmfo:hasIdentifier        "HBL-2026-4711-B" ;
+    dmfo:identifierScheme     "urn:un:cefact:hbl"^^xsd:anyURI ;
+    prov:wasDerivedFrom       ex:CargoLot_BL_2026_4711 ;
+    prov:wasGeneratedBy       ex:Decon_τ_HLXU ;
+    rdfs:label "House BL 2026-4711-B"@en .
+
+ex:CargoSubLot_BL_4711_c  a mar:CargoLot ;
+    dmfo:hasIdentifier        "HBL-2026-4711-C" ;
+    dmfo:identifierScheme     "urn:un:cefact:hbl"^^xsd:anyURI ;
+    prov:wasDerivedFrom       ex:CargoLot_BL_2026_4711 ;
+    prov:wasGeneratedBy       ex:Decon_τ_HLXU ;
+    rdfs:label "House BL 2026-4711-C"@en .
+
+# State manifestations on the successor lots (post-deconsolidation).
+ex:M_Distributed_4711_a  a mar:Distributed ;
+    dmfo:manifestationOf      ex:CargoSubLot_BL_4711_a ;
+    dmfo:stateWasGeneratedBy  ex:Decon_τ_HLXU ;
+    dmfo:manifestationTimestamp "2026-04-12T16:45:00Z"^^xsd:dateTimeStamp .
+
+ex:M_Distributed_4711_b  a mar:Distributed ;
+    dmfo:manifestationOf      ex:CargoSubLot_BL_4711_b ;
+    dmfo:stateWasGeneratedBy  ex:Decon_τ_HLXU ;
+    dmfo:manifestationTimestamp "2026-04-12T16:45:00Z"^^xsd:dateTimeStamp .
+
+ex:M_Distributed_4711_c  a mar:Distributed ;
+    dmfo:manifestationOf      ex:CargoSubLot_BL_4711_c ;
+    dmfo:stateWasGeneratedBy  ex:Decon_τ_HLXU ;
+    dmfo:manifestationTimestamp "2026-04-12T16:45:00Z"^^xsd:dateTimeStamp .
+
+# ─────────────────────────────────────────────────────────────
+#  Situations (Context, A4 + A6)
+# ─────────────────────────────────────────────────────────────
+
+ex:Situation_CustodyHHLA_HLXU  a mar:CustodyTransferSituation ;
+    dul:includesObject  ex:M_InYard_HLXU ;
+    dul:includesObject  ex:M_Discharged_HLXU ;
+    dmfo:governedBy     ex:Regime_ISPS ;
+    dmfo:inZone         ex:ISPSZone_CTA ;
+    rdfs:comment "Custody transfer of HLXU3456789 from vessel to terminal yard, governed by ISPS."@en .
+
+ex:Situation_Customs_HLXU      a mar:CustomsControlSituation ;
+    dul:includesObject  ex:M_GateOut_HLXU ;
+    dmfo:governedBy     ex:Regime_EU_UCC ;
+    dmfo:inZone         ex:Gate_CTA_South ;
+    rdfs:comment "Customs control situation under the EU UCC."@en .
+
+# Deliberate governance gap (ACQ-IV-04, Paper §4.3 negative cases):
+# a generic dul:Situation that includes a manifestation but declares no
+# regime. Modelled as plain dul:Situation rather than mar:CustodyTransferSituation
+# so SHACL's profile-level M-02 (which targets the custody class) does
+# not flag it; the gap is detected by the absence ACQ at the SPARQL level.
+ex:Situation_PendingHandover_MSKU  a dul:Situation ;
+    dul:includesObject  ex:M_InYard_MSKU ;
+    dmfo:inZone         ex:Yard_CTA ;
+    rdfs:comment "Pending-handover situation with no declared regime — used by ACQ-IV-04 absence detection."@en .

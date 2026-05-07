@@ -1,0 +1,21 @@
+ACQ,class,DMFO_status,DMFO_rows,B2CCO_status,B2CCO_rows,classification,diagnosis_adr
+ACQ-I-01,I,✓,4,✓,60,b,ADR-001
+ACQ-I-02,I,✓,10,✓,5,b,ADR-001+003a
+ACQ-II-01,II,✓,45,✓,20,b,ADR-001
+ACQ-II-02,II,✓,27,✓,33,a,ADR-002
+ACQ-II-03,II,✓,3,✓,2,a,ADR-003a (SOSA co-import)
+ACQ-II-04,II,✓,9,✓,9,b,ADR-005
+ACQ-II-05,II,✓,3,✓,3,b,ADR-004
+ACQ-II-06,II,✓,3,✓,2,a,ADR-003a (SOSA bitemporal annotations)
+ACQ-III-01,III,✓,3,✓,4,b,ADR-001+002
+ACQ-III-02,III,✓,3,◑,0,b/c,ADR-004
+ACQ-III-03,III,✓,1,✓,1,a,ADR-003a (SOSA sensor link)
+ACQ-III-04,III,✓,2,✗,0,d,ADR-002 (no PROV-O qualified usage / hadRole in CCO)
+ACQ-III-05,III,✓,2,✓,4,b,ADR-006 (act-mediated)
+ACQ-III-06,III,✓,3,✓,3,b,ADR-004+005
+ACQ-III-07,III,✓,2,✓,4,b,ADR-002+005
+ACQ-III-08,III,✓,8,✓,14,b,ADR-006 (transitive Act-chain)
+ACQ-IV-01,IV,✓,3,✓,3,a,ADR-003a
+ACQ-IV-02,IV,✓,1,✓,1,a,ADR-002
+ACQ-IV-03,IV,✓,4,◑,0,c,ADR-001 (scheme shift)
+ACQ-IV-04,IV,✓,1,✓,5,b,ADR-004

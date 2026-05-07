@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  validate:
+    name: Validate KB and run ACQ catalog
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install rdflib pyshacl owlrl owlready2
+      - name: Validate ontology + profile syntax
+        run: python validation/scripts/validate_kb.py
+      - name: Conformance check (maritime)
+        run: python validation/scripts/conformance_validator.py profiles/maritime
+      - name: Conformance check (food)
+        run: python validation/scripts/conformance_validator.py profiles/food
+      - name: Locality classification
+        run: python validation/scripts/locality_check.py
+      - name: SHACL — maritime
+        run: |
+          pyshacl -s shapes/dmfo-core-shapes.ttl \
+                  -s shapes/identity-deriv-shapes.ttl \
+                  -s profiles/maritime/mar-shapes.ttl \
+                  -e ontology/dmfo-full.ttl \
+                  -d profiles/maritime/mar-abox.ttl \
+                  -f human
+      - name: SHACL — food
+        run: |
+          pyshacl -s shapes/dmfo-core-shapes.ttl \
+                  -s shapes/identity-deriv-shapes.ttl \
+                  -s profiles/food/food-shapes.ttl \
+                  -e ontology/dmfo-full.ttl \
+                  -d profiles/food/food-abox.ttl \
+                  -f human
+      - name: ACQ catalog + B1 ablation
+        run: python validation/scripts/run_all_acqs.py --all
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dmfo-results
+          path: validation/results/

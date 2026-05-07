@@ -1,0 +1,19 @@
+# ACQ-II-06  Observation completeness for ISO 8000-61 (Class II)
+# Source: ISO 8000-61 (data quality), SOSA/SSN
+# Bridges required: A3 (evidencedBy)
+# Question: For each Observation that grounds a state assertion, are
+#           phenomenonTime, resultTime, and sensor all present?
+
+PREFIX dmfo: <https://w3id.org/dmfo#>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+
+SELECT ?observation
+       (BOUND(?pt) AS ?hasPhenomenonTime)
+       (BOUND(?rt) AS ?hasResultTime)
+       (BOUND(?sn) AS ?hasSensor)
+WHERE {
+  ?manifestation dmfo:evidencedBy ?observation .
+  OPTIONAL { ?observation sosa:phenomenonTime ?pt . }
+  OPTIONAL { ?observation sosa:resultTime     ?rt . }
+  OPTIONAL { ?observation sosa:madeBySensor   ?sn . }
+}

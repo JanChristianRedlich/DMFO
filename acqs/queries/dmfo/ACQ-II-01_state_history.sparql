@@ -1,0 +1,14 @@
+# ACQ-II-01  State history (Class II: single-bridge traversal)
+# Source: ISO 22005 (one-up/one-down traceability), GS1 EPCIS 2.0
+# Bridges required: A2 (manifestationOf)
+# Question: Retrieve the time-ordered state history of a given TVE.
+
+PREFIX dmfo: <https://w3id.org/dmfo#>
+
+SELECT ?tve ?manifestation ?stateClass ?ts
+WHERE {
+  ?manifestation dmfo:manifestationOf      ?tve ;
+                 a                          ?stateClass ;
+                 dmfo:manifestationTimestamp ?ts .
+}
+ORDER BY ?tve ?ts

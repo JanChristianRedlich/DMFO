@@ -1,0 +1,18 @@
+# A1 — Manifestation joint typing
+# Looks for an rdfs:subClassOf statement from dmfo:Manifestation to a
+# class whose owl:intersectionOf contains prov:Entity, dul:Event and
+# sosa:FeatureOfInterest. Required by Paper Table 1 row A1.
+PREFIX dmfo: <https://w3id.org/dmfo#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX dul:  <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+
+ASK {
+  dmfo:Manifestation rdfs:subClassOf ?inter .
+  ?inter owl:intersectionOf ?list .
+  ?list rdf:rest*/rdf:first prov:Entity .
+  ?list rdf:rest*/rdf:first dul:Event .
+  ?list rdf:rest*/rdf:first sosa:FeatureOfInterest .
+}

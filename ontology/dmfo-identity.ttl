@@ -1,0 +1,61 @@
+# =============================================================
+# DMFO Module: dmfo-identity (O_Id)
+#
+# Anchor: dmfo:TimeVaryingEntity (TVE)
+#
+# An identity-stable entity with time-varying manifestations.
+# Carries invariant datatype properties only; all dimensional
+# state reaches the TVE through bridges (manifestationOf etc.).
+#
+# Reference: Paper §3.1 (Identity slot), Welty/Fikes 2006 [3].
+# =============================================================
+
+@prefix dmfo:    <https://w3id.org/dmfo#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+
+<https://w3id.org/dmfo/identity>
+    a owl:Ontology ;
+    owl:versionIRI <https://w3id.org/dmfo/identity/1.0.0> ;
+    rdfs:label "DMFO Identity Module"@en ;
+    rdfs:comment "Anchor class dmfo:TimeVaryingEntity for the Identity slot."@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> .
+
+# ── Anchor class ──────────────────────────────────────────────
+
+dmfo:TimeVaryingEntity
+    a owl:Class ;
+    rdfs:label "Time-Varying Entity"@en , "Zeitvariable Entität"@de ;
+    rdfs:isDefinedBy <https://w3id.org/dmfo> ;
+    rdfs:comment """A discrete entity that maintains numerical identity invariantly while
+its dimensional state varies across time and observation contexts.
+Domain profiles populate this slot by declaring sortal classes
+(e.g. mar:Container, food:Batch) as rdfs:subClassOf this anchor.
+Carries invariant datatype properties only; all other slots reach
+the TVE through bridges (Paper §3.1)."""@en ;
+    skos:scopeNote "Mandatory slot. Anchor is sortal-relative (Guarino & Welty 2000)."@en .
+
+# ── Invariant datatype properties on TVE ──────────────────────
+# (Datatype properties are always top-local; they do not affect
+#  the locality classification of the bridge modules.)
+
+dmfo:hasIdentifier
+    a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "has identifier"@en ;
+    rdfs:isDefinedBy <https://w3id.org/dmfo> ;
+    rdfs:domain dmfo:TimeVaryingEntity ;
+    rdfs:range  xsd:string ;
+    rdfs:subPropertyOf dcterms:identifier ;
+    rdfs:comment "Stable, scheme-qualified identifier for the TVE (e.g. ISO 6346 BIC code, GS1 GTIN+lot)."@en .
+
+dmfo:identifierScheme
+    a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "identifier scheme"@en ;
+    rdfs:isDefinedBy <https://w3id.org/dmfo> ;
+    rdfs:domain dmfo:TimeVaryingEntity ;
+    rdfs:range  xsd:anyURI ;
+    rdfs:comment "URI of the identifier scheme (e.g. urn:iso:std:iso:6346 for container BIC, urn:epc:id:sgtin for GS1)."@en .

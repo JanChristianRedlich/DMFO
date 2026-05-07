@@ -1,0 +1,20 @@
+# ACQ-III-03 (B2-CCO strict native — no SOSA) — State → evidence → sensor
+# Classification: (d) NOT MEANINGFULLY TRANSLATABLE.
+# Diagnosis: ADR-003b. CCO has no native concept of "sensor" — the
+# closest analogue is the agent of a measurement act, but agency is
+# already exercised by ACQ-III-01 and is not an evidential commitment.
+# The DMFO question "which observations + which sensors ground each
+# state assertion?" cannot be reframed onto CCO without inventing
+# a fresh sensor-modelling commitment, which Faithful-Translation-Rule
+# F3 forbids.
+#
+# Query left as a documented absence; expected zero rows.
+
+PREFIX cco: <https://www.commoncoreontologies.org/>
+
+SELECT ?tve ?quality ?measurement ?sensor
+WHERE {
+  # Sensor is not a CCO commitment; the query is intentionally
+  # empty under the strict CCO-native variant.
+  FILTER (false)
+}

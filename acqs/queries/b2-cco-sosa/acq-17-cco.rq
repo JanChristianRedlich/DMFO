@@ -1,0 +1,11 @@
+# ACQ-IV-01 (B2-CCO, variant a) — Evidence gap
+# Classification: (a) — directly translatable as FoI absence.
+
+PREFIX bfo:  <http://purl.obolibrary.org/obo/>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+
+SELECT ?quality ?bearer
+WHERE {
+  ?quality bfo:BFO_0000197 ?bearer .          # inheres in
+  FILTER NOT EXISTS { ?o sosa:hasFeatureOfInterest ?quality }
+}

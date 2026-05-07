@@ -1,0 +1,21 @@
+# ACQ-I-01 (B2-CCO) — Identity persistence
+# Faithful-Translation-Rule: F1, F2, F3, F4, F5 — compliant
+# Classification: (b) translatable with modelling rework
+#   - DMFO uses dmfo:hasIdentifier datatype property on TVE.
+#   - B2-CCO uses cco:designates: ICE → Object. The "identifier"
+#     value lives on the ICE (rdfs:label as the literal string,
+#     classification by ICE subclass).
+
+PREFIX cco:  <https://www.commoncoreontologies.org/>
+PREFIX bfo:  <http://purl.obolibrary.org/obo/>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?tve ?identifierLiteral ?icClass ?sortal
+WHERE {
+  ?ice cco:ont00001916 ?tve .                # designates
+  ?ice a ?icClass .
+  ?ice rdfs:label ?identifierLiteral .
+  ?tve a ?sortal .
+}
+ORDER BY ?icClass ?identifierLiteral

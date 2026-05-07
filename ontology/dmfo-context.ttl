@@ -1,0 +1,52 @@
+# =============================================================
+# DMFO Module: dmfo-context (O_Co) + bridge O_bridge(Co_internal)
+#
+# Anchor: dul:Situation / dul:Description (imported from DUL/DnS)
+# Bridge: dmfo:governedBy (Context-internal, Situation ↔ Description)
+#
+# Alignment axiom contributed by this module:
+#   (A4) Domain/Range(dmfo:governedBy)
+#                       = dul:Situation / dul:Description
+#
+# A4 formalises the Situation/Description coupling of DnS as a
+# typed normative-framing bridge. The dul:Situation/Description
+# pair are non-nominal classes; nominals from DnS regime catalogs
+# are confined to O_Co and not combined with inverse-role
+# cardinality restrictions in the same module.
+#
+# Reference: Paper §3.1 (Context), §3.2 proof sketch (iii),
+#            Gangemi & Mika 2003 [17].
+# =============================================================
+
+@prefix dmfo:    <https://w3id.org/dmfo#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix dul:     <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+
+<https://w3id.org/dmfo/context>
+    a owl:Ontology ;
+    owl:versionIRI <https://w3id.org/dmfo/context/1.0.0> ;
+    rdfs:label "DMFO Context Module"@en ;
+    rdfs:comment "Bridge dmfo:governedBy, alignment axiom (A4)."@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    owl:imports <https://w3id.org/dmfo/state> ,
+                <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl> .
+
+# ── Bridge: Context — Normative Framing (A4) ──────────────────
+
+dmfo:governedBy
+    a owl:ObjectProperty ;
+    rdfs:label "governed by"@en ;
+    rdfs:isDefinedBy <https://w3id.org/dmfo> ;
+    rdfs:domain dul:Situation ;
+    rdfs:range  dul:Description ;
+    rdfs:comment """(A4) Couples a contextual Situation to the Description (regime,
+obligation set, regulatory framework) under which it constitutes a
+distinct institutional act. The same event constitutes distinct
+institutional acts under distinct regimes; multi-regime framing is
+not derivable from physical description alone."""@en ;
+    skos:closeMatch dul:satisfies .

@@ -1,0 +1,12 @@
+# ACQ-II-05 (B2-CCO) — Situation → governing regime
+# Classification: (b) — direction reversed (regulation prescribes act).
+
+PREFIX cco:  <https://www.commoncoreontologies.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?act ?regime ?regimeLabel
+WHERE {
+  ?regime cco:ont00001942 ?act .              # prescribes
+  ?act a cco:ont00000005 .                    # cco:Act
+  OPTIONAL { ?regime rdfs:label ?regimeLabel }
+}
