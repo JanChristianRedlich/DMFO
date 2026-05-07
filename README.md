@@ -44,7 +44,7 @@ contribution is the alignment layer, not new vocabulary.
 | `dmfo:evidencedBy` | State ↔ Evidence | A3 (⊑ inverse `sosa:hasFeatureOfInterest`) |
 | `dmfo:governedBy` | Context-internal | A4 (`dul:Situation` × `dul:Description`) |
 | `dmfo:stateWasGeneratedBy` | State ↔ Activity | A5 (⊑ `prov:wasGeneratedBy`) |
-| `dmfo:inZone` | Context ↔ Location | A6 (⊑ `geo:sfWithin`) |
+| `dmfo:situatedAt` | Context ↔ Location | A6 (⊑ `geo:sfWithin`) |
 
 ---
 

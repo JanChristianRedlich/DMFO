@@ -39,7 +39,7 @@ SHAPE_FILES = sorted((REPO_ROOT / "shapes").glob("*.ttl"))
 OPTIONAL_BRIDGES = [
     DMFO.evidencedBy,
     DMFO.governedBy,
-    DMFO.inZone,
+    DMFO.situatedAt,
     DMFO.stateWasGeneratedBy,
 ]
 

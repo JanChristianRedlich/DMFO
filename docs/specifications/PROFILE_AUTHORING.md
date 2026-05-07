@@ -97,7 +97,7 @@ profile is conformant.
 The 20 ACQs in [`acqs/queries/dmfo/`](../../acqs/queries/dmfo/) are
 written against the DMFO bridges (`dmfo:manifestationOf`,
 `dmfo:stateWasGeneratedBy`, `dmfo:evidencedBy`, `dmfo:governedBy`,
-`dmfo:inZone`) and the imported vocabularies. They run unmodified
+`dmfo:situatedAt`) and the imported vocabularies. They run unmodified
 against any conformant profile.
 
 ```bash

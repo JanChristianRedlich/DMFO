@@ -134,12 +134,12 @@ ex:M_GateOut_{n}  a mar:GateOut ;
 ex:Sit_Custody_{n}  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_{n} , ex:M_Discharged_{n} ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_{n}  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_{n} ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 """
@@ -208,7 +208,7 @@ ex:CONT_GAP_scheme  a mar:Container ;
 
 ex:Sit_GAP_governance  a dul:Situation ;
     dul:includesObject ex:M_GAP_NoEvidence ;
-    dmfo:inZone ex:Yard_CTA .
+    dmfo:situatedAt ex:Yard_CTA .
 """
 
 

@@ -78,12 +78,12 @@ dmfo:GovernedByShape
 
 dmfo:InZoneShape
     a sh:NodeShape ;
-    sh:targetSubjectsOf dmfo:inZone ;
+    sh:targetSubjectsOf dmfo:situatedAt ;
     sh:class dul:Situation ;
     sh:property [
-        sh:path dmfo:inZone ;
+        sh:path dmfo:situatedAt ;
         sh:class geo:Feature ;
-        sh:message "(A6) dmfo:inZone: domain dul:Situation, range geo:Feature."@en ;
+        sh:message "(A6) dmfo:situatedAt: domain dul:Situation, range geo:Feature."@en ;
     ] .
 
 # ─────────────────────────────────────────────────────────────

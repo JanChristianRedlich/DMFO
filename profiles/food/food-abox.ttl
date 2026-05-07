@@ -192,18 +192,18 @@ ex:Situation_Compliance_FINAL  a food:RegulatorySituation ;
     dul:includesObject  ex:M_InColdStorage_FINAL ;
     dmfo:governedBy     ex:Regime_EU_178_2002 ;
     dmfo:governedBy     ex:Regime_FDA_FSMA_204 ;
-    dmfo:inZone         ex:ColdZone_Bonn_C2 ;
+    dmfo:situatedAt         ex:ColdZone_Bonn_C2 ;
     rdfs:comment "Compliance situation for the merged final product under both EU and FDA regimes."@en .
 
 ex:Situation_Recall_PROC_B    a food:RecallSituation ;
     dul:includesObject  ex:M_InColdStorage_PROC_B ;
     dmfo:governedBy     ex:Regime_FDA_FSMA_204 ;
-    dmfo:inZone         ex:Facility_Bonn ;
+    dmfo:situatedAt         ex:Facility_Bonn ;
     rdfs:comment "Recall situation triggered by missing temperature observations on PROC_B."@en .
 
 # Deliberate governance gap (ACQ-IV-04): a regulatory situation whose
 # governing regime is not yet declared (regime adjudication pending).
 ex:Situation_PendingRegime_OrphanReceipt  a food:RegulatorySituation ;
     dul:includesObject  ex:M_InColdStorage_OrphanReceipt ;
-    dmfo:inZone         ex:Facility_Bonn ;
+    dmfo:situatedAt         ex:Facility_Bonn ;
     rdfs:comment "Regulatory situation with no declared regime — used by ACQ-IV-04 absence detection."@en .

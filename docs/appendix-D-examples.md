@@ -41,7 +41,7 @@ ex:M_InYard       a dmfo:Manifestation, prov:Entity, dul:Event,
 ex:Sit_001        a dul:Situation ;
                   dul:hasSetting             ex:M_InYard ;
                   dmfo:governedBy            ex:Regime_ISPS ;         # A4
-                  dmfo:inZone                ex:Zone_Yard1 .          # A6
+                  dmfo:situatedAt                ex:Zone_Yard1 .          # A6
 
 ex:Activity_Arrival a prov:Activity .
 ex:Observation_AIS  a sosa:Observation ;
@@ -108,7 +108,7 @@ ex:M_InYard_002       a mar:InYard ;
 ex:Sit_002            a mar:CustodyTransferSituation ;
                       dul:hasSetting   ex:M_InYard_002 ;
                       dmfo:governedBy  ex:ISPS_Regime_HamburgPort ;
-                      dmfo:inZone      ex:ISPS_Zone_HamburgYard1 .
+                      dmfo:situatedAt      ex:ISPS_Zone_HamburgYard1 .
 ```
 
 This fragment exercises ACQ-II-01 through ACQ-III-07 once.
@@ -251,7 +251,7 @@ removed (B1-style ablation, restricted to that single component).
 | **A3** `dmfo:evidencedBy`                  |   |   |   |   | ✓ |   |   | ✓ |   |   | ✓ |   |   |   |   |   | ✓ |   |   |   |
 | **A4** `dmfo:governedBy`                   |   |   |   |   |   |   | ✓ |   |   | ✓ |   |   |   | ✓ |   |   |   |   |   | ✓ |
 | **A5** `dmfo:stateWasGeneratedBy`          |   |   |   | ✓ |   |   |   |   | ✓ |   |   | ✓ |   |   | ✓ | ✓ |   | ✓ |   |   |
-| **A6** `dmfo:inZone`                       |   |   |   |   |   | ✓ |   |   |   |   |   |   |   | ✓ | ✓ |   |   |   |   |   |
+| **A6** `dmfo:situatedAt`                       |   |   |   |   |   | ✓ |   |   |   |   |   |   |   | ✓ | ✓ |   |   |   |   |   |
 | Identity-derivation module                  |   |   |   |   |   |   |   |   |   |   |   |   | ✓ |   |   | ✓ |   |   |   |   |
 | `dmfo:hasIdentifier` (datatype)             | ✓ | ✓ |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | ✓ |   |
 

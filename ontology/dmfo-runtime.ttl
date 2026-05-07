@@ -41,7 +41,7 @@ dmfo:identifierScheme a owl:DatatypeProperty,
     rdfs:domain dmfo:TimeVaryingEntity ;
     rdfs:range xsd:anyURI .
 
-dmfo:inZone a owl:ObjectProperty ;
+dmfo:situatedAt a owl:ObjectProperty ;
     rdfs:domain dul:Situation ;
     rdfs:range geo:Feature ;
     rdfs:subPropertyOf geo:sfWithin .

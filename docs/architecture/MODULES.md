@@ -12,7 +12,7 @@ Per-module breakdown of the DMFO 2.0 axiom set. Each module file in
 | O_Ev + b(St,Ev) | [`ontology/dmfo-evidence.ttl`](../../ontology/dmfo-evidence.ttl) | O_St, SOSA | `dmfo:evidencedBy`, A3 | top-local |
 | O_Co + b(St,Co) | [`ontology/dmfo-context.ttl`](../../ontology/dmfo-context.ttl) | O_St, DUL/DnS | `dmfo:governedBy`, A4 | top-local |
 | O_Act + b(St,Act) | [`ontology/dmfo-activity.ttl`](../../ontology/dmfo-activity.ttl) | O_St, PROV-O | `dmfo:stateWasGeneratedBy`, A5 | top-local |
-| O_Lo + b(Co,Lo) | [`ontology/dmfo-location.ttl`](../../ontology/dmfo-location.ttl) | O_Co, GeoSPARQL | `dmfo:inZone`, A6 | top-local |
+| O_Lo + b(Co,Lo) | [`ontology/dmfo-location.ttl`](../../ontology/dmfo-location.ttl) | O_Co, GeoSPARQL | `dmfo:situatedAt`, A6 | top-local |
 | O_identity-deriv | [`ontology/dmfo-identity-deriv.ttl`](../../ontology/dmfo-identity-deriv.ttl) | O_Id, PROV-O | `dmfo:SplitSourceIdentity`, `dmfo:MergeSourceIdentity` | top-local |
 
 ---

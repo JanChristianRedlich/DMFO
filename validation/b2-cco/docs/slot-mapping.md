@@ -29,7 +29,7 @@ their domain/range to fresh subclasses (Faithful-Translation-Rule F3).
 | `dmfo:stateWasGeneratedBy` | A5 | `cco:has output` (the activity has the quality as an output) **or** `cco:has process part` for stage-of-process. | `https://www.commoncoreontologies.org/ont00001986` / `https://www.commoncoreontologies.org/ont00001777` | No subproperty of `prov:wasGeneratedBy` because PROV-O is not co-imported in baseline. |
 | `dmfo:evidencedBy` | A3 | (a) `sosa:hasFeatureOfInterest`-inverse if SOSA co-imported; (b) `cco:is about` (Measurement ICE about the Quality). | (a) `http://www.w3.org/ns/sosa/hasFeatureOfInterest`; (b) `https://www.commoncoreontologies.org/ont00001808` | ADR-003 variants. |
 | `dmfo:governedBy` | A4 | `cco:prescribes` (Process Regulation prescribes the Act). | `https://www.commoncoreontologies.org/ont00001942` | NB: prescribes goes from regulation to act, opposite direction of DMFO `governedBy`. SPARQL must reflect the inversion. |
-| `dmfo:inZone` | A6 | `bfo:located in` (BFO_0000171) — there is no GeoSPARQL `sfWithin` semantics. | `http://purl.obolibrary.org/obo/BFO_0000171` | Spatial-region containment is BFO-mereotopological, not GeoSPARQL-typed. |
+| `dmfo:situatedAt` | A6 | `bfo:located in` (BFO_0000171) — there is no GeoSPARQL `sfWithin` semantics. | `http://purl.obolibrary.org/obo/BFO_0000171` | Spatial-region containment is BFO-mereotopological, not GeoSPARQL-typed. |
 
 ## Domain classes (maritime)
 

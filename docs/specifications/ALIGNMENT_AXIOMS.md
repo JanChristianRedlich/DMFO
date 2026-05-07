@@ -166,7 +166,7 @@ commitment to the DMFO layer (Paper §3.2 "PROV contamination").
 **Manchester:**
 
 ```
-ObjectProperty: dmfo:inZone
+ObjectProperty: dmfo:situatedAt
   Domain: dul:Situation
   Range:  geo:Feature
   SubPropertyOf: geo:sfWithin
@@ -175,7 +175,7 @@ ObjectProperty: dmfo:inZone
 **Turtle** ([`ontology/dmfo-location.ttl`](../../ontology/dmfo-location.ttl)):
 
 ```turtle
-dmfo:inZone
+dmfo:situatedAt
     a owl:ObjectProperty ;
     rdfs:domain dul:Situation ;
     rdfs:range  geo:Feature ;

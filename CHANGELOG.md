@@ -19,7 +19,7 @@ First public release of the DMFO reproduction package.
 - **Four classes / five object properties** under the single `dmfo:`
   namespace (`TimeVaryingEntity`, `Manifestation`,
   `SplitSourceIdentity`, `MergeSourceIdentity`; `manifestationOf`,
-  `stateWasGeneratedBy`, `evidencedBy`, `governedBy`, `inZone`).
+  `stateWasGeneratedBy`, `evidencedBy`, `governedBy`, `situatedAt`).
 - **Two profiles**: `profiles/maritime/` (port-call sequence per IMO
   FAL.5/Circ.42) and `profiles/food/` (FDA FSMA-204 KDE/CTE
   traceability with split/merge identity derivation).

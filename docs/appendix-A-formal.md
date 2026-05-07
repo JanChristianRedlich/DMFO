@@ -75,7 +75,7 @@ dmfo:stateWasGeneratedBy
 ### A6 — Spatial-context bridge (`ontology/dmfo-location.ttl`)
 
 ```turtle
-dmfo:inZone
+dmfo:situatedAt
     a owl:ObjectProperty ;
     rdfs:subPropertyOf geo:sfWithin ;
     rdfs:domain dul:Situation ;

@@ -13,7 +13,7 @@ vocabularies. Following the camera-ready protocol it adds:
 3. SWRL-style domain inference rules connecting `sosa:Observation` to
    its target via `sosa:hasFeatureOfInterest` only (no inverse-typed A3
    bridge).
-4. **No** typed `inZone` bridge between `dul:Situation` and
+4. **No** typed `situatedAt` bridge between `dul:Situation` and
    `geo:Feature` (A6 absent).
 
 The B2 construction protocol and ABox annotations will be supplied with

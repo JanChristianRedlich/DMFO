@@ -104,12 +104,12 @@ ex:M_GateOut_1  a mar:GateOut ;
 ex:Sit_Custody_1  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_1 , ex:M_Discharged_1 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_1  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_1 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # Class IV gaps (ABox-size-independent)
@@ -132,4 +132,4 @@ ex:CONT_GAP_scheme  a mar:Container ;
 
 ex:Sit_GAP_governance  a dul:Situation ;
     dul:includesObject ex:M_GAP_NoEvidence ;
-    dmfo:inZone ex:Yard_CTA .
+    dmfo:situatedAt ex:Yard_CTA .

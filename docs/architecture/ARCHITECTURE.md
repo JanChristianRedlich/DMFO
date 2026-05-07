@@ -101,7 +101,7 @@ operator undecidability barrier of Wolter & Zakharyaschev (Paper §2,
 | A3 | `dmfo:evidencedBy ⊑ inverse(sosa:hasFeatureOfInterest)` | evidence bridge |
 | A4 | `Domain/Range(dmfo:governedBy) = dul:Situation × dul:Description` | normative framing |
 | A5 | `dmfo:stateWasGeneratedBy ⊑ prov:wasGeneratedBy`, typed `dmfo:Manifestation × prov:Activity` | state-activity sub-property |
-| A6 | `dmfo:inZone ⊑ geo:sfWithin`, typed `dul:Situation × geo:Feature` | spatial-context bridge |
+| A6 | `dmfo:situatedAt ⊑ geo:sfWithin`, typed `dul:Situation × geo:Feature` | spatial-context bridge |
 
 ### The data-of-opportunity constraint
 

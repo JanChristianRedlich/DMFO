@@ -8,7 +8,7 @@
 
 DMFO uses `geo:Feature` as the Location anchor and links a contextual
 situation to its institutional zone via
-`dmfo:inZone ⊑ geo:sfWithin` (A6). GeoSPARQL provides
+`dmfo:situatedAt ⊑ geo:sfWithin` (A6). GeoSPARQL provides
 `sfWithin`/`sfIntersects`/`sfTouches` mereotopological relations.
 
 CCO has `cco:Geospatial Region` (`ont00000472`) and
@@ -21,7 +21,7 @@ spatial-relation algebra**. BFO provides only `bfo:located in`
 
 - **Option A** — `bfo:Site` (BFO_0000029) for institutional zones,
   `bfo:located in` for the situation→zone relation. No GeoSPARQL
-  topological reasoning. No typed `inZone`-equivalent sub-property.
+  topological reasoning. No typed `situatedAt`-equivalent sub-property.
 - **Option B** — `cco:Geospatial Region` for purely geometric
   zones, `cco:occurs at` for activities. Loses the "institutional"
   semantics of the zone (a customs-controlled zone is

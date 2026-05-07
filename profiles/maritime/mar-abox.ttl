@@ -273,13 +273,13 @@ ex:Situation_CustodyHHLA_HLXU  a mar:CustodyTransferSituation ;
     dul:includesObject  ex:M_InYard_HLXU ;
     dul:includesObject  ex:M_Discharged_HLXU ;
     dmfo:governedBy     ex:Regime_ISPS ;
-    dmfo:inZone         ex:ISPSZone_CTA ;
+    dmfo:situatedAt         ex:ISPSZone_CTA ;
     rdfs:comment "Custody transfer of HLXU3456789 from vessel to terminal yard, governed by ISPS."@en .
 
 ex:Situation_Customs_HLXU      a mar:CustomsControlSituation ;
     dul:includesObject  ex:M_GateOut_HLXU ;
     dmfo:governedBy     ex:Regime_EU_UCC ;
-    dmfo:inZone         ex:Gate_CTA_South ;
+    dmfo:situatedAt         ex:Gate_CTA_South ;
     rdfs:comment "Customs control situation under the EU UCC."@en .
 
 # Deliberate governance gap (ACQ-IV-04, Paper §4.3 negative cases):
@@ -289,5 +289,5 @@ ex:Situation_Customs_HLXU      a mar:CustomsControlSituation ;
 # not flag it; the gap is detected by the absence ACQ at the SPARQL level.
 ex:Situation_PendingHandover_MSKU  a dul:Situation ;
     dul:includesObject  ex:M_InYard_MSKU ;
-    dmfo:inZone         ex:Yard_CTA ;
+    dmfo:situatedAt         ex:Yard_CTA ;
     rdfs:comment "Pending-handover situation with no declared regime — used by ACQ-IV-04 absence detection."@en .

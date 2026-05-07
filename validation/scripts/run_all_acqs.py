@@ -143,12 +143,12 @@ B1_STRIP_PATTERNS = [
     ("https://w3id.org/dmfo#stateWasGeneratedBy",
      "http://www.w3.org/2000/01/rdf-schema#range", None),
     # A6: subPropertyOf geo:sfWithin + domain/range
-    ("https://w3id.org/dmfo#inZone",
+    ("https://w3id.org/dmfo#situatedAt",
      "http://www.w3.org/2000/01/rdf-schema#subPropertyOf",
      "http://www.opengis.net/ont/geosparql#sfWithin"),
-    ("https://w3id.org/dmfo#inZone",
+    ("https://w3id.org/dmfo#situatedAt",
      "http://www.w3.org/2000/01/rdf-schema#domain", None),
-    ("https://w3id.org/dmfo#inZone",
+    ("https://w3id.org/dmfo#situatedAt",
      "http://www.w3.org/2000/01/rdf-schema#range", None),
 ]
 
@@ -251,7 +251,7 @@ def strip_a1_a6(graph: Graph) -> Graph:
         # (dmfo:bridge, replacement, swap_subject_object)
         (URIRef("https://w3id.org/dmfo#stateWasGeneratedBy"), prov_wasGenBy, False),
         (URIRef("https://w3id.org/dmfo#governedBy"),          dul_satisfies, False),
-        (URIRef("https://w3id.org/dmfo#inZone"),              geo_sfWithin,  False),
+        (URIRef("https://w3id.org/dmfo#situatedAt"),              geo_sfWithin,  False),
         (URIRef("https://w3id.org/dmfo#evidencedBy"),         sosa_hasFOI,   True),
     ]
     for dmfo_p, repl, swap in bridge_remaps:

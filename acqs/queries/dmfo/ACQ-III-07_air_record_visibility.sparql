@@ -15,6 +15,6 @@ WHERE {
   ?manifestation dmfo:manifestationOf     ?tve ;
                  dmfo:stateWasGeneratedBy ?activity .
   ?situation     dul:includesObject       ?manifestation ;
-                 dmfo:inZone              ?zone .
+                 dmfo:situatedAt              ?zone .
 }
 ORDER BY ?tve

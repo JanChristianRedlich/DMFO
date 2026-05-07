@@ -92,7 +92,7 @@ COLORS: dict[str, str] = {
     "bridge_state_identity": "#0984e3",   # A2 manifestationOf
     "bridge_state_activity": "#e17055",   # A5 stateWasGeneratedBy / prov:wasGeneratedBy
     "bridge_state_evidence": "#6c5ce7",   # A3 evidencedBy
-    "bridge_situation_zone": "#00b894",   # A6 inZone / geo:sfWithin
+    "bridge_situation_zone": "#00b894",   # A6 situatedAt / geo:sfWithin
     "bridge_situation_regime": "#fd79a8", # A4 governedBy
     "bridge_identity_deriv": "#d63031",   # SplitSourceIdentity / MergeSourceIdentity / wasDerivedFrom
     "core_dmfo": "#dfe6e9",
@@ -134,7 +134,7 @@ CATEGORY_LABELS_DE: dict[str, str] = {
     "bridge_state_identity": "Bridge A2: manifestationOf",
     "bridge_state_activity": "Bridge A5: stateWasGeneratedBy",
     "bridge_state_evidence": "Bridge A3: evidencedBy",
-    "bridge_situation_zone": "Bridge A6: inZone",
+    "bridge_situation_zone": "Bridge A6: situatedAt",
     "bridge_situation_regime": "Bridge A4: governedBy",
     "bridge_identity_deriv": "Identity-Derivation (Split/Merge)",
     "core_dmfo": "DMFO core",
@@ -152,7 +152,7 @@ PREDICATE_CATEGORY: dict[str, str] = {
     "https://w3id.org/dmfo#manifestationOf": "bridge_state_identity",
     "https://w3id.org/dmfo#stateWasGeneratedBy": "bridge_state_activity",
     "https://w3id.org/dmfo#evidencedBy": "bridge_state_evidence",
-    "https://w3id.org/dmfo#inZone": "bridge_situation_zone",
+    "https://w3id.org/dmfo#situatedAt": "bridge_situation_zone",
     "https://w3id.org/dmfo#governedBy": "bridge_situation_regime",
     "https://w3id.org/dmfo#manifestationTimestamp": "state_dim",
     "https://w3id.org/dmfo#hasIdentifier": "identity_dim",

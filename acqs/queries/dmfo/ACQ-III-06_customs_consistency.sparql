@@ -12,6 +12,6 @@ SELECT ?manifestation ?regime ?zone
 WHERE {
   ?situation    dul:includesObject ?manifestation ;
                 dmfo:governedBy    ?regime ;
-                dmfo:inZone        ?zone .
+                dmfo:situatedAt        ?zone .
 }
 ORDER BY ?manifestation

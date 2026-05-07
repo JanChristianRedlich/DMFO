@@ -2,10 +2,10 @@
 # DMFO Module: dmfo-location (O_Lo) + bridge O_bridge(Co, Lo)
 #
 # Anchor: geo:Feature (imported from GeoSPARQL)
-# Bridge: dmfo:inZone (Context ↔ Location)
+# Bridge: dmfo:situatedAt (Context ↔ Location)
 #
 # Alignment axiom contributed by this module:
-#   (A6) dmfo:inZone ⊑ geo:sfWithin , typed dul:Situation × geo:Feature
+#   (A6) dmfo:situatedAt ⊑ geo:sfWithin , typed dul:Situation × geo:Feature
 #
 # Institutional zone membership is constituted by decision, not
 # containment. A6 fixes the typed bridge from contextual situations
@@ -29,14 +29,14 @@
     a owl:Ontology ;
     owl:versionIRI <https://w3id.org/dmfo/location/1.0.0> ;
     rdfs:label "DMFO Location Module"@en ;
-    rdfs:comment "Bridge dmfo:inZone, alignment axiom (A6)."@en ;
+    rdfs:comment "Bridge dmfo:situatedAt, alignment axiom (A6)."@en ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     owl:imports <https://w3id.org/dmfo/context> ,
                 <http://www.opengis.net/ont/geosparql> .
 
 # ── Bridge: Context–Location (A6) ─────────────────────────────
 
-dmfo:inZone
+dmfo:situatedAt
     a owl:ObjectProperty ;
     rdfs:label "in zone"@en ;
     rdfs:isDefinedBy <https://w3id.org/dmfo> ;

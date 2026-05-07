@@ -87,7 +87,7 @@ ex:Situation_CustodyHHLA_HLXU  a mar:CustodyTransferSituation ;
     dul:includesObject  ex:M_InYard_HLXU ;
     dul:includesObject  ex:M_Discharged_HLXU ;
     dmfo:governedBy     ex:Regime_ISPS ;
-    dmfo:inZone         ex:ISPSZone_CTA .
+    dmfo:situatedAt         ex:ISPSZone_CTA .
 ```
 
 **B2-CCO** (ADR-004):

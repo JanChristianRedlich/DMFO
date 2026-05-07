@@ -104,12 +104,12 @@ ex:M_GateOut_1  a mar:GateOut ;
 ex:Sit_Custody_1  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_1 , ex:M_Discharged_1 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_1  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_1 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 2 (full port-call + LCL deconsolidation) ──
@@ -185,12 +185,12 @@ ex:M_GateOut_2  a mar:GateOut ;
 ex:Sit_Custody_2  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_2 , ex:M_Discharged_2 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_2  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_2 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 3 (full port-call + LCL deconsolidation) ──
@@ -266,12 +266,12 @@ ex:M_GateOut_3  a mar:GateOut ;
 ex:Sit_Custody_3  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_3 , ex:M_Discharged_3 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_3  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_3 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 4 (full port-call + LCL deconsolidation) ──
@@ -347,12 +347,12 @@ ex:M_GateOut_4  a mar:GateOut ;
 ex:Sit_Custody_4  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_4 , ex:M_Discharged_4 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_4  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_4 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 5 (full port-call + LCL deconsolidation) ──
@@ -428,12 +428,12 @@ ex:M_GateOut_5  a mar:GateOut ;
 ex:Sit_Custody_5  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_5 , ex:M_Discharged_5 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_5  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_5 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 ex:CargoLot_BL_5  a mar:CargoLot , dmfo:SplitSourceIdentity ;
@@ -548,12 +548,12 @@ ex:M_GateOut_6  a mar:GateOut ;
 ex:Sit_Custody_6  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_6 , ex:M_Discharged_6 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_6  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_6 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 7 (full port-call + LCL deconsolidation) ──
@@ -629,12 +629,12 @@ ex:M_GateOut_7  a mar:GateOut ;
 ex:Sit_Custody_7  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_7 , ex:M_Discharged_7 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_7  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_7 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 8 (full port-call + LCL deconsolidation) ──
@@ -710,12 +710,12 @@ ex:M_GateOut_8  a mar:GateOut ;
 ex:Sit_Custody_8  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_8 , ex:M_Discharged_8 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_8  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_8 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 9 (full port-call + LCL deconsolidation) ──
@@ -791,12 +791,12 @@ ex:M_GateOut_9  a mar:GateOut ;
 ex:Sit_Custody_9  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_9 , ex:M_Discharged_9 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_9  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_9 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 10 (full port-call + LCL deconsolidation) ──
@@ -872,12 +872,12 @@ ex:M_GateOut_10  a mar:GateOut ;
 ex:Sit_Custody_10  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_10 , ex:M_Discharged_10 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_10  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_10 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 ex:CargoLot_BL_10  a mar:CargoLot , dmfo:SplitSourceIdentity ;
@@ -992,12 +992,12 @@ ex:M_GateOut_11  a mar:GateOut ;
 ex:Sit_Custody_11  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_11 , ex:M_Discharged_11 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_11  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_11 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 12 (full port-call + LCL deconsolidation) ──
@@ -1073,12 +1073,12 @@ ex:M_GateOut_12  a mar:GateOut ;
 ex:Sit_Custody_12  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_12 , ex:M_Discharged_12 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_12  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_12 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 13 (full port-call + LCL deconsolidation) ──
@@ -1154,12 +1154,12 @@ ex:M_GateOut_13  a mar:GateOut ;
 ex:Sit_Custody_13  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_13 , ex:M_Discharged_13 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_13  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_13 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 14 (full port-call + LCL deconsolidation) ──
@@ -1235,12 +1235,12 @@ ex:M_GateOut_14  a mar:GateOut ;
 ex:Sit_Custody_14  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_14 , ex:M_Discharged_14 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_14  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_14 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 15 (full port-call + LCL deconsolidation) ──
@@ -1316,12 +1316,12 @@ ex:M_GateOut_15  a mar:GateOut ;
 ex:Sit_Custody_15  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_15 , ex:M_Discharged_15 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_15  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_15 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 ex:CargoLot_BL_15  a mar:CargoLot , dmfo:SplitSourceIdentity ;
@@ -1436,12 +1436,12 @@ ex:M_GateOut_16  a mar:GateOut ;
 ex:Sit_Custody_16  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_16 , ex:M_Discharged_16 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_16  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_16 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 17 (full port-call + LCL deconsolidation) ──
@@ -1517,12 +1517,12 @@ ex:M_GateOut_17  a mar:GateOut ;
 ex:Sit_Custody_17  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_17 , ex:M_Discharged_17 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_17  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_17 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 18 (full port-call + LCL deconsolidation) ──
@@ -1598,12 +1598,12 @@ ex:M_GateOut_18  a mar:GateOut ;
 ex:Sit_Custody_18  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_18 , ex:M_Discharged_18 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_18  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_18 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 19 (full port-call + LCL deconsolidation) ──
@@ -1679,12 +1679,12 @@ ex:M_GateOut_19  a mar:GateOut ;
 ex:Sit_Custody_19  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_19 , ex:M_Discharged_19 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_19  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_19 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 20 (full port-call + LCL deconsolidation) ──
@@ -1760,12 +1760,12 @@ ex:M_GateOut_20  a mar:GateOut ;
 ex:Sit_Custody_20  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_20 , ex:M_Discharged_20 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_20  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_20 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 ex:CargoLot_BL_20  a mar:CargoLot , dmfo:SplitSourceIdentity ;
@@ -1880,12 +1880,12 @@ ex:M_GateOut_21  a mar:GateOut ;
 ex:Sit_Custody_21  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_21 , ex:M_Discharged_21 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_21  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_21 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 22 (full port-call + LCL deconsolidation) ──
@@ -1961,12 +1961,12 @@ ex:M_GateOut_22  a mar:GateOut ;
 ex:Sit_Custody_22  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_22 , ex:M_Discharged_22 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_22  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_22 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 23 (full port-call + LCL deconsolidation) ──
@@ -2042,12 +2042,12 @@ ex:M_GateOut_23  a mar:GateOut ;
 ex:Sit_Custody_23  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_23 , ex:M_Discharged_23 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_23  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_23 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 24 (full port-call + LCL deconsolidation) ──
@@ -2123,12 +2123,12 @@ ex:M_GateOut_24  a mar:GateOut ;
 ex:Sit_Custody_24  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_24 , ex:M_Discharged_24 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_24  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_24 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 25 (full port-call + LCL deconsolidation) ──
@@ -2204,12 +2204,12 @@ ex:M_GateOut_25  a mar:GateOut ;
 ex:Sit_Custody_25  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_25 , ex:M_Discharged_25 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_25  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_25 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 ex:CargoLot_BL_25  a mar:CargoLot , dmfo:SplitSourceIdentity ;
@@ -2324,12 +2324,12 @@ ex:M_GateOut_26  a mar:GateOut ;
 ex:Sit_Custody_26  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_26 , ex:M_Discharged_26 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_26  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_26 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 27 (full port-call + LCL deconsolidation) ──
@@ -2405,12 +2405,12 @@ ex:M_GateOut_27  a mar:GateOut ;
 ex:Sit_Custody_27  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_27 , ex:M_Discharged_27 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_27  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_27 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 28 (full port-call + LCL deconsolidation) ──
@@ -2486,12 +2486,12 @@ ex:M_GateOut_28  a mar:GateOut ;
 ex:Sit_Custody_28  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_28 , ex:M_Discharged_28 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_28  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_28 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 29 (full port-call + LCL deconsolidation) ──
@@ -2567,12 +2567,12 @@ ex:M_GateOut_29  a mar:GateOut ;
 ex:Sit_Custody_29  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_29 , ex:M_Discharged_29 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_29  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_29 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 30 (full port-call + LCL deconsolidation) ──
@@ -2648,12 +2648,12 @@ ex:M_GateOut_30  a mar:GateOut ;
 ex:Sit_Custody_30  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_30 , ex:M_Discharged_30 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_30  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_30 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 ex:CargoLot_BL_30  a mar:CargoLot , dmfo:SplitSourceIdentity ;
@@ -2768,12 +2768,12 @@ ex:M_GateOut_31  a mar:GateOut ;
 ex:Sit_Custody_31  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_31 , ex:M_Discharged_31 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_31  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_31 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 32 (full port-call + LCL deconsolidation) ──
@@ -2849,12 +2849,12 @@ ex:M_GateOut_32  a mar:GateOut ;
 ex:Sit_Custody_32  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_32 , ex:M_Discharged_32 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_32  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_32 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 33 (full port-call + LCL deconsolidation) ──
@@ -2930,12 +2930,12 @@ ex:M_GateOut_33  a mar:GateOut ;
 ex:Sit_Custody_33  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_33 , ex:M_Discharged_33 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_33  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_33 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 34 (full port-call + LCL deconsolidation) ──
@@ -3011,12 +3011,12 @@ ex:M_GateOut_34  a mar:GateOut ;
 ex:Sit_Custody_34  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_34 , ex:M_Discharged_34 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_34  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_34 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 35 (full port-call + LCL deconsolidation) ──
@@ -3092,12 +3092,12 @@ ex:M_GateOut_35  a mar:GateOut ;
 ex:Sit_Custody_35  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_35 , ex:M_Discharged_35 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_35  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_35 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 ex:CargoLot_BL_35  a mar:CargoLot , dmfo:SplitSourceIdentity ;
@@ -3212,12 +3212,12 @@ ex:M_GateOut_36  a mar:GateOut ;
 ex:Sit_Custody_36  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_36 , ex:M_Discharged_36 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_36  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_36 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 37 (full port-call + LCL deconsolidation) ──
@@ -3293,12 +3293,12 @@ ex:M_GateOut_37  a mar:GateOut ;
 ex:Sit_Custody_37  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_37 , ex:M_Discharged_37 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_37  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_37 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 38 (full port-call + LCL deconsolidation) ──
@@ -3374,12 +3374,12 @@ ex:M_GateOut_38  a mar:GateOut ;
 ex:Sit_Custody_38  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_38 , ex:M_Discharged_38 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_38  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_38 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 39 (full port-call + LCL deconsolidation) ──
@@ -3455,12 +3455,12 @@ ex:M_GateOut_39  a mar:GateOut ;
 ex:Sit_Custody_39  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_39 , ex:M_Discharged_39 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_39  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_39 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 40 (full port-call + LCL deconsolidation) ──
@@ -3536,12 +3536,12 @@ ex:M_GateOut_40  a mar:GateOut ;
 ex:Sit_Custody_40  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_40 , ex:M_Discharged_40 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_40  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_40 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 ex:CargoLot_BL_40  a mar:CargoLot , dmfo:SplitSourceIdentity ;
@@ -3656,12 +3656,12 @@ ex:M_GateOut_41  a mar:GateOut ;
 ex:Sit_Custody_41  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_41 , ex:M_Discharged_41 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_41  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_41 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 42 (full port-call + LCL deconsolidation) ──
@@ -3737,12 +3737,12 @@ ex:M_GateOut_42  a mar:GateOut ;
 ex:Sit_Custody_42  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_42 , ex:M_Discharged_42 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_42  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_42 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 43 (full port-call + LCL deconsolidation) ──
@@ -3818,12 +3818,12 @@ ex:M_GateOut_43  a mar:GateOut ;
 ex:Sit_Custody_43  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_43 , ex:M_Discharged_43 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_43  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_43 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 44 (full port-call + LCL deconsolidation) ──
@@ -3899,12 +3899,12 @@ ex:M_GateOut_44  a mar:GateOut ;
 ex:Sit_Custody_44  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_44 , ex:M_Discharged_44 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_44  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_44 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 45 (full port-call + LCL deconsolidation) ──
@@ -3980,12 +3980,12 @@ ex:M_GateOut_45  a mar:GateOut ;
 ex:Sit_Custody_45  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_45 , ex:M_Discharged_45 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_45  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_45 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 ex:CargoLot_BL_45  a mar:CargoLot , dmfo:SplitSourceIdentity ;
@@ -4100,12 +4100,12 @@ ex:M_GateOut_46  a mar:GateOut ;
 ex:Sit_Custody_46  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_46 , ex:M_Discharged_46 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_46  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_46 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 47 (full port-call + LCL deconsolidation) ──
@@ -4181,12 +4181,12 @@ ex:M_GateOut_47  a mar:GateOut ;
 ex:Sit_Custody_47  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_47 , ex:M_Discharged_47 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_47  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_47 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 48 (full port-call + LCL deconsolidation) ──
@@ -4262,12 +4262,12 @@ ex:M_GateOut_48  a mar:GateOut ;
 ex:Sit_Custody_48  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_48 , ex:M_Discharged_48 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_48  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_48 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 49 (full port-call + LCL deconsolidation) ──
@@ -4343,12 +4343,12 @@ ex:M_GateOut_49  a mar:GateOut ;
 ex:Sit_Custody_49  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_49 , ex:M_Discharged_49 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_49  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_49 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 50 (full port-call + LCL deconsolidation) ──
@@ -4424,12 +4424,12 @@ ex:M_GateOut_50  a mar:GateOut ;
 ex:Sit_Custody_50  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_50 , ex:M_Discharged_50 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_50  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_50 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 ex:CargoLot_BL_50  a mar:CargoLot , dmfo:SplitSourceIdentity ;
@@ -4544,12 +4544,12 @@ ex:M_GateOut_51  a mar:GateOut ;
 ex:Sit_Custody_51  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_51 , ex:M_Discharged_51 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_51  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_51 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 52 (full port-call + LCL deconsolidation) ──
@@ -4625,12 +4625,12 @@ ex:M_GateOut_52  a mar:GateOut ;
 ex:Sit_Custody_52  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_52 , ex:M_Discharged_52 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_52  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_52 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 53 (full port-call + LCL deconsolidation) ──
@@ -4706,12 +4706,12 @@ ex:M_GateOut_53  a mar:GateOut ;
 ex:Sit_Custody_53  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_53 , ex:M_Discharged_53 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_53  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_53 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 54 (full port-call + LCL deconsolidation) ──
@@ -4787,12 +4787,12 @@ ex:M_GateOut_54  a mar:GateOut ;
 ex:Sit_Custody_54  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_54 , ex:M_Discharged_54 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_54  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_54 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 55 (full port-call + LCL deconsolidation) ──
@@ -4868,12 +4868,12 @@ ex:M_GateOut_55  a mar:GateOut ;
 ex:Sit_Custody_55  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_55 , ex:M_Discharged_55 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_55  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_55 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 ex:CargoLot_BL_55  a mar:CargoLot , dmfo:SplitSourceIdentity ;
@@ -4988,12 +4988,12 @@ ex:M_GateOut_56  a mar:GateOut ;
 ex:Sit_Custody_56  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_56 , ex:M_Discharged_56 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_56  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_56 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 57 (full port-call + LCL deconsolidation) ──
@@ -5069,12 +5069,12 @@ ex:M_GateOut_57  a mar:GateOut ;
 ex:Sit_Custody_57  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_57 , ex:M_Discharged_57 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_57  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_57 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 58 (full port-call + LCL deconsolidation) ──
@@ -5150,12 +5150,12 @@ ex:M_GateOut_58  a mar:GateOut ;
 ex:Sit_Custody_58  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_58 , ex:M_Discharged_58 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_58  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_58 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 59 (full port-call + LCL deconsolidation) ──
@@ -5231,12 +5231,12 @@ ex:M_GateOut_59  a mar:GateOut ;
 ex:Sit_Custody_59  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_59 , ex:M_Discharged_59 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_59  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_59 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 60 (full port-call + LCL deconsolidation) ──
@@ -5312,12 +5312,12 @@ ex:M_GateOut_60  a mar:GateOut ;
 ex:Sit_Custody_60  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_60 , ex:M_Discharged_60 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_60  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_60 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 ex:CargoLot_BL_60  a mar:CargoLot , dmfo:SplitSourceIdentity ;
@@ -5432,12 +5432,12 @@ ex:M_GateOut_61  a mar:GateOut ;
 ex:Sit_Custody_61  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_61 , ex:M_Discharged_61 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_61  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_61 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 62 (full port-call + LCL deconsolidation) ──
@@ -5513,12 +5513,12 @@ ex:M_GateOut_62  a mar:GateOut ;
 ex:Sit_Custody_62  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_62 , ex:M_Discharged_62 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_62  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_62 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 63 (full port-call + LCL deconsolidation) ──
@@ -5594,12 +5594,12 @@ ex:M_GateOut_63  a mar:GateOut ;
 ex:Sit_Custody_63  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_63 , ex:M_Discharged_63 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_63  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_63 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 64 (full port-call + LCL deconsolidation) ──
@@ -5675,12 +5675,12 @@ ex:M_GateOut_64  a mar:GateOut ;
 ex:Sit_Custody_64  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_64 , ex:M_Discharged_64 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_64  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_64 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 65 (full port-call + LCL deconsolidation) ──
@@ -5756,12 +5756,12 @@ ex:M_GateOut_65  a mar:GateOut ;
 ex:Sit_Custody_65  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_65 , ex:M_Discharged_65 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_65  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_65 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 ex:CargoLot_BL_65  a mar:CargoLot , dmfo:SplitSourceIdentity ;
@@ -5876,12 +5876,12 @@ ex:M_GateOut_66  a mar:GateOut ;
 ex:Sit_Custody_66  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_66 , ex:M_Discharged_66 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_66  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_66 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 67 (full port-call + LCL deconsolidation) ──
@@ -5957,12 +5957,12 @@ ex:M_GateOut_67  a mar:GateOut ;
 ex:Sit_Custody_67  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_67 , ex:M_Discharged_67 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_67  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_67 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 68 (full port-call + LCL deconsolidation) ──
@@ -6038,12 +6038,12 @@ ex:M_GateOut_68  a mar:GateOut ;
 ex:Sit_Custody_68  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_68 , ex:M_Discharged_68 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_68  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_68 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 69 (full port-call + LCL deconsolidation) ──
@@ -6119,12 +6119,12 @@ ex:M_GateOut_69  a mar:GateOut ;
 ex:Sit_Custody_69  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_69 , ex:M_Discharged_69 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_69  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_69 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 70 (full port-call + LCL deconsolidation) ──
@@ -6200,12 +6200,12 @@ ex:M_GateOut_70  a mar:GateOut ;
 ex:Sit_Custody_70  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_70 , ex:M_Discharged_70 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_70  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_70 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 ex:CargoLot_BL_70  a mar:CargoLot , dmfo:SplitSourceIdentity ;
@@ -6320,12 +6320,12 @@ ex:M_GateOut_71  a mar:GateOut ;
 ex:Sit_Custody_71  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_71 , ex:M_Discharged_71 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_71  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_71 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 72 (full port-call + LCL deconsolidation) ──
@@ -6401,12 +6401,12 @@ ex:M_GateOut_72  a mar:GateOut ;
 ex:Sit_Custody_72  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_72 , ex:M_Discharged_72 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_72  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_72 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 73 (full port-call + LCL deconsolidation) ──
@@ -6482,12 +6482,12 @@ ex:M_GateOut_73  a mar:GateOut ;
 ex:Sit_Custody_73  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_73 , ex:M_Discharged_73 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_73  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_73 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 74 (full port-call + LCL deconsolidation) ──
@@ -6563,12 +6563,12 @@ ex:M_GateOut_74  a mar:GateOut ;
 ex:Sit_Custody_74  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_74 , ex:M_Discharged_74 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_74  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_74 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 75 (full port-call + LCL deconsolidation) ──
@@ -6644,12 +6644,12 @@ ex:M_GateOut_75  a mar:GateOut ;
 ex:Sit_Custody_75  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_75 , ex:M_Discharged_75 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_75  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_75 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 ex:CargoLot_BL_75  a mar:CargoLot , dmfo:SplitSourceIdentity ;
@@ -6764,12 +6764,12 @@ ex:M_GateOut_76  a mar:GateOut ;
 ex:Sit_Custody_76  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_76 , ex:M_Discharged_76 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_76  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_76 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 77 (full port-call + LCL deconsolidation) ──
@@ -6845,12 +6845,12 @@ ex:M_GateOut_77  a mar:GateOut ;
 ex:Sit_Custody_77  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_77 , ex:M_Discharged_77 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_77  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_77 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 78 (full port-call + LCL deconsolidation) ──
@@ -6926,12 +6926,12 @@ ex:M_GateOut_78  a mar:GateOut ;
 ex:Sit_Custody_78  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_78 , ex:M_Discharged_78 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_78  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_78 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 79 (full port-call + LCL deconsolidation) ──
@@ -7007,12 +7007,12 @@ ex:M_GateOut_79  a mar:GateOut ;
 ex:Sit_Custody_79  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_79 , ex:M_Discharged_79 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_79  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_79 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 80 (full port-call + LCL deconsolidation) ──
@@ -7088,12 +7088,12 @@ ex:M_GateOut_80  a mar:GateOut ;
 ex:Sit_Custody_80  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_80 , ex:M_Discharged_80 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_80  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_80 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 ex:CargoLot_BL_80  a mar:CargoLot , dmfo:SplitSourceIdentity ;
@@ -7208,12 +7208,12 @@ ex:M_GateOut_81  a mar:GateOut ;
 ex:Sit_Custody_81  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_81 , ex:M_Discharged_81 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_81  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_81 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 82 (full port-call + LCL deconsolidation) ──
@@ -7289,12 +7289,12 @@ ex:M_GateOut_82  a mar:GateOut ;
 ex:Sit_Custody_82  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_82 , ex:M_Discharged_82 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_82  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_82 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 83 (full port-call + LCL deconsolidation) ──
@@ -7370,12 +7370,12 @@ ex:M_GateOut_83  a mar:GateOut ;
 ex:Sit_Custody_83  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_83 , ex:M_Discharged_83 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_83  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_83 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 84 (full port-call + LCL deconsolidation) ──
@@ -7451,12 +7451,12 @@ ex:M_GateOut_84  a mar:GateOut ;
 ex:Sit_Custody_84  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_84 , ex:M_Discharged_84 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_84  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_84 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 85 (full port-call + LCL deconsolidation) ──
@@ -7532,12 +7532,12 @@ ex:M_GateOut_85  a mar:GateOut ;
 ex:Sit_Custody_85  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_85 , ex:M_Discharged_85 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_85  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_85 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 ex:CargoLot_BL_85  a mar:CargoLot , dmfo:SplitSourceIdentity ;
@@ -7652,12 +7652,12 @@ ex:M_GateOut_86  a mar:GateOut ;
 ex:Sit_Custody_86  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_86 , ex:M_Discharged_86 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_86  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_86 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 87 (full port-call + LCL deconsolidation) ──
@@ -7733,12 +7733,12 @@ ex:M_GateOut_87  a mar:GateOut ;
 ex:Sit_Custody_87  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_87 , ex:M_Discharged_87 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_87  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_87 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 88 (full port-call + LCL deconsolidation) ──
@@ -7814,12 +7814,12 @@ ex:M_GateOut_88  a mar:GateOut ;
 ex:Sit_Custody_88  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_88 , ex:M_Discharged_88 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_88  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_88 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 89 (full port-call + LCL deconsolidation) ──
@@ -7895,12 +7895,12 @@ ex:M_GateOut_89  a mar:GateOut ;
 ex:Sit_Custody_89  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_89 , ex:M_Discharged_89 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_89  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_89 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 90 (full port-call + LCL deconsolidation) ──
@@ -7976,12 +7976,12 @@ ex:M_GateOut_90  a mar:GateOut ;
 ex:Sit_Custody_90  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_90 , ex:M_Discharged_90 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_90  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_90 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 ex:CargoLot_BL_90  a mar:CargoLot , dmfo:SplitSourceIdentity ;
@@ -8096,12 +8096,12 @@ ex:M_GateOut_91  a mar:GateOut ;
 ex:Sit_Custody_91  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_91 , ex:M_Discharged_91 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_91  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_91 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 92 (full port-call + LCL deconsolidation) ──
@@ -8177,12 +8177,12 @@ ex:M_GateOut_92  a mar:GateOut ;
 ex:Sit_Custody_92  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_92 , ex:M_Discharged_92 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_92  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_92 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 93 (full port-call + LCL deconsolidation) ──
@@ -8258,12 +8258,12 @@ ex:M_GateOut_93  a mar:GateOut ;
 ex:Sit_Custody_93  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_93 , ex:M_Discharged_93 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_93  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_93 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 94 (full port-call + LCL deconsolidation) ──
@@ -8339,12 +8339,12 @@ ex:M_GateOut_94  a mar:GateOut ;
 ex:Sit_Custody_94  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_94 , ex:M_Discharged_94 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_94  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_94 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 95 (full port-call + LCL deconsolidation) ──
@@ -8420,12 +8420,12 @@ ex:M_GateOut_95  a mar:GateOut ;
 ex:Sit_Custody_95  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_95 , ex:M_Discharged_95 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_95  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_95 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 ex:CargoLot_BL_95  a mar:CargoLot , dmfo:SplitSourceIdentity ;
@@ -8540,12 +8540,12 @@ ex:M_GateOut_96  a mar:GateOut ;
 ex:Sit_Custody_96  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_96 , ex:M_Discharged_96 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_96  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_96 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 97 (full port-call + LCL deconsolidation) ──
@@ -8621,12 +8621,12 @@ ex:M_GateOut_97  a mar:GateOut ;
 ex:Sit_Custody_97  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_97 , ex:M_Discharged_97 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_97  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_97 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 98 (full port-call + LCL deconsolidation) ──
@@ -8702,12 +8702,12 @@ ex:M_GateOut_98  a mar:GateOut ;
 ex:Sit_Custody_98  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_98 , ex:M_Discharged_98 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_98  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_98 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 99 (full port-call + LCL deconsolidation) ──
@@ -8783,12 +8783,12 @@ ex:M_GateOut_99  a mar:GateOut ;
 ex:Sit_Custody_99  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_99 , ex:M_Discharged_99 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_99  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_99 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 # ── Container 100 (full port-call + LCL deconsolidation) ──
@@ -8864,12 +8864,12 @@ ex:M_GateOut_100  a mar:GateOut ;
 ex:Sit_Custody_100  a mar:CustodyTransferSituation ;
     dul:includesObject ex:M_InYard_100 , ex:M_Discharged_100 ;
     dmfo:governedBy    ex:Regime_ISPS ;
-    dmfo:inZone        ex:ISPSZone_CTA .
+    dmfo:situatedAt        ex:ISPSZone_CTA .
 
 ex:Sit_Customs_100  a mar:CustomsControlSituation ;
     dul:includesObject ex:M_GateOut_100 ;
     dmfo:governedBy    ex:Regime_EU_UCC ;
-    dmfo:inZone        ex:Gate_CTA_South .
+    dmfo:situatedAt        ex:Gate_CTA_South .
 
 # LCL deconsolidation chain (every 5th container)
 ex:CargoLot_BL_100  a mar:CargoLot , dmfo:SplitSourceIdentity ;
@@ -8931,4 +8931,4 @@ ex:CONT_GAP_scheme  a mar:Container ;
 
 ex:Sit_GAP_governance  a dul:Situation ;
     dul:includesObject ex:M_GAP_NoEvidence ;
-    dmfo:inZone ex:Yard_CTA .
+    dmfo:situatedAt ex:Yard_CTA .
