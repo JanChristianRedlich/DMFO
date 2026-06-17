@@ -10,7 +10,7 @@ follow the conventions below.
 
 ```bash
 # 1. Clone
-git clone https://github.com/redlich/DMFO.git
+git clone https://github.com/JanChristianRedlich/DMFO.git
 cd DMFO
 
 # 2. Conda env (preferred)

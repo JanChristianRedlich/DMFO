@@ -17,7 +17,7 @@ authors:
     given-names: Sebastian
     email: sebastian.bosse@hhi.fraunhofer.de
     affiliation: "Fraunhofer Heinrich-Hertz-Institut (HHI), Berlin, Germany"
-repository-code: "https://github.com/redlich/DMFO"
+repository-code: "https://github.com/JanChristianRedlich/DMFO"
 keywords:
   - ontology design patterns
   - modular ontology

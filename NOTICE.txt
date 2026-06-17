@@ -1,0 +1,12 @@
+DMFO — Dimensional Modeling Framework for Persisting and Fluent Entities
+Copyright 2026 Bonn Systems GmbH and the DMFO authors
+(Jan Christian Redlich, Peter Kloke, Sebastian Bosse)
+
+This product includes software developed at Bonn Systems GmbH.
+
+Licensing summary:
+  - Source code: Apache License 2.0           (see LICENSE)
+  - Ontology and data artifacts: CC-BY-4.0     (see LICENSE-DATA)
+
+This NOTICE file is provided in accordance with Section 4(d) of the
+Apache License, Version 2.0.

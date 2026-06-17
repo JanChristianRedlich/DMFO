@@ -4,7 +4,7 @@
 > Architecture for Situationally Interpretable State Representations"*.
 >
 > **Version:** 1.0.0 (May 2026)
-> **License:** [CC BY 4.0](LICENSE.txt)
+**License:** code [Apache-2.0](LICENSE.txt) · ontology & data [CC BY 4.0](LICENSE-DATA.txt)
 > **OWL profile:** OWL 2 DL / SROIQ(D)
 
 ---
@@ -276,17 +276,30 @@ SHACL validation against the DMFO core shapes.
 
 ---
 
-## Citation
+## License
 
-```bibtex
-@unpublished{redlich2026dmfo,
-  author    = {Redlich, Jan Christian and Kloke, Peter and Bosse, Sebastian},
-  title     = {{DMFO}: A Modular Alignment Architecture for
-               Situationally Interpretable State Representations},
-  year      = {2026},
-  note      = {Manuscript},
-}
-```
+This repository is dual-licensed to separate the software from the
+ontology and data artifacts:
+
+| Component                                   | License      | File          |
+|---------------------------------------------|--------------|---------------|
+| Source code (scripts, validators, runners)  | Apache-2.0   | `LICENSE`     |
+| Ontology modules, profiles, SHACL shapes, ACQ catalogue, ABoxes, benchmarks | CC-BY-4.0 | `LICENSE-DATA` |
+
+In short: **code is Apache-2.0, the ontology and data artifacts are
+CC-BY-4.0.** When reusing the ontology or data, please attribute via the
+canonical citation below.
+
+---
+
+### Citation
+
+> Redlich, J. C., Kloke, P., & Bosse, S. (2026). *DMFO: A Modular Alignment
+> Architecture for Situationally Interpretable State Representations* (v1.0)
+> [Data set]. Zenodo. https://doi.org/10.5281/zenodo.20074688
+
+Concept DOI (all versions): https://doi.org/10.5281/zenodo.20074687
+
 
 ---
 
